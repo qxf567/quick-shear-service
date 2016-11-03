@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bean="http://www.springframework.org/schema/bean"
+	xsi:schemaLocation="
+     http://www.springframework.org/schema/beans
+     http://www.springframework.org/schema/beans/spring-beans-3.2.xsd"
+	default-lazy-init="true">
+
+	<!-- scan for mappers and let them be autowired -->
+	<bean id="quickshear_Scan" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="com.quickshear.mapper" />
+		<property name="sqlSessionFactoryBeanName" value="quickshearSessionFactory" />
+	</bean>
+
+
+	<!-- define the SqlSessionFactory -->
+	<bean id="quickshearSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="quickshear_dynamic_DataSource" />
+		<property name="typeAliasesPackage" value="com.lquickshear.domain" />
+	</bean>
+
+</beans>

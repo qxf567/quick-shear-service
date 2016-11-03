@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bean="http://www.springframework.org/schema/beans"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="
+     http://www.springframework.org/schema/beans
+     http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+     http://www.springframework.org/schema/context
+     http://www.springframework.org/schema/context/spring-context-4.1.xsd
+     http://www.springframework.org/schema/aop
+     http://www.springframework.org/schema/aop/spring-aop-4.1.xsd
+     http://www.springframework.org/schema/jdbc  
+     http://www.springframework.org/schema/jdbc/spring-jdbc-4.1.xsd 
+     http://www.springframework.org/schema/tx
+     http://www.springframework.org/schema/tx/spring-tx-4.1.xsd">
+
+	<bean id="quickshearDynamicDsAOP" class="com.quickshear.common.aop.datasource.dynamic.QuickshearDynamicDsAOP"></bean>
+
+	<!-- repair master datasource -->
+	<bean id="quickshear_DataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://${db.quickshear.ip}:${db.quickshear.port}/${db.quickshear.db.name}?characterEncoding=utf8" />
+		<property name="username" value="${db.quickshear.username}" />
+		<property name="password" value="${db.quickshear.password}" />
+		<property name="maxActive" value="50" />
+		<property name="initialSize" value="5" />
+		<property name="minIdle" value="5" />
+		<property name="maxIdle" value="10" />
+		<property name="defaultAutoCommit" value="true" />
+		<property name="validationQuery" value="SELECT 1"></property>
+ 		<property name="testWhileIdle" value="true"></property>
+ 		<property name="testOnBorrow" value="true"></property>
+	</bean>
+	
+	<!-- repair slave datasource -->
+	<bean id="quickshear_slave_DataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://${db.slave.quickshear.ip}:${db.slave.quickshear.port}/${db.slave.quickshear.db.name}?characterEncoding=utf8" />
+		<property name="username" value="${db.slave.quickshear.username}" />
+		<property name="password" value="${db.slave.quickshear.password}" />
+		<property name="maxActive" value="50" />
+		<property name="initialSize" value="5" />
+		<property name="minIdle" value="5" />
+		<property name="maxIdle" value="10" />
+		<property name="defaultAutoCommit" value="true" />
+		<property name="validationQuery" value="SELECT 1"></property>
+ 		<property name="testWhileIdle" value="true"></property>
+ 		<property name="testOnBorrow" value="true"></property>
+	</bean>
+
+	<bean id="quickshear_dynamic_DataSource" class="com.quickshear.common.aop.datasource.dynamic.QuickShearDynamicDataSource">
+		<property name="targetDataSources">
+			<map>
+				<entry key="master" value-ref="quickshear_DataSource" />
+				<entry key="slave" value-ref="quickshear_slave_DataSource" />
+			</map>
+		</property>
+		<property name="defaultTargetDataSource" ref="quickshear_DataSource" />
+	</bean>
+
+	<!-- tx -->
+	<tx:annotation-driven transaction-manager="quickshear_Txm" />
+	<bean id="quickshear_Txm" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="quickshear_dynamic_DataSource" />
+	</bean>
+
+</beans>

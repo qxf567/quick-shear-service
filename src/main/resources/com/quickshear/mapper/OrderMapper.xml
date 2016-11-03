@@ -1,0 +1,469 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.quickshear.mapper.OrderMapper" >
+  <resultMap id="BaseResultMap" type="com.quickshear.domain.Order" >
+    <id column="order_id" property="orderId" jdbcType="BIGINT" />
+    <result column="customer_id" property="customerId" jdbcType="BIGINT" />
+    <result column="customer_name" property="customerName" jdbcType="VARCHAR" />
+    <result column="customer_number" property="customerNumber" jdbcType="VARCHAR" />
+    <result column="shop_id" property="shopId" jdbcType="VARCHAR" />
+    <result column="hairdresser_id" property="hairdresserId" jdbcType="BIGINT" />
+    <result column="hairstyle_id" property="hairstyleId" jdbcType="BIGINT" />
+    <result column="appointment_time" property="appointmentTime" jdbcType="TIMESTAMP" />
+    <result column="pay_type" property="payType" jdbcType="INTEGER" />
+    <result column="order_status" property="orderStatus" jdbcType="INTEGER" />
+    <result column="total_price" property="totalPrice" jdbcType="DECIMAL" />
+    <result column="actual_price" property="actualPrice" jdbcType="DECIMAL" />
+    <result column="order_time" property="orderTime" jdbcType="TIMESTAMP" />
+    <result column="service_completion_time" property="serviceCompletionTime" jdbcType="TIMESTAMP" />
+    <result column="cancel_type" property="cancelType" jdbcType="INTEGER" />
+    <result column="cancel_reason" property="cancelReason" jdbcType="VARCHAR" />
+    <result column="cancel_time" property="cancelTime" jdbcType="TIMESTAMP" />
+    <result column="is_evaluate" property="isEvaluate" jdbcType="INTEGER" />
+    <result column="c_time" property="cTime" jdbcType="TIMESTAMP" />
+    <result column="m_time" property="mTime" jdbcType="TIMESTAMP" />
+    <result column="t_stamp" property="tStamp" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    order_id, customer_id, customer_name, customer_number, shop_id, hairdresser_id, hairstyle_id, 
+    appointment_time, pay_type, order_status, total_price, actual_price, order_time, 
+    service_completion_time, cancel_type, cancel_reason, cancel_time, is_evaluate, c_time, 
+    m_time, t_stamp
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.quickshear.domain.OrderExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from orders
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart >= 0" >
+       limit ${limitStart} , ${limitEnd}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from orders
+    where order_id = #{orderId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from orders
+    where order_id = #{orderId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.quickshear.domain.OrderExample" >
+    delete from orders
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.quickshear.domain.Order" >
+    insert into orders (order_id, customer_id, customer_name, 
+      customer_number, shop_id, hairdresser_id, 
+      hairstyle_id, appointment_time, pay_type, 
+      order_status, total_price, actual_price, 
+      order_time, service_completion_time, cancel_type, 
+      cancel_reason, cancel_time, is_evaluate, 
+      c_time, m_time, t_stamp
+      )
+    values (#{orderId,jdbcType=BIGINT}, #{customerId,jdbcType=BIGINT}, #{customerName,jdbcType=VARCHAR}, 
+      #{customerNumber,jdbcType=VARCHAR}, #{shopId,jdbcType=VARCHAR}, #{hairdresserId,jdbcType=BIGINT}, 
+      #{hairstyleId,jdbcType=BIGINT}, #{appointmentTime,jdbcType=TIMESTAMP}, #{payType,jdbcType=INTEGER}, 
+      #{orderStatus,jdbcType=INTEGER}, #{totalPrice,jdbcType=DECIMAL}, #{actualPrice,jdbcType=DECIMAL}, 
+      #{orderTime,jdbcType=TIMESTAMP}, #{serviceCompletionTime,jdbcType=TIMESTAMP}, #{cancelType,jdbcType=INTEGER}, 
+      #{cancelReason,jdbcType=VARCHAR}, #{cancelTime,jdbcType=TIMESTAMP}, #{isEvaluate,jdbcType=INTEGER}, 
+      #{cTime,jdbcType=TIMESTAMP}, #{mTime,jdbcType=TIMESTAMP}, #{tStamp,jdbcType=BIGINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.quickshear.domain.Order" >
+    insert into orders
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="orderId != null" >
+        order_id,
+      </if>
+      <if test="customerId != null" >
+        customer_id,
+      </if>
+      <if test="customerName != null" >
+        customer_name,
+      </if>
+      <if test="customerNumber != null" >
+        customer_number,
+      </if>
+      <if test="shopId != null" >
+        shop_id,
+      </if>
+      <if test="hairdresserId != null" >
+        hairdresser_id,
+      </if>
+      <if test="hairstyleId != null" >
+        hairstyle_id,
+      </if>
+      <if test="appointmentTime != null" >
+        appointment_time,
+      </if>
+      <if test="payType != null" >
+        pay_type,
+      </if>
+      <if test="orderStatus != null" >
+        order_status,
+      </if>
+      <if test="totalPrice != null" >
+        total_price,
+      </if>
+      <if test="actualPrice != null" >
+        actual_price,
+      </if>
+      <if test="orderTime != null" >
+        order_time,
+      </if>
+      <if test="serviceCompletionTime != null" >
+        service_completion_time,
+      </if>
+      <if test="cancelType != null" >
+        cancel_type,
+      </if>
+      <if test="cancelReason != null" >
+        cancel_reason,
+      </if>
+      <if test="cancelTime != null" >
+        cancel_time,
+      </if>
+      <if test="isEvaluate != null" >
+        is_evaluate,
+      </if>
+      <if test="cTime != null" >
+        c_time,
+      </if>
+      <if test="mTime != null" >
+        m_time,
+      </if>
+      <if test="tStamp != null" >
+        t_stamp,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="orderId != null" >
+        #{orderId,jdbcType=BIGINT},
+      </if>
+      <if test="customerId != null" >
+        #{customerId,jdbcType=BIGINT},
+      </if>
+      <if test="customerName != null" >
+        #{customerName,jdbcType=VARCHAR},
+      </if>
+      <if test="customerNumber != null" >
+        #{customerNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="shopId != null" >
+        #{shopId,jdbcType=VARCHAR},
+      </if>
+      <if test="hairdresserId != null" >
+        #{hairdresserId,jdbcType=BIGINT},
+      </if>
+      <if test="hairstyleId != null" >
+        #{hairstyleId,jdbcType=BIGINT},
+      </if>
+      <if test="appointmentTime != null" >
+        #{appointmentTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="payType != null" >
+        #{payType,jdbcType=INTEGER},
+      </if>
+      <if test="orderStatus != null" >
+        #{orderStatus,jdbcType=INTEGER},
+      </if>
+      <if test="totalPrice != null" >
+        #{totalPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="actualPrice != null" >
+        #{actualPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="orderTime != null" >
+        #{orderTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="serviceCompletionTime != null" >
+        #{serviceCompletionTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cancelType != null" >
+        #{cancelType,jdbcType=INTEGER},
+      </if>
+      <if test="cancelReason != null" >
+        #{cancelReason,jdbcType=VARCHAR},
+      </if>
+      <if test="cancelTime != null" >
+        #{cancelTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isEvaluate != null" >
+        #{isEvaluate,jdbcType=INTEGER},
+      </if>
+      <if test="cTime != null" >
+        #{cTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mTime != null" >
+        #{mTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tStamp != null" >
+        #{tStamp,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.quickshear.domain.OrderExample" resultType="java.lang.Integer" >
+    select count(*) from orders
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update orders
+    <set >
+      <if test="record.orderId != null" >
+        order_id = #{record.orderId,jdbcType=BIGINT},
+      </if>
+      <if test="record.customerId != null" >
+        customer_id = #{record.customerId,jdbcType=BIGINT},
+      </if>
+      <if test="record.customerName != null" >
+        customer_name = #{record.customerName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.customerNumber != null" >
+        customer_number = #{record.customerNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shopId != null" >
+        shop_id = #{record.shopId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hairdresserId != null" >
+        hairdresser_id = #{record.hairdresserId,jdbcType=BIGINT},
+      </if>
+      <if test="record.hairstyleId != null" >
+        hairstyle_id = #{record.hairstyleId,jdbcType=BIGINT},
+      </if>
+      <if test="record.appointmentTime != null" >
+        appointment_time = #{record.appointmentTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.payType != null" >
+        pay_type = #{record.payType,jdbcType=INTEGER},
+      </if>
+      <if test="record.orderStatus != null" >
+        order_status = #{record.orderStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.totalPrice != null" >
+        total_price = #{record.totalPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.actualPrice != null" >
+        actual_price = #{record.actualPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.orderTime != null" >
+        order_time = #{record.orderTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.serviceCompletionTime != null" >
+        service_completion_time = #{record.serviceCompletionTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.cancelType != null" >
+        cancel_type = #{record.cancelType,jdbcType=INTEGER},
+      </if>
+      <if test="record.cancelReason != null" >
+        cancel_reason = #{record.cancelReason,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cancelTime != null" >
+        cancel_time = #{record.cancelTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.isEvaluate != null" >
+        is_evaluate = #{record.isEvaluate,jdbcType=INTEGER},
+      </if>
+      <if test="record.cTime != null" >
+        c_time = #{record.cTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.mTime != null" >
+        m_time = #{record.mTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tStamp != null" >
+        t_stamp = #{record.tStamp,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update orders
+    set order_id = #{record.orderId,jdbcType=BIGINT},
+      customer_id = #{record.customerId,jdbcType=BIGINT},
+      customer_name = #{record.customerName,jdbcType=VARCHAR},
+      customer_number = #{record.customerNumber,jdbcType=VARCHAR},
+      shop_id = #{record.shopId,jdbcType=VARCHAR},
+      hairdresser_id = #{record.hairdresserId,jdbcType=BIGINT},
+      hairstyle_id = #{record.hairstyleId,jdbcType=BIGINT},
+      appointment_time = #{record.appointmentTime,jdbcType=TIMESTAMP},
+      pay_type = #{record.payType,jdbcType=INTEGER},
+      order_status = #{record.orderStatus,jdbcType=INTEGER},
+      total_price = #{record.totalPrice,jdbcType=DECIMAL},
+      actual_price = #{record.actualPrice,jdbcType=DECIMAL},
+      order_time = #{record.orderTime,jdbcType=TIMESTAMP},
+      service_completion_time = #{record.serviceCompletionTime,jdbcType=TIMESTAMP},
+      cancel_type = #{record.cancelType,jdbcType=INTEGER},
+      cancel_reason = #{record.cancelReason,jdbcType=VARCHAR},
+      cancel_time = #{record.cancelTime,jdbcType=TIMESTAMP},
+      is_evaluate = #{record.isEvaluate,jdbcType=INTEGER},
+      c_time = #{record.cTime,jdbcType=TIMESTAMP},
+      m_time = #{record.mTime,jdbcType=TIMESTAMP},
+      t_stamp = #{record.tStamp,jdbcType=BIGINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.quickshear.domain.Order" >
+    update orders
+    <set >
+      <if test="customerId != null" >
+        customer_id = #{customerId,jdbcType=BIGINT},
+      </if>
+      <if test="customerName != null" >
+        customer_name = #{customerName,jdbcType=VARCHAR},
+      </if>
+      <if test="customerNumber != null" >
+        customer_number = #{customerNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="shopId != null" >
+        shop_id = #{shopId,jdbcType=VARCHAR},
+      </if>
+      <if test="hairdresserId != null" >
+        hairdresser_id = #{hairdresserId,jdbcType=BIGINT},
+      </if>
+      <if test="hairstyleId != null" >
+        hairstyle_id = #{hairstyleId,jdbcType=BIGINT},
+      </if>
+      <if test="appointmentTime != null" >
+        appointment_time = #{appointmentTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="payType != null" >
+        pay_type = #{payType,jdbcType=INTEGER},
+      </if>
+      <if test="orderStatus != null" >
+        order_status = #{orderStatus,jdbcType=INTEGER},
+      </if>
+      <if test="totalPrice != null" >
+        total_price = #{totalPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="actualPrice != null" >
+        actual_price = #{actualPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="orderTime != null" >
+        order_time = #{orderTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="serviceCompletionTime != null" >
+        service_completion_time = #{serviceCompletionTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cancelType != null" >
+        cancel_type = #{cancelType,jdbcType=INTEGER},
+      </if>
+      <if test="cancelReason != null" >
+        cancel_reason = #{cancelReason,jdbcType=VARCHAR},
+      </if>
+      <if test="cancelTime != null" >
+        cancel_time = #{cancelTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isEvaluate != null" >
+        is_evaluate = #{isEvaluate,jdbcType=INTEGER},
+      </if>
+      <if test="cTime != null" >
+        c_time = #{cTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mTime != null" >
+        m_time = #{mTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tStamp != null" >
+        t_stamp = #{tStamp,jdbcType=BIGINT},
+      </if>
+    </set>
+    where order_id = #{orderId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.quickshear.domain.Order" >
+    update orders
+    set customer_id = #{customerId,jdbcType=BIGINT},
+      customer_name = #{customerName,jdbcType=VARCHAR},
+      customer_number = #{customerNumber,jdbcType=VARCHAR},
+      shop_id = #{shopId,jdbcType=VARCHAR},
+      hairdresser_id = #{hairdresserId,jdbcType=BIGINT},
+      hairstyle_id = #{hairstyleId,jdbcType=BIGINT},
+      appointment_time = #{appointmentTime,jdbcType=TIMESTAMP},
+      pay_type = #{payType,jdbcType=INTEGER},
+      order_status = #{orderStatus,jdbcType=INTEGER},
+      total_price = #{totalPrice,jdbcType=DECIMAL},
+      actual_price = #{actualPrice,jdbcType=DECIMAL},
+      order_time = #{orderTime,jdbcType=TIMESTAMP},
+      service_completion_time = #{serviceCompletionTime,jdbcType=TIMESTAMP},
+      cancel_type = #{cancelType,jdbcType=INTEGER},
+      cancel_reason = #{cancelReason,jdbcType=VARCHAR},
+      cancel_time = #{cancelTime,jdbcType=TIMESTAMP},
+      is_evaluate = #{isEvaluate,jdbcType=INTEGER},
+      c_time = #{cTime,jdbcType=TIMESTAMP},
+      m_time = #{mTime,jdbcType=TIMESTAMP},
+      t_stamp = #{tStamp,jdbcType=BIGINT}
+    where order_id = #{orderId,jdbcType=BIGINT}
+  </update>
+</mapper>
