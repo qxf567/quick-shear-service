@@ -16,7 +16,7 @@
      http://www.springframework.org/schema/tx
      http://www.springframework.org/schema/tx/spring-tx-4.1.xsd">
 
-	<bean id="quickshearDynamicDsAOP" class="com.quickshear.common.aop.datasource.dynamic.QuickshearDynamicDsAOP"></bean>
+	<bean id="quickshearDynamicDsAOP" class="com.quickshear.common.aop.datasource.dynamic.QuickShearDynamicDsAOP"></bean>
 
 	<!-- repair master datasource -->
 	<bean id="quickshear_DataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">

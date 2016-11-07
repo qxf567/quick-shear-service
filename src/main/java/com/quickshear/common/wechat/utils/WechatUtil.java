@@ -17,6 +17,7 @@ import javax.net.ssl.TrustManager;
 import org.apache.log4j.Logger;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -29,6 +30,7 @@ import com.quickshear.common.wechat.domain.WechatConfig;
  * @date 2015-9-11
  *
  */
+@Component
 public class WechatUtil {
   private static Logger log = Logger.getLogger(WechatUtil.class);
 
