@@ -1,153 +1,131 @@
 package com.quickshear.service.impl;
 
+import java.util.Calendar;
+import java.util.List;
+
+import org.apache.commons.lang.StringUtils;
+import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.quickshear.common.vo.BaseQuery;
+import com.quickshear.common.vo.PageVo;
+import com.quickshear.domain.User;
+import com.quickshear.domain.UserExample;
+import com.quickshear.domain.UserExample.Criteria;
+import com.quickshear.domain.query.UserQuery;
+import com.quickshear.mapper.UserMapper;
 import com.quickshear.service.UserService;
 
 @Service
 public class UserServiceImpl implements UserService {
 
-//	@Autowired
-//	private ShopMapper shopMapper;
-//
-//	@Override
-//	public Shop findbyid(Integer id) {
-//		return shopMapper.selectByPrimaryKey(id);
-//	}
-//
-//	@Override
-//	public boolean findCheckName(String name, Integer id) {
-//		ShopExample example = new ShopExample();
-//		ShopExample.Criteria mc = example.createCriteria();
-//		mc.andShopNameEqualTo(name);
-//
-//		if (id != null && id > 0) {
-//			mc.andShopIdNotEqualTo(id);
-//		}
-//
-//		List<Shop> list = shopMapper.selectByExample(example);
-//		if (list != null && !list.isEmpty()) {
-//			return true;
-//		}
-//
-//		return false;
-//	}
-//
-//	@Override
-//	public int save(Shop t) {
-//		return shopMapper.insert(t);
-//	}
-//
-//	@Override
-//	public int update(Shop t) {
-//		ShopExample example = new ShopExample();
-//		ShopExample.Criteria sc = example.createCriteria();
-//		sc.andShopIdEqualTo(t.getShopId());
-//		sc.andMTimeEqualTo(t.getmTime());
-//		t.setmTime(new Date());
-//		return shopMapper.updateByExample(t, example);
-//	}
-//
-//	@Override
-//	public int deleteById(Integer id, Integer isValid) {
-//		Shop record = new Shop();
-//		record.setShopId(id);
-//		record.setIsValid(isValid);
-//		return shopMapper.updateByPrimaryKeySelective(record);
-//	}
-//
-//	@Override
-//	public void findByPage(Page<Shop> page, Shop t) {
-//		ShopExample example = new ShopExample();
-//		page2Exam(page, example);
-//
-//		if (t != null) {
-//			ShopExample.Criteria sc = example.createCriteria();
-//			if (t.getShopName() != null && !"".equals(t.getShopName())) {
-//				sc.andShopNameLike("%" + t.getShopName() + "%");
-//			}
-//
-//			if (t.getCityId() != null && t.getCityId() > 0) {
-//				sc.andCityIdEqualTo(t.getCityId());
-//			}
-//			
-//			if (t.getTownId() != null && t.getTownId() > 0) {
-//				sc.andTownIdEqualTo(t.getTownId());
-//			}
-//		}
-//
-//		int total = shopMapper.countByExample(example);
-//		List<Shop> list = shopMapper.selectByExample(example);
-//
-//		page.setTotalCount(total);
-//		page.setResult(list);
-//	}
-//
-//	/**
-//	 * 分页对象组装分页查询条件
-//	 * 
-//	 * @param p
-//	 *            分页对象
-//	 * @param c
-//	 *            查询条件
-//	 */
-//	private void page2Exam(Page<Shop> p, ShopExample c) {
-//		if (p != null && c != null) {
-//			c.setLimitEnd(p.getPageSize());
-//			c.setLimitStart(p.getPageSize() * (p.getPageNo() - 1));
-//
-//			if (p.getOrderBy() != null && p.getOrderBy().length() < 20) {
-//				c.setOrderByClause(StringEscapeUtils.escapeSql(p.getOrderBy()));
-//			}
-//		}
-//	}
-//
-//	@Override
-//	public List<Integer> findShopCityIds() {
-//		return shopMapper.selectCityIds();
-//	}
-//
-//	@Override
-//	public List<Shop> findbycityId(Integer cityId) {
-//		ShopExample example = new ShopExample();
-//		ShopExample.Criteria mc = example.createCriteria();
-//		mc.andCityIdEqualTo(cityId);
-//		mc.andIsValidEqualTo(1);
-//		return shopMapper.selectByExample(example);
-//	}
-//	
-//	@Override
-//	public List<Shop> findByOrg(Shop t){
-//		ShopExample example = new ShopExample();
-//		example.setOrderByClause("c_time desc");
-//
-//		if (t != null) {
-//			ShopExample.Criteria sc = example.createCriteria();
-//			if(t.getIsValid() != null){
-//				sc.andIsValidEqualTo(t.getIsValid());
-//			}
-//			if (t.getShopName() != null && !"".equals(t.getShopName())) {
-//				sc.andShopNameLike("%" + t.getShopName() + "%");
-//			}
-//			if (t.getCityId() != null && t.getCityId() > 0) {
-//				sc.andCityIdEqualTo(t.getCityId());
-//			}
-//			if (t.getTownId() != null && t.getTownId() > 0) {
-//				sc.andTownIdEqualTo(t.getTownId());
-//			}
-//		}
-//
-//		return shopMapper.selectByExample(example);
-//	}
-//	
-//	@Override
-//	public List<Shop> findByShopId(List<Integer> shopIds, Integer isValid){
-//		ShopExample example = new ShopExample();
-//		ShopExample.Criteria mc = example.createCriteria();
-//		mc.andShopIdIn(shopIds) ;
-//		if (null != isValid && isValid > 0) {
-//			mc.andIsValidEqualTo(isValid);
-//		}
-//		return shopMapper.selectByExample(example);
-//	}
+	private static final Logger logger = Logger.getLogger(UserServiceImpl.class);
+	@Autowired
+	private UserMapper userMapper;
+	
+	public User findbyid(Long id) throws Exception {
+		if(id == null || id <= 0){
+			return null ;
+		}
+		return userMapper.selectByPrimaryKey(id) ;
+	}
+
+	public int save(User t) throws Exception {
+		if (t == null) {
+			return -1;
+		}
+		try {
+			t.setcTime(Calendar.getInstance().getTime());
+			t.setmTime(Calendar.getInstance().getTime());
+			return userMapper.insertSelective(t);
+		} catch (Exception e) {
+			e.printStackTrace();
+			logger.error("save 失败", e);
+		}
+		return 0;
+	}
+
+	public int update(User t) throws Exception {
+		if (t == null) {
+			return -1;
+		}
+		try {
+			t.setmTime(Calendar.getInstance().getTime());
+			return userMapper.updateByPrimaryKeySelective(t);
+		} catch (Exception e) {
+			e.printStackTrace();
+			logger.error("update 失败", e);
+		}
+		return 0;
+	}
+
+	public List<User> selectByParam(UserQuery queryObj) throws Exception {
+		if (queryObj == null) {
+			return null;
+		}
+		UserExample example = new UserExample();
+		Criteria criteria = example.createCriteria();
+		if(queryObj.getPhoneNumber() != null){
+			criteria.andPhoneNumberEqualTo(queryObj.getPhoneNumber());
+		}
+		return userMapper.selectByExample(example);
+	}
+
+	public PageVo<User> findByParam(UserQuery queryObj) throws Exception {
+		PageVo<User> result = new PageVo<User>();
+		try {
+			UserExample example = this.queryObj2Example(queryObj);
+			List<User> list = userMapper.selectByExample(example);
+
+			this.clearSortAndPagenation(example);
+			int count = userMapper.countByExample(example);
+
+			result.setResult(list);
+			result.setTotalCount(count);
+
+			result.setPageNo(queryObj.getPageNo());
+			result.setPageSize(queryObj.getPageSize());
+		} catch (Exception e) {
+			e.printStackTrace();
+			logger.error("findByParam 失败", e);
+		}
+		return result;
+	}
+	
+	/**
+	 * 清除排序和分页条件
+	 */
+	private void clearSortAndPagenation(UserExample example) {
+		example.setOrderByClause(null);
+		example.setLimitStart(-1);
+		example.setLimitEnd(-1);
+	}
+
+	/**
+	 * QueryObj转换为Example
+	 */
+	private UserExample queryObj2Example(UserQuery queryObj) {
+
+		UserExample example = new UserExample();
+		Criteria criteria = example.createCriteria();
+		if(queryObj.getPhoneNumber() != null){
+			criteria.andPhoneNumberEqualTo(queryObj.getPhoneNumber());
+		}
+
+		// 排序
+		if (StringUtils.isNotBlank(queryObj.getSort())) {
+			String orderByClause = queryObj.getSort();
+			if (BaseQuery.DESC.equalsIgnoreCase(queryObj.getSortType())) {
+				orderByClause += " desc";
+			} else {
+				orderByClause += " asc";
+			}
+			example.setOrderByClause(orderByClause);
+		}
+		// 分页
+		example.setLimitStart((queryObj.getPageNo() - 1) * queryObj.getPageSize());
+		example.setLimitEnd(queryObj.getPageSize());
+		return example;
+	}
 }
