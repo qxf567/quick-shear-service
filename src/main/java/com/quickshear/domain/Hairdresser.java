@@ -7,7 +7,7 @@ import java.util.Date;
  * 
  *
  * @author Administrator
- * @date 2016-11-3
+ * @date 2016-11-8
  *
  */
 public class Hairdresser implements Serializable {
@@ -19,9 +19,6 @@ public class Hairdresser implements Serializable {
 
     /** 电话 */
     private String phoneNumber;
-
-    /** 登陆密码 */
-    private String password;
 
     /** 所属门店 */
     private Long shopId;
@@ -71,14 +68,6 @@ public class Hairdresser implements Serializable {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public Long getShopId() {

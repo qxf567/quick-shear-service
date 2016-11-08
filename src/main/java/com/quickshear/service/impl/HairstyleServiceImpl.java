@@ -2,10 +2,10 @@ package com.quickshear.service.impl;
 
 import org.springframework.stereotype.Service;
 
-import com.quickshear.service.ShopService;
+import com.quickshear.service.HairstyleService;
 
 @Service
-public class HairstyleServiceImpl implements ShopService {
+public class HairstyleServiceImpl implements HairstyleService {
 
 //	@Autowired
 //	private ShopMapper shopMapper;

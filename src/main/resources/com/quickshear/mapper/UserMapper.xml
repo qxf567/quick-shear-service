@@ -1,16 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.quickshear.mapper.HairdresserMapper" >
-  <resultMap id="BaseResultMap" type="com.quickshear.domain.Hairdresser" >
+<mapper namespace="com.quickshear.mapper.UserMapper" >
+  <resultMap id="BaseResultMap" type="com.quickshear.domain.User" >
     <id column="id" property="id" jdbcType="BIGINT" />
-    <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="phone_number" property="phoneNumber" jdbcType="VARCHAR" />
-    <result column="shop_id" property="shopId" jdbcType="BIGINT" />
-    <result column="wechat_id" property="wechatId" jdbcType="VARCHAR" />
-    <result column="identity_card_face_photo" property="identityCardFacePhoto" jdbcType="VARCHAR" />
-    <result column="identity_card_back_photo" property="identityCardBackPhoto" jdbcType="VARCHAR" />
-    <result column="restday" property="restday" jdbcType="VARCHAR" />
-    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="roles" property="roles" jdbcType="VARCHAR" />
     <result column="c_time" property="cTime" jdbcType="TIMESTAMP" />
     <result column="m_time" property="mTime" jdbcType="TIMESTAMP" />
   </resultMap>
@@ -73,16 +68,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, name, phone_number, shop_id, wechat_id, identity_card_face_photo, identity_card_back_photo, 
-    restday, status, c_time, m_time
+    id, phone_number, password, roles, c_time, m_time
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.quickshear.domain.HairdresserExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.quickshear.domain.UserExample" >
     select
     <if test="distinct" >
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from hairdresser
+    from users
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -96,61 +90,42 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
-    from hairdresser
+    from users
     where id = #{id,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
-    delete from hairdresser
+    delete from users
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.quickshear.domain.HairdresserExample" >
-    delete from hairdresser
+  <delete id="deleteByExample" parameterType="com.quickshear.domain.UserExample" >
+    delete from users
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.quickshear.domain.Hairdresser" >
+  <insert id="insert" parameterType="com.quickshear.domain.User" >
     <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into hairdresser (name, phone_number, shop_id, 
-      wechat_id, identity_card_face_photo, identity_card_back_photo, 
-      restday, status, c_time, 
-      m_time)
-    values (#{name,jdbcType=VARCHAR}, #{phoneNumber,jdbcType=VARCHAR}, #{shopId,jdbcType=BIGINT}, 
-      #{wechatId,jdbcType=VARCHAR}, #{identityCardFacePhoto,jdbcType=VARCHAR}, #{identityCardBackPhoto,jdbcType=VARCHAR}, 
-      #{restday,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{cTime,jdbcType=TIMESTAMP}, 
-      #{mTime,jdbcType=TIMESTAMP})
+    insert into users (phone_number, password, roles, 
+      c_time, m_time)
+    values (#{phoneNumber,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{roles,jdbcType=VARCHAR}, 
+      #{cTime,jdbcType=TIMESTAMP}, #{mTime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.quickshear.domain.Hairdresser" >
+  <insert id="insertSelective" parameterType="com.quickshear.domain.User" >
     <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into hairdresser
+    insert into users
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="name != null" >
-        name,
-      </if>
       <if test="phoneNumber != null" >
         phone_number,
       </if>
-      <if test="shopId != null" >
-        shop_id,
+      <if test="password != null" >
+        password,
       </if>
-      <if test="wechatId != null" >
-        wechat_id,
-      </if>
-      <if test="identityCardFacePhoto != null" >
-        identity_card_face_photo,
-      </if>
-      <if test="identityCardBackPhoto != null" >
-        identity_card_back_photo,
-      </if>
-      <if test="restday != null" >
-        restday,
-      </if>
-      <if test="status != null" >
-        status,
+      <if test="roles != null" >
+        roles,
       </if>
       <if test="cTime != null" >
         c_time,
@@ -160,29 +135,14 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="name != null" >
-        #{name,jdbcType=VARCHAR},
-      </if>
       <if test="phoneNumber != null" >
         #{phoneNumber,jdbcType=VARCHAR},
       </if>
-      <if test="shopId != null" >
-        #{shopId,jdbcType=BIGINT},
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
       </if>
-      <if test="wechatId != null" >
-        #{wechatId,jdbcType=VARCHAR},
-      </if>
-      <if test="identityCardFacePhoto != null" >
-        #{identityCardFacePhoto,jdbcType=VARCHAR},
-      </if>
-      <if test="identityCardBackPhoto != null" >
-        #{identityCardBackPhoto,jdbcType=VARCHAR},
-      </if>
-      <if test="restday != null" >
-        #{restday,jdbcType=VARCHAR},
-      </if>
-      <if test="status != null" >
-        #{status,jdbcType=INTEGER},
+      <if test="roles != null" >
+        #{roles,jdbcType=VARCHAR},
       </if>
       <if test="cTime != null" >
         #{cTime,jdbcType=TIMESTAMP},
@@ -192,41 +152,26 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.quickshear.domain.HairdresserExample" resultType="java.lang.Integer" >
-    select count(*) from hairdresser
+  <select id="countByExample" parameterType="com.quickshear.domain.UserExample" resultType="java.lang.Integer" >
+    select count(*) from users
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update hairdresser
+    update users
     <set >
       <if test="record.id != null" >
         id = #{record.id,jdbcType=BIGINT},
       </if>
-      <if test="record.name != null" >
-        name = #{record.name,jdbcType=VARCHAR},
-      </if>
       <if test="record.phoneNumber != null" >
         phone_number = #{record.phoneNumber,jdbcType=VARCHAR},
       </if>
-      <if test="record.shopId != null" >
-        shop_id = #{record.shopId,jdbcType=BIGINT},
+      <if test="record.password != null" >
+        password = #{record.password,jdbcType=VARCHAR},
       </if>
-      <if test="record.wechatId != null" >
-        wechat_id = #{record.wechatId,jdbcType=VARCHAR},
-      </if>
-      <if test="record.identityCardFacePhoto != null" >
-        identity_card_face_photo = #{record.identityCardFacePhoto,jdbcType=VARCHAR},
-      </if>
-      <if test="record.identityCardBackPhoto != null" >
-        identity_card_back_photo = #{record.identityCardBackPhoto,jdbcType=VARCHAR},
-      </if>
-      <if test="record.restday != null" >
-        restday = #{record.restday,jdbcType=VARCHAR},
-      </if>
-      <if test="record.status != null" >
-        status = #{record.status,jdbcType=INTEGER},
+      <if test="record.roles != null" >
+        roles = #{record.roles,jdbcType=VARCHAR},
       </if>
       <if test="record.cTime != null" >
         c_time = #{record.cTime,jdbcType=TIMESTAMP},
@@ -240,48 +185,28 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update hairdresser
+    update users
     set id = #{record.id,jdbcType=BIGINT},
-      name = #{record.name,jdbcType=VARCHAR},
       phone_number = #{record.phoneNumber,jdbcType=VARCHAR},
-      shop_id = #{record.shopId,jdbcType=BIGINT},
-      wechat_id = #{record.wechatId,jdbcType=VARCHAR},
-      identity_card_face_photo = #{record.identityCardFacePhoto,jdbcType=VARCHAR},
-      identity_card_back_photo = #{record.identityCardBackPhoto,jdbcType=VARCHAR},
-      restday = #{record.restday,jdbcType=VARCHAR},
-      status = #{record.status,jdbcType=INTEGER},
+      password = #{record.password,jdbcType=VARCHAR},
+      roles = #{record.roles,jdbcType=VARCHAR},
       c_time = #{record.cTime,jdbcType=TIMESTAMP},
       m_time = #{record.mTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.quickshear.domain.Hairdresser" >
-    update hairdresser
+  <update id="updateByPrimaryKeySelective" parameterType="com.quickshear.domain.User" >
+    update users
     <set >
-      <if test="name != null" >
-        name = #{name,jdbcType=VARCHAR},
-      </if>
       <if test="phoneNumber != null" >
         phone_number = #{phoneNumber,jdbcType=VARCHAR},
       </if>
-      <if test="shopId != null" >
-        shop_id = #{shopId,jdbcType=BIGINT},
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
       </if>
-      <if test="wechatId != null" >
-        wechat_id = #{wechatId,jdbcType=VARCHAR},
-      </if>
-      <if test="identityCardFacePhoto != null" >
-        identity_card_face_photo = #{identityCardFacePhoto,jdbcType=VARCHAR},
-      </if>
-      <if test="identityCardBackPhoto != null" >
-        identity_card_back_photo = #{identityCardBackPhoto,jdbcType=VARCHAR},
-      </if>
-      <if test="restday != null" >
-        restday = #{restday,jdbcType=VARCHAR},
-      </if>
-      <if test="status != null" >
-        status = #{status,jdbcType=INTEGER},
+      <if test="roles != null" >
+        roles = #{roles,jdbcType=VARCHAR},
       </if>
       <if test="cTime != null" >
         c_time = #{cTime,jdbcType=TIMESTAMP},
@@ -292,16 +217,11 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.quickshear.domain.Hairdresser" >
-    update hairdresser
-    set name = #{name,jdbcType=VARCHAR},
-      phone_number = #{phoneNumber,jdbcType=VARCHAR},
-      shop_id = #{shopId,jdbcType=BIGINT},
-      wechat_id = #{wechatId,jdbcType=VARCHAR},
-      identity_card_face_photo = #{identityCardFacePhoto,jdbcType=VARCHAR},
-      identity_card_back_photo = #{identityCardBackPhoto,jdbcType=VARCHAR},
-      restday = #{restday,jdbcType=VARCHAR},
-      status = #{status,jdbcType=INTEGER},
+  <update id="updateByPrimaryKey" parameterType="com.quickshear.domain.User" >
+    update users
+    set phone_number = #{phoneNumber,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      roles = #{roles,jdbcType=VARCHAR},
       c_time = #{cTime,jdbcType=TIMESTAMP},
       m_time = #{mTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}

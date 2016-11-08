@@ -2,10 +2,10 @@ package com.quickshear.service.impl;
 
 import org.springframework.stereotype.Service;
 
-import com.quickshear.service.ShopService;
+import com.quickshear.service.OrderEvaluateService;
 
 @Service
-public class OrderEvaluateServiceImpl implements ShopService {
+public class OrderEvaluateServiceImpl implements OrderEvaluateService {
 
 //	@Autowired
 //	private ShopMapper shopMapper;
