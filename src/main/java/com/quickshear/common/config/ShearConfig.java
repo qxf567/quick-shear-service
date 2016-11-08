@@ -3,9 +3,6 @@ package com.quickshear.common.config;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-/**
- * @since v
- */
 @Component
 public class ShearConfig {
 
@@ -13,8 +10,11 @@ public class ShearConfig {
     @Value("${shear.env}")
     private String env;
 
-    @Value("${shear.env}")
+    @Value("${shear.appid}")
     private String appId;
+    
+    @Value("${shear.appsecret}")
+    private String appSecret;
     
 
     public String getEnv() {
@@ -32,5 +32,12 @@ public class ShearConfig {
     public void setAppId(String appId) {
         this.appId = appId;
     }
-    
+
+    public String getAppSecret() {
+        return appSecret;
+    }
+
+    public void setAppSecret(String appSecret) {
+        this.appSecret = appSecret;
+    }
 }
