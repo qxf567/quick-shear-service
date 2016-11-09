@@ -1,6 +1,7 @@
 package com.quickshear.domain;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 
 /**
@@ -43,6 +44,9 @@ public class Shop implements Serializable {
 
     /** 门店图片(副图) */
     private String multiImageUrls;
+
+    /** 门店均价 */
+    private BigDecimal price;
 
     /** 状态(0无效1正常营业2暂停营业) */
     private Integer status;
@@ -141,6 +145,14 @@ public class Shop implements Serializable {
 
     public void setMultiImageUrls(String multiImageUrls) {
         this.multiImageUrls = multiImageUrls;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
     }
 
     public Integer getStatus() {

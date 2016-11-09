@@ -13,6 +13,7 @@
     <result column="geocode" property="geocode" jdbcType="VARCHAR" />
     <result column="main_image_url" property="mainImageUrl" jdbcType="VARCHAR" />
     <result column="multi_image_urls" property="multiImageUrls" jdbcType="VARCHAR" />
+    <result column="price" property="price" jdbcType="DECIMAL" />
     <result column="status" property="status" jdbcType="INTEGER" />
     <result column="c_time" property="cTime" jdbcType="TIMESTAMP" />
     <result column="m_time" property="mTime" jdbcType="TIMESTAMP" />
@@ -77,7 +78,7 @@
   </sql>
   <sql id="Base_Column_List" >
     id, name, phone_number, business_hours, city_id, longitude, latitude, address, geocode, 
-    main_image_url, multi_image_urls, status, c_time, m_time
+    main_image_url, multi_image_urls, price, status, c_time, m_time
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.quickshear.domain.ShopExample" >
     select
@@ -119,13 +120,13 @@
     insert into shop (name, phone_number, business_hours, 
       city_id, longitude, latitude, 
       address, geocode, main_image_url, 
-      multi_image_urls, status, c_time, 
-      m_time)
+      multi_image_urls, price, status, 
+      c_time, m_time)
     values (#{name,jdbcType=VARCHAR}, #{phoneNumber,jdbcType=VARCHAR}, #{businessHours,jdbcType=VARCHAR}, 
       #{cityId,jdbcType=BIGINT}, #{longitude,jdbcType=DOUBLE}, #{latitude,jdbcType=DOUBLE}, 
       #{address,jdbcType=VARCHAR}, #{geocode,jdbcType=VARCHAR}, #{mainImageUrl,jdbcType=VARCHAR}, 
-      #{multiImageUrls,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{cTime,jdbcType=TIMESTAMP}, 
-      #{mTime,jdbcType=TIMESTAMP})
+      #{multiImageUrls,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL}, #{status,jdbcType=INTEGER}, 
+      #{cTime,jdbcType=TIMESTAMP}, #{mTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.quickshear.domain.Shop" >
     <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
@@ -162,6 +163,9 @@
       </if>
       <if test="multiImageUrls != null" >
         multi_image_urls,
+      </if>
+      <if test="price != null" >
+        price,
       </if>
       <if test="status != null" >
         status,
@@ -203,6 +207,9 @@
       </if>
       <if test="multiImageUrls != null" >
         #{multiImageUrls,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=DECIMAL},
       </if>
       <if test="status != null" >
         #{status,jdbcType=INTEGER},
@@ -257,6 +264,9 @@
       <if test="record.multiImageUrls != null" >
         multi_image_urls = #{record.multiImageUrls,jdbcType=VARCHAR},
       </if>
+      <if test="record.price != null" >
+        price = #{record.price,jdbcType=DECIMAL},
+      </if>
       <if test="record.status != null" >
         status = #{record.status,jdbcType=INTEGER},
       </if>
@@ -284,6 +294,7 @@
       geocode = #{record.geocode,jdbcType=VARCHAR},
       main_image_url = #{record.mainImageUrl,jdbcType=VARCHAR},
       multi_image_urls = #{record.multiImageUrls,jdbcType=VARCHAR},
+      price = #{record.price,jdbcType=DECIMAL},
       status = #{record.status,jdbcType=INTEGER},
       c_time = #{record.cTime,jdbcType=TIMESTAMP},
       m_time = #{record.mTime,jdbcType=TIMESTAMP}
@@ -324,6 +335,9 @@
       <if test="multiImageUrls != null" >
         multi_image_urls = #{multiImageUrls,jdbcType=VARCHAR},
       </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=DECIMAL},
+      </if>
       <if test="status != null" >
         status = #{status,jdbcType=INTEGER},
       </if>
@@ -348,6 +362,7 @@
       geocode = #{geocode,jdbcType=VARCHAR},
       main_image_url = #{mainImageUrl,jdbcType=VARCHAR},
       multi_image_urls = #{multiImageUrls,jdbcType=VARCHAR},
+      price = #{price,jdbcType=DECIMAL},
       status = #{status,jdbcType=INTEGER},
       c_time = #{cTime,jdbcType=TIMESTAMP},
       m_time = #{mTime,jdbcType=TIMESTAMP}
