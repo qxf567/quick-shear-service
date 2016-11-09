@@ -1,14 +1,13 @@
 package com.quickshear.domain;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.Date;
 
 /**
  * 
  *
  * @author Administrator
- * @date 2016-11-3
+ * @date 2016-11-9
  *
  */
 public class Shop implements Serializable {
@@ -28,13 +27,16 @@ public class Shop implements Serializable {
     private Long cityId;
 
     /** 坐标经度 */
-    private BigDecimal longitude;
+    private Double longitude;
 
     /** 坐标纬度 */
-    private BigDecimal latitude;
+    private Double latitude;
 
     /** 详细地址 */
     private String address;
+
+    /** 经纬度hash值 */
+    private String geocode;
 
     /** 门店图片(主图) */
     private String mainImageUrl;
@@ -93,19 +95,19 @@ public class Shop implements Serializable {
         this.cityId = cityId;
     }
 
-    public BigDecimal getLongitude() {
+    public Double getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(BigDecimal longitude) {
+    public void setLongitude(Double longitude) {
         this.longitude = longitude;
     }
 
-    public BigDecimal getLatitude() {
+    public Double getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(BigDecimal latitude) {
+    public void setLatitude(Double latitude) {
         this.latitude = latitude;
     }
 
@@ -115,6 +117,14 @@ public class Shop implements Serializable {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public String getGeocode() {
+        return geocode;
+    }
+
+    public void setGeocode(String geocode) {
+        this.geocode = geocode;
     }
 
     public String getMainImageUrl() {

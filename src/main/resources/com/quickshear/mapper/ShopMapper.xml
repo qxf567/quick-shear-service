@@ -7,9 +7,10 @@
     <result column="phone_number" property="phoneNumber" jdbcType="VARCHAR" />
     <result column="business_hours" property="businessHours" jdbcType="VARCHAR" />
     <result column="city_id" property="cityId" jdbcType="BIGINT" />
-    <result column="longitude" property="longitude" jdbcType="DECIMAL" />
-    <result column="latitude" property="latitude" jdbcType="DECIMAL" />
+    <result column="longitude" property="longitude" jdbcType="DOUBLE" />
+    <result column="latitude" property="latitude" jdbcType="DOUBLE" />
     <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="geocode" property="geocode" jdbcType="VARCHAR" />
     <result column="main_image_url" property="mainImageUrl" jdbcType="VARCHAR" />
     <result column="multi_image_urls" property="multiImageUrls" jdbcType="VARCHAR" />
     <result column="status" property="status" jdbcType="INTEGER" />
@@ -75,8 +76,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, name, phone_number, business_hours, city_id, longitude, latitude, address, main_image_url, 
-    multi_image_urls, status, c_time, m_time
+    id, name, phone_number, business_hours, city_id, longitude, latitude, address, geocode, 
+    main_image_url, multi_image_urls, status, c_time, m_time
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.quickshear.domain.ShopExample" >
     select
@@ -117,14 +118,14 @@
     </selectKey>
     insert into shop (name, phone_number, business_hours, 
       city_id, longitude, latitude, 
-      address, main_image_url, multi_image_urls, 
-      status, c_time, m_time
-      )
+      address, geocode, main_image_url, 
+      multi_image_urls, status, c_time, 
+      m_time)
     values (#{name,jdbcType=VARCHAR}, #{phoneNumber,jdbcType=VARCHAR}, #{businessHours,jdbcType=VARCHAR}, 
-      #{cityId,jdbcType=BIGINT}, #{longitude,jdbcType=DECIMAL}, #{latitude,jdbcType=DECIMAL}, 
-      #{address,jdbcType=VARCHAR}, #{mainImageUrl,jdbcType=VARCHAR}, #{multiImageUrls,jdbcType=VARCHAR}, 
-      #{status,jdbcType=INTEGER}, #{cTime,jdbcType=TIMESTAMP}, #{mTime,jdbcType=TIMESTAMP}
-      )
+      #{cityId,jdbcType=BIGINT}, #{longitude,jdbcType=DOUBLE}, #{latitude,jdbcType=DOUBLE}, 
+      #{address,jdbcType=VARCHAR}, #{geocode,jdbcType=VARCHAR}, #{mainImageUrl,jdbcType=VARCHAR}, 
+      #{multiImageUrls,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{cTime,jdbcType=TIMESTAMP}, 
+      #{mTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.quickshear.domain.Shop" >
     <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
@@ -152,6 +153,9 @@
       </if>
       <if test="address != null" >
         address,
+      </if>
+      <if test="geocode != null" >
+        geocode,
       </if>
       <if test="mainImageUrl != null" >
         main_image_url,
@@ -183,13 +187,16 @@
         #{cityId,jdbcType=BIGINT},
       </if>
       <if test="longitude != null" >
-        #{longitude,jdbcType=DECIMAL},
+        #{longitude,jdbcType=DOUBLE},
       </if>
       <if test="latitude != null" >
-        #{latitude,jdbcType=DECIMAL},
+        #{latitude,jdbcType=DOUBLE},
       </if>
       <if test="address != null" >
         #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="geocode != null" >
+        #{geocode,jdbcType=VARCHAR},
       </if>
       <if test="mainImageUrl != null" >
         #{mainImageUrl,jdbcType=VARCHAR},
@@ -233,13 +240,16 @@
         city_id = #{record.cityId,jdbcType=BIGINT},
       </if>
       <if test="record.longitude != null" >
-        longitude = #{record.longitude,jdbcType=DECIMAL},
+        longitude = #{record.longitude,jdbcType=DOUBLE},
       </if>
       <if test="record.latitude != null" >
-        latitude = #{record.latitude,jdbcType=DECIMAL},
+        latitude = #{record.latitude,jdbcType=DOUBLE},
       </if>
       <if test="record.address != null" >
         address = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.geocode != null" >
+        geocode = #{record.geocode,jdbcType=VARCHAR},
       </if>
       <if test="record.mainImageUrl != null" >
         main_image_url = #{record.mainImageUrl,jdbcType=VARCHAR},
@@ -268,9 +278,10 @@
       phone_number = #{record.phoneNumber,jdbcType=VARCHAR},
       business_hours = #{record.businessHours,jdbcType=VARCHAR},
       city_id = #{record.cityId,jdbcType=BIGINT},
-      longitude = #{record.longitude,jdbcType=DECIMAL},
-      latitude = #{record.latitude,jdbcType=DECIMAL},
+      longitude = #{record.longitude,jdbcType=DOUBLE},
+      latitude = #{record.latitude,jdbcType=DOUBLE},
       address = #{record.address,jdbcType=VARCHAR},
+      geocode = #{record.geocode,jdbcType=VARCHAR},
       main_image_url = #{record.mainImageUrl,jdbcType=VARCHAR},
       multi_image_urls = #{record.multiImageUrls,jdbcType=VARCHAR},
       status = #{record.status,jdbcType=INTEGER},
@@ -296,13 +307,16 @@
         city_id = #{cityId,jdbcType=BIGINT},
       </if>
       <if test="longitude != null" >
-        longitude = #{longitude,jdbcType=DECIMAL},
+        longitude = #{longitude,jdbcType=DOUBLE},
       </if>
       <if test="latitude != null" >
-        latitude = #{latitude,jdbcType=DECIMAL},
+        latitude = #{latitude,jdbcType=DOUBLE},
       </if>
       <if test="address != null" >
         address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="geocode != null" >
+        geocode = #{geocode,jdbcType=VARCHAR},
       </if>
       <if test="mainImageUrl != null" >
         main_image_url = #{mainImageUrl,jdbcType=VARCHAR},
@@ -328,9 +342,10 @@
       phone_number = #{phoneNumber,jdbcType=VARCHAR},
       business_hours = #{businessHours,jdbcType=VARCHAR},
       city_id = #{cityId,jdbcType=BIGINT},
-      longitude = #{longitude,jdbcType=DECIMAL},
-      latitude = #{latitude,jdbcType=DECIMAL},
+      longitude = #{longitude,jdbcType=DOUBLE},
+      latitude = #{latitude,jdbcType=DOUBLE},
       address = #{address,jdbcType=VARCHAR},
+      geocode = #{geocode,jdbcType=VARCHAR},
       main_image_url = #{mainImageUrl,jdbcType=VARCHAR},
       multi_image_urls = #{multiImageUrls,jdbcType=VARCHAR},
       status = #{status,jdbcType=INTEGER},

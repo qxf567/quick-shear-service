@@ -21,10 +21,10 @@ public class Hairstyle implements Serializable {
     /** 介绍明细 */
     private String detail;
 
-    /** 门店图片(主图) */
+    /** 图片(主图) */
     private String mainImageUrl;
 
-    /** 门店图片(副图) */
+    /** 图片(副图) */
     private String multiImageUrls;
 
     /** 收费价格 */

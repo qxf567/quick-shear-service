@@ -25,10 +25,13 @@ public class ShopQuery extends BaseQuery implements Serializable {
     private Long cityId;
 
     /** 坐标经度 */
-    private BigDecimal longitude;
+    private Double longitude;
 
     /** 坐标纬度 */
-    private BigDecimal latitude;
+    private Double latitude;
+
+    /** 经纬度hash值 */
+    private String geocode;
 
     /** 状态(0无效1正常营业2暂停营业) */
     private Integer status;
@@ -57,28 +60,36 @@ public class ShopQuery extends BaseQuery implements Serializable {
 		this.cityId = cityId;
 	}
 
-	public BigDecimal getLongitude() {
-		return longitude;
-	}
-
-	public void setLongitude(BigDecimal longitude) {
-		this.longitude = longitude;
-	}
-
-	public BigDecimal getLatitude() {
-		return latitude;
-	}
-
-	public void setLatitude(BigDecimal latitude) {
-		this.latitude = latitude;
-	}
-
 	public Integer getStatus() {
 		return status;
 	}
 
 	public void setStatus(Integer status) {
 		this.status = status;
+	}
+
+	public Double getLongitude() {
+		return longitude;
+	}
+
+	public void setLongitude(Double longitude) {
+		this.longitude = longitude;
+	}
+
+	public Double getLatitude() {
+		return latitude;
+	}
+
+	public void setLatitude(Double latitude) {
+		this.latitude = latitude;
+	}
+
+	public String getGeocode() {
+		return geocode;
+	}
+
+	public void setGeocode(String geocode) {
+		this.geocode = geocode;
 	}
 
 }
