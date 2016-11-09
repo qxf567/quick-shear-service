@@ -33,6 +33,7 @@ import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
+import com.quickshear.common.pay.tenpay.util.Sha1Util;
 import com.quickshear.common.wechat.domain.AccessToken;
 import com.quickshear.common.wechat.domain.Article;
 import com.quickshear.common.wechat.domain.Message;
@@ -88,7 +89,7 @@ public class WechatManager {
       for (String string : strSet) {
         key = key + string;
       }
-      String pwd = sha1(key);
+      String pwd = Sha1Util.getSha1(key);
       return pwd.equals(signature);
     } else {
       return false;
@@ -98,16 +99,17 @@ public class WechatManager {
   
   /** 计算signature
   */
- public String getSign(String timestamp,String noncestr) {
+ public String getSign(String timestamp,String noncestr,String url) {
 	 AccessToken accessToken = wechatUtil.getAccessToken();
-	String token = accessToken.getToken();
-     String[] strSet = new String[] {token, timestamp, noncestr};
+	 generateJsapiTicket(accessToken);
+	String jspApi = accessToken.getJsapiTicket();
+     String[] strSet = new String[] {"jsapi_ticket="+jspApi+"&", "timestamp="+timestamp+"&", "noncestr="+noncestr+"&","url="+url};
      java.util.Arrays.sort(strSet);
      String key = "";
      for (String string : strSet) {
        key = key + string;
      }
-     String pwd = sha1(key);
+     String pwd = Sha1Util.getSha1(key);
      return pwd;
  }
   
@@ -117,21 +119,8 @@ public class WechatManager {
    */
   public String getJsapiTicket() {
      AccessToken accessToken = wechatUtil.getAccessToken();
-
-    ObjectMapper objectMapper = new ObjectMapper();
-    try {
-      log.debug("getJsapiTicket().jsapiTicket:" + objectMapper.writeValueAsString(accessToken)); // 输出log
-    } catch (JsonParseException e) {
-      e.printStackTrace();
-      log.error("getJsapiTicket()", e);
-    } catch (JsonMappingException e) {
-      e.printStackTrace();
-      log.error("getJsapiTicket()", e);
-    } catch (IOException e) {
-      e.printStackTrace();
-      log.error("getJsapiTicket()", e);
-    }
-    return accessToken != null ? accessToken.getJsapiTicket() : null;
+     generateJsapiTicket(accessToken);
+    return accessToken.getJsapiTicket();
   }
 
   public void generateJsapiTicket(AccessToken accessToken) {
@@ -409,22 +398,4 @@ public class WechatManager {
     return result;
   }
   
-  /**
-   * sha1加密算法
-   *
-   * @param key 需要加密的字符串
-   * @return 加密后的结果
-   */
-  private static String sha1(String key) {
-    try {
-      MessageDigest md = MessageDigest.getInstance("SHA1");
-      md.update(key.getBytes());
-      String pwd = new BigInteger(1, md.digest()).toString(16);
-      return pwd;
-    } catch (Exception e) {
-      e.printStackTrace();
-      return key;
-    }
-  }
-
 }

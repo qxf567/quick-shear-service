@@ -21,8 +21,8 @@ import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
+import com.quickshear.common.config.ShearConfig;
 import com.quickshear.common.wechat.domain.AccessToken;
-import com.quickshear.common.wechat.domain.WechatConfig;
 
 
 /**
@@ -38,7 +38,7 @@ public class WechatUtil {
   public final static String access_token_url =
       "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=APPID&secret=APPSECRET";
   @Autowired
-  private WechatConfig wechatConfig;
+  private ShearConfig config;
 
   /**
    * 获取access_token 首先从session中获取，如果没有，则从微信获取，并放入session中
@@ -80,8 +80,8 @@ public class WechatUtil {
   private AccessToken getAccessTokenFromWexin() {
     AccessToken accessToken = new AccessToken();
 
-    String requestUrl = access_token_url.replace("APPID", wechatConfig.getAppId())
-        .replace("APPSECRET", wechatConfig.getAppSecret());
+    String requestUrl = access_token_url.replace("APPID", config.getAppId())
+        .replace("APPSECRET", config.getAppSecret());
     String httpResult = httpRequest(requestUrl, "GET", null);
     ObjectMapper objectMapper = new ObjectMapper();
     Map<String, Object> objMap = null;

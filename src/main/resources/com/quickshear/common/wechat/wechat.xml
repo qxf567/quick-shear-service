@@ -24,8 +24,8 @@
 	
 	<bean id="wechatConfig" class="com.quickshear.common.wechat.domain.WechatConfig">
 		<property name="wechatToken" value="${wechat.token}" />
-		<property name="appId" value="${wechat.appid}" />
-		<property name="appSecret" value="${wechat.appsecret}" />
+	<!-- 	<property name="appId" value="${wechat.appid}" />
+		<property name="appSecret" value="${wechat.appsecret}" /> -->
 		<property name="wechatHost" value="${wechat.wechathost}" />
 		<property name="wechatTokenCacheKey" value="${wechat.token.cache.key}" />
 		<property name="wechatMsgTemplateId" value="${wechat.msg.template.id}" />

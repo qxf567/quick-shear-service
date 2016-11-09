@@ -10,10 +10,10 @@ public class ShearConfig {
     @Value("${shear.env}")
     private String env;
 
-    @Value("${shear.appid}")
+    @Value("${wechat.appid}")
     private String appId;
     
-    @Value("${shear.appsecret}")
+    @Value("${wechat.appsecret}")
     private String appSecret;
     
 

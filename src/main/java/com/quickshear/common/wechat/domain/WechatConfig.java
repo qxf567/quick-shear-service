@@ -16,10 +16,6 @@ public class WechatConfig implements Serializable {
    */
   private static final long serialVersionUID = 4098059352785986673L;
 
-  private String appId;
-
-  private String appSecret;
-
   private String wechatToken;
 
   private String wechatHost;
@@ -32,22 +28,6 @@ public class WechatConfig implements Serializable {
    * 保存在缓存中的token的key
    */
   private String wechatTokenCacheKey;
-
-  public String getAppId() {
-    return appId;
-  }
-
-  public void setAppId(String appId) {
-    this.appId = appId;
-  }
-
-  public String getAppSecret() {
-    return appSecret;
-  }
-
-  public void setAppSecret(String appSecret) {
-    this.appSecret = appSecret;
-  }
 
   public String getWechatToken() {
     return wechatToken;
