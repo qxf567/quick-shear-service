@@ -12,6 +12,7 @@ import java.util.Date;
  *
  */
 public class Hairstyle implements Serializable {
+	
     /** id(自增) */
     private Long id;
 
