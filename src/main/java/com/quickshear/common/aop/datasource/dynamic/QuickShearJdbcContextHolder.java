@@ -10,7 +10,7 @@ public class QuickShearJdbcContextHolder {
 	private static final ThreadLocal<String> contextHolder = new ThreadLocal<String>();
 
 	public static final String master = "master";
-	public static final String slave = "slave";
+/*	public static final String slave = "slave";*/
 
 	public static void setCustomerType(String customerType) {
 		Assert.notNull(customerType, "customer's datasource Type cannot be null");

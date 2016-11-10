@@ -34,7 +34,7 @@
  		<property name="testOnBorrow" value="true"></property>
 	</bean>
 	
-	<!-- repair slave datasource -->
+	<!-- repair slave datasource 
 	<bean id="quickshear_slave_DataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
 		<property name="url" value="jdbc:mysql://${db.slave.quickshear.ip}:${db.slave.quickshear.port}/${db.slave.quickshear.db.name}?characterEncoding=utf8" />
@@ -49,12 +49,12 @@
  		<property name="testWhileIdle" value="true"></property>
  		<property name="testOnBorrow" value="true"></property>
 	</bean>
-
+-->
 	<bean id="quickshear_dynamic_DataSource" class="com.quickshear.common.aop.datasource.dynamic.QuickShearDynamicDataSource">
 		<property name="targetDataSources">
 			<map>
 				<entry key="master" value-ref="quickshear_DataSource" />
-				<entry key="slave" value-ref="quickshear_slave_DataSource" />
+				<!-- <entry key="slave" value-ref="quickshear_slave_DataSource" /> -->
 			</map>
 		</property>
 		<property name="defaultTargetDataSource" ref="quickshear_DataSource" />
