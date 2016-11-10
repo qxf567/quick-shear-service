@@ -11,7 +11,7 @@ import com.quickshear.common.vo.BaseQuery;
 public class ShopQuery extends BaseQuery implements Serializable {
 
 	/**
-	 * 
+	 * 序列号
 	 */
 	private static final long serialVersionUID = -7057309047169490433L;
 
