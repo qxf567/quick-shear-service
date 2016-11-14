@@ -12,7 +12,7 @@ public class CityQuery extends BaseQuery implements Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -5240619874361475540L;
+	private static final long serialVersionUID = 1L;
 
 	/** id(自增) */
     private Long id;

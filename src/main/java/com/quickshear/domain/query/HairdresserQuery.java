@@ -9,10 +9,10 @@ import com.quickshear.common.vo.BaseQuery;
  */
 public class HairdresserQuery extends BaseQuery implements Serializable {
 
-	 /**
+	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -3025614684397016248L;
+	private static final long serialVersionUID = 1L;
 
 	/** id(自增) */
     private Long id;

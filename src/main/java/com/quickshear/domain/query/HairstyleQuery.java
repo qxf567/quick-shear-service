@@ -12,7 +12,7 @@ public class HairstyleQuery extends BaseQuery implements Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -6860866217740412414L;
+	private static final long serialVersionUID = 1L;
 
 	/** id(自增) */
     private Long id;

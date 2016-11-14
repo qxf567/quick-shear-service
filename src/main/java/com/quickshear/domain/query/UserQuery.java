@@ -9,10 +9,10 @@ import com.quickshear.common.vo.BaseQuery;
  */
 public class UserQuery extends BaseQuery implements Serializable {
 
-	 /**
+	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -998124707764880792L;
+	private static final long serialVersionUID = 1L;
 
 	/** id(自增) */
     private Long id;

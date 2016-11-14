@@ -12,7 +12,7 @@ public class OrderEvaluateQuery extends BaseQuery implements Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 6278034358426903595L;
+	private static final long serialVersionUID = 1L;
 
 	/** 自增id */
     private Long id;
