@@ -2,7 +2,6 @@ package com.quickshear.common.pay.tenpay;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-//import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -18,15 +17,15 @@ public class AccessTokenUtil {
 //	@Resource(name = "base_redisTemplate")
 //	private RedisTemplate<String, String> redisTemplate;
 //	private static String access_token_key="pay.tenpay.access.token";
-//
-//	/**
-//	 * 获取微信支付访问TOKEN，一天最多获取200次，需要所有用户共享值
-//	 * token的expires_in默认为7200秒
-//	 * @return
-//	 */
-//	public String getAccessToken() {
+
+	/**
+	 * 获取微信支付访问TOKEN，一天最多获取200次，需要所有用户共享值
+	 * token的expires_in默认为7200秒
+	 * @return
+	 */
+	public String getAccessToken() {
 //		Boolean hasKey = redisTemplate.hasKey(access_token_key);
-//		String token = null;
+		String token = null;
 //		if (!hasKey) {
 //			String requestUrl = TenpayConfig.token_url
 //					+ "?grant_type=client_credential&appid="
@@ -68,7 +67,7 @@ public class AccessTokenUtil {
 //		}else{
 //			token = redisTemplate.opsForValue().get(access_token_key);
 //		}
-//		return token;
-//	}
+		return token;
+	}
 	
 }

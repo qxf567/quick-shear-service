@@ -128,5 +128,4 @@ public class TenpayUtil {
 		SimpleDateFormat sdf = new SimpleDateFormat(formatType);
 		return sdf.format(date);
 	}
-
 }

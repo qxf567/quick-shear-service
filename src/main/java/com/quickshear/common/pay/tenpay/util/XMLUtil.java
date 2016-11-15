@@ -39,7 +39,7 @@ public class XMLUtil {
 	public static void main(String[] args) {
 		SortedMap<String, String> packageParams = new TreeMap<String, String>();
 		packageParams.put("appid", TenpayConfig.app_id);
-		packageParams.put("mch_id", TenpayConfig.partner);//商户号
+		packageParams.put("mch_id", TenpayConfig.mch_id);//商户号
 		String noncestr = Sha1Util.getNonceStr();
 		packageParams.put("nonce_str", noncestr);
 //		packageParams.put("fee_type", TenpayConfig.fee_type); //币种 

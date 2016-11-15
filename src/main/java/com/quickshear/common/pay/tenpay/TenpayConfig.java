@@ -13,9 +13,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class TenpayConfig {
 	
-	public static String partner;
-	
-//	public static String partner_password;
+	public static String mch_id;
 	/** 密钥 */
 	public static String partner_key;
 	/** appid */
@@ -35,7 +33,6 @@ public class TenpayConfig {
 	/** */
 	public static String sign_method="sha1";
 	
-	public static String _package="Sign=WXPay";
 	public static String input_charset="GBK";
 	
 	/** Token获取网关地址地址 */
@@ -53,16 +50,11 @@ public class TenpayConfig {
 	
 	public static String pkcs12_path;
 	
-	@Value("${pay.tenpay.partner}")
-	private void setPartner(String partner) {
-		TenpayConfig.partner = partner;
+	@Value("${pay.tenpay.partner.mch.id}")
+	public static void setMch_id(String mch_id) {
+	    TenpayConfig.mch_id = mch_id;
 	}
-	
-//	@Value("${pay.tenpay.partner.password}")
-//	private void setPartnerPassword(String partnerPassword) {
-//		TenpayConfig.partner_password = partnerPassword;
-//	}
-	
+
 	@Value("${pay.tenpay.partner.key}")
 	private void setPartnerKey(String partnerKey) {
 		TenpayConfig.partner_key = partnerKey;
@@ -85,7 +77,7 @@ public class TenpayConfig {
 
 	@Value("${app.instance.config}")
 	private void setAppInstanceConfig(String config) {
-		TenpayConfig.pkcs12_path = config+File.separator+"tenpay"+File.separator+TenpayConfig.partner+".p12";
+		TenpayConfig.pkcs12_path = config+File.separator+"tenpay"+File.separator+TenpayConfig.mch_id+".p12";
 	}
 	
 }

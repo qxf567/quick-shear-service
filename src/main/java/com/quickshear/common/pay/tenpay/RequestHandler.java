@@ -187,11 +187,12 @@ public class RequestHandler {
 
 	}
 
+	
 		// 提交预支付
-		public String sendPrepay(SortedMap<String,String> packageParams,String token) {
-			String prepayid = "";
-			// 转换成xml
-			String postData = XMLUtil.map2Xml(packageParams);
+		public String sendPrepay(SortedMap<String,String> params) {
+			String prepayid = null;
+		    // 转换成xml
+			String postData = XMLUtil.map2Xml(params);
 			// 设置链接参数
 			String requestUrl = gateUrl;
 			logger.info(String.format("post url= %s", requestUrl));
@@ -200,20 +201,18 @@ public class RequestHandler {
 			httpClient.setReqContent(requestUrl);
 			httpClient.setCharset("UTF-8");
 			String resContent = "";
+			Map<String, String> map = new HashMap<String, String>();
 			if (httpClient.callHttpPost(requestUrl, postData)) {
 				resContent = httpClient.getResContent();
 				logger.info(String.format("res xml= %s", resContent));
-				Map<String, String> map = new HashMap<String, String>();
 				try {
 					map = XMLUtil.doXMLParse(resContent);
+					if ("SUCCESS".equals(map.get("return_code"))) {
+					    prepayid = map.get("prepay_id");
+					}
 				} catch (Exception e) {
 					e.printStackTrace();
 				} 
-				if ("SUCCESS".equals(map.get("return_code"))) {
-					prepayid = map.get("prepay_id");
-				} else {
-					logger.error(String.format("get prepayid err ,info = %s", map.get("return_msg")));
-				}
 			}
 			return prepayid;
 		}

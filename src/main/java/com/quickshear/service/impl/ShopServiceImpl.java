@@ -8,6 +8,9 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.quickshear.common.util.GeoUtil;
+import com.quickshear.common.util.Geohash;
+import com.quickshear.common.util.GeoUtil.GaussSphere;
 import com.quickshear.common.vo.BaseQuery;
 import com.quickshear.common.vo.PageVo;
 import com.quickshear.domain.Shop;
@@ -133,5 +136,20 @@ public class ShopServiceImpl implements ShopService {
 		example.setLimitStart((queryObj.getPageNo() - 1) * queryObj.getPageSize());
 		example.setLimitEnd(queryObj.getPageSize());
 		return example;
+	}
+	
+	public static void main(String[] args) {
+	    String geocode = Geohash.encode(39.3265d, 116.3253d);
+	    System.out.println(geocode);
+	    
+	    String geocode2 = Geohash.encode(39.3266d, 116.3253d);
+	    System.out.println(geocode2);
+	    
+	    String geocode3 = Geohash.encode(39.3267d, 116.3253d);
+	    System.out.println(geocode3);
+	    
+	    String geocode4 = Geohash.encode(39.5267d, 116.3254d);
+	    System.out.println(geocode4);
+	    System.out.println(GeoUtil.DistanceOfTwoPoints(39.52671d, 116.32541d,39.62679d, 116.32541d,GaussSphere.WGS84));
 	}
 }
