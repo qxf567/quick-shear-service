@@ -57,7 +57,8 @@ public class RequestHandler {
 		this.request = request;
 		this.response = response;
 		
-		this.gateUrl = "https://gw.tenpay.com/gateway/pay.htm";
+//		this.gateUrl = "https://gw.tenpay.com/gateway/pay.htm";
+		this.gateUrl="https://api.mch.weixin.qq.com/pay/unifiedorder";
 		this.key = TenpayConfig.partner_key;
 		this.parameters = new TreeMap();
 		this.debugInfo = "";
@@ -142,7 +143,7 @@ public class RequestHandler {
 	}
 		
 	// 获取package带参数的签名包
-	public String genPackage(SortedMap<String, String> packageParams)
+/*	public String genPackage(SortedMap<String, String> packageParams)
 			throws UnsupportedEncodingException {
 		String sign = createSign(packageParams);
 
@@ -161,7 +162,7 @@ public class RequestHandler {
 		logger.debug(String.format("packageValue= %s", packageValue));
 		return packageValue;
 	}
-
+*/
 	/**
 	 * 创建md5摘要,规则是:按参数名称a-z排序,遇到空值的参数不参加签名。
 	 */

@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class TenpayConfig {
 	
+        //商户号
 	public static String mch_id;
 	/** 密钥 */
 	public static String partner_key;
@@ -50,7 +51,7 @@ public class TenpayConfig {
 	
 	public static String pkcs12_path;
 	
-	@Value("${pay.tenpay.partner.mch.id}")
+	@Value("${wechat.mch.id}")
 	public static void setMch_id(String mch_id) {
 	    TenpayConfig.mch_id = mch_id;
 	}
@@ -60,17 +61,17 @@ public class TenpayConfig {
 		TenpayConfig.partner_key = partnerKey;
 	}
 
-	@Value("${pay.tenpay.app.id}")
+	@Value("${wechat.appid}")
 	private void setAppId(String appId) {
 		TenpayConfig.app_id = appId;
 	}
 
-	@Value("${pay.tenpay.app.secret}")
+	@Value("${wechat.appsecret}")
 	private void setAppSecret(String appSecret) {
 		TenpayConfig.app_secret = appSecret;
 	}
 
-	@Value("${pay.tenpay.notify.url}")
+	@Value("${wechat.notify.url}")
 	private void setNotifyUrl(String NotifyUrl){
 		TenpayConfig.notify_url = NotifyUrl;
 	}
