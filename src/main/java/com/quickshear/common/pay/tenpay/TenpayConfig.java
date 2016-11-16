@@ -36,19 +36,6 @@ public class TenpayConfig {
 	
 	public static String input_charset="GBK";
 	
-	/** Token获取网关地址地址 */
-	public static String token_url = "https://api.weixin.qq.com/cgi-bin/token";
-	/** 订单查询url */
-	public static String order_query_url = "https://api.mch.weixin.qq.com/pay/orderquery";
-	/** 提交预支付单网关 */
-	public static String prepay_url = "https://api.weixin.qq.com/pay/genprepay";
-	/** 申请退款 */
-	public static String refund_url = "https://api.mch.weixin.qq.com/secapi/pay/refund";
-	/** 统一下单 **/
-	public static String unified_order_url = "https://api.mch.weixin.qq.com/pay/unifiedorder";
-	
-	public static String refund_query_url = "https://api.mch.weixin.qq.com/pay/refundquery";
-	
 	public static String pkcs12_path;
 	
 	@Value("${wechat.mch.id}")

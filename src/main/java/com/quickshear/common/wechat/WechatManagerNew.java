@@ -7,10 +7,8 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.io.Writer;
-import java.math.BigInteger;
 import java.net.ConnectException;
 import java.net.URL;
-import java.security.MessageDigest;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -25,6 +23,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.type.TypeReference;
 import org.dom4j.Document;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
@@ -33,8 +32,8 @@ import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
-import com.quickshear.common.pay.tenpay.util.Sha1Util;
-import com.quickshear.common.wechat.domain.AccessToken;
+import com.quickshear.common.pay.tenpay.TenpayConfig;
+import com.quickshear.common.util.JsonUtil;
 import com.quickshear.common.wechat.domain.Article;
 import com.quickshear.common.wechat.domain.Message;
 import com.quickshear.common.wechat.domain.Reply;
@@ -46,103 +45,67 @@ import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
 import com.thoughtworks.xstream.io.xml.PrettyPrintWriter;
 import com.thoughtworks.xstream.io.xml.XppDriver;
 
-/**
- * @author liuyh
- * @date 2015-9-11
- *
- */
 @Component
-public class WechatManager {
-  private static Logger log = Logger.getLogger(WechatManager.class);
+public class WechatManagerNew {
+  private static Logger log = Logger.getLogger(WechatManagerNew.class);
 
   @Autowired
   private WechatUtil wechatUtil;
 
   /**
-   * 根据token计算signature验证是否为weixin服务端发送的消息
+   * 公众号可以通过微信网页授权机制，来获取用户基本信息
+   * 
    */
-  public boolean checkWeixinReques(HttpServletRequest request, String token) {
-    String signature = request.getParameter("signature");
-    String timestamp = request.getParameter("timestamp");
-    String nonce = request.getParameter("nonce");
-    log.debug("----------------checkWeixinReques------------------------");
-    log.debug("signature=" + signature + ";timestamp=" + timestamp + ";nonce=" + nonce);
-    log.debug("token=" + token);
-    if (signature != null && timestamp != null && nonce != null) {
-      String[] strSet = new String[] {token, timestamp, nonce};
-      java.util.Arrays.sort(strSet);
-      String key = "";
-      for (String string : strSet) {
-        key = key + string;
-      }
-      String pwd = Sha1Util.getSha1(key);
-      return pwd.equals(signature);
-    } else {
-      return false;
-    }
-  }
-
-  
-  /** 计算signature
-  */
- public String getSign(String timestamp,String noncestr,String url) {
-	 AccessToken accessToken = wechatUtil.getAccessToken();
-	 generateJsapiTicket(accessToken);
-	String jspApi = accessToken.getJsapiTicket();
-     String[] strSet = new String[] {"jsapi_ticket="+jspApi+"&", "timestamp="+timestamp+"&", "noncestr="+noncestr+"&","url="+url};
-     java.util.Arrays.sort(strSet);
-     String key = "";
-     for (String string : strSet) {
-       key = key + string;
+  public Map<String,String> getUser(HttpServletRequest request,String code) {
+     String accessTokenUrl = WechatConstat.accessTokenUrl;
+     accessTokenUrl = accessTokenUrl.replace("{appid}", TenpayConfig.app_id)
+	     .replace("{secret}", TenpayConfig.app_secret)
+	     .replace("{code}", code);
+     
+     // 第二步：通过code换取网页授权access_token
+     String accessTokenContent = httpRequest(accessTokenUrl,"GET",null);
+     //	取到json串中的refresh_token值
+     TypeReference<Map<String, String>> ref = new TypeReference<Map<String, String>>() {};
+     Map<String, String> map = (Map<String, String>) JsonUtil.json2GenericObject(accessTokenContent, ref);
+     String refreshToken = map.get("refresh_token");
+     
+     //第三步：刷新access_token
+     String refreshTokenUrl = WechatConstat.refreshTokenUrl;
+     refreshTokenUrl = refreshTokenUrl.replace("{appid}", TenpayConfig.app_id)
+	     .replace("{refreshToken}", refreshToken);
+     
+     String refreshTokenContent = httpRequest(refreshTokenUrl,"GET",null);
+     
+     //	取到json串中的refresh_token值
+     TypeReference<Map<String, String>> ref2 = new TypeReference<Map<String, String>>() {};
+     Map<String, String> map2 = (Map<String, String>) JsonUtil.json2GenericObject(refreshTokenContent, ref2);
+     if(map2.get("errcode") != null){
+	 //@TODO  有错误
      }
-     String pwd = Sha1Util.getSha1(key);
-     return pwd;
- }
+     String accessToken = map2.get("access_token");
+     String openid = map2.get("openid");
+     
+     
+     //第四步：拉取用户信息(需scope为 snsapi_userinfo)
+   //第三步：刷新access_token
+     String userInfoUrl = WechatConstat.userInfoUrl;
+     userInfoUrl = userInfoUrl.replace("{accessToken}", accessToken)
+	     .replace("{openid}", openid);
+     
+     String userInfoContent = httpRequest(userInfoUrl,"GET",null);
+     
+     //	取到json串中的refresh_token值
+     TypeReference<Map<String, String>> ref3 = new TypeReference<Map<String, String>>() {};
+     Map<String, String> map3 = (Map<String, String>) JsonUtil.json2GenericObject(userInfoContent, ref3);
+     if(map3.get("errcode") != null){
+	 //@TODO  有错误
+     }
+     
+     return map3;
+  }
+
   
-
-  /**
-   * 获取jsapi_ticket
-   */
-  public String getJsapiTicket() {
-     AccessToken accessToken = wechatUtil.getAccessToken();
-     generateJsapiTicket(accessToken);
-    return accessToken.getJsapiTicket();
-  }
-
-  public void generateJsapiTicket(AccessToken accessToken) {
-    String requestUrl = WechatConstat.jsapi_ticket_url.replace("{0}", accessToken.getToken());
-    String httpResult = httpRequest(requestUrl, "GET", null);
-    ObjectMapper objectMapper = new ObjectMapper();
-    Map<String, Object> objMap = null;
-    if ("" != httpResult) {
-      try {
-        objMap = objectMapper.readValue(httpResult, Map.class);
-        if (null != objMap && objMap.get("errmsg").equals("ok")) {
-          accessToken.setJsapiTicket(objMap.get("ticket").toString());
-        } else {
-          // 获取token失败
-          int errcode = objMap != null ? Integer.valueOf(objMap.get("errcode").toString()) : 0;
-          String errmsg = objMap != null ? objMap.get("errmsg").toString() : null;
-          log.error("获取jsapi_ticket失败 errcode:{" + errcode + "} errmsg:{" + errmsg + "}");
-        }
-      } catch (JsonParseException e) {
-        e.printStackTrace();
-        log.error("generateJsapiTicket()", e);
-      } catch (JsonMappingException e) {
-        e.printStackTrace();
-        log.error("generateJsapiTicket()", e);
-      } catch (IOException e) {
-        e.printStackTrace();
-        log.error("generateJsapiTicket()", e);
-      } catch (Exception e) {
-        e.printStackTrace();
-        accessToken.setJsapiTicket(null);
-        // 获取token失败
-        log.error("获取jsapi_ticket时返回值转换错误  errcode:{" + objMap.get("errcode") + "} errmsg:{"
-            + objMap.get("errmsg") + "}", e);
-      }
-    }
-  }
+  
 
   /**
    * 发起https请求并获取结果

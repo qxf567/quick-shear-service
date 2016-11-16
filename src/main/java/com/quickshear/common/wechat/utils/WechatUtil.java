@@ -22,6 +22,7 @@ import org.springframework.stereotype.Component;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.quickshear.common.config.ShearConfig;
+import com.quickshear.common.wechat.WechatConstat;
 import com.quickshear.common.wechat.domain.AccessToken;
 
 
@@ -33,10 +34,6 @@ import com.quickshear.common.wechat.domain.AccessToken;
 @Component
 public class WechatUtil {
   private static Logger log = Logger.getLogger(WechatUtil.class);
-
-  // 获取access_token的接口地址（GET） 限200（次/天）
-  public final static String access_token_url =
-      "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=APPID&secret=APPSECRET";
   @Autowired
   private ShearConfig config;
 
@@ -80,7 +77,7 @@ public class WechatUtil {
   private AccessToken getAccessTokenFromWexin() {
     AccessToken accessToken = new AccessToken();
 
-    String requestUrl = access_token_url.replace("APPID", config.getAppId())
+    String requestUrl = WechatConstat.access_token_url.replace("APPID", config.getAppId())
         .replace("APPSECRET", config.getAppSecret());
     String httpResult = httpRequest(requestUrl, "GET", null);
     ObjectMapper objectMapper = new ObjectMapper();

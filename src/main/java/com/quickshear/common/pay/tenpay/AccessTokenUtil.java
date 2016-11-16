@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 
 import com.quickshear.common.pay.tenpay.client.TenpayHttpClient;
 import com.quickshear.common.util.JsonUtil;
+import com.quickshear.common.wechat.WechatConstat;
 
 @Component
 /**
@@ -96,7 +97,7 @@ public class AccessTokenUtil {
 	Boolean hasKey = tokenMap.containsKey(access_token_key);
 	String token = null;
 	if (!hasKey) {
-	    String requestUrl = TenpayConfig.token_url + "?grant_type=client_credential&appid=" + TenpayConfig.app_id
+	    String requestUrl = WechatConstat.token_url + "?grant_type=client_credential&appid=" + TenpayConfig.app_id
 		    + "&secret=" + TenpayConfig.app_secret;
 	    try {
 		// 发送请求，返回json
