@@ -1,4 +1,4 @@
-package com.quickshear.common.pay.tenpay;
+package com.quickshear.common.wechat.pay;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -17,10 +17,10 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.quickshear.common.pay.tenpay.client.TenpayHttpClient;
-import com.quickshear.common.pay.tenpay.util.MD5Util;
-import com.quickshear.common.pay.tenpay.util.TenpayUtil;
-import com.quickshear.common.pay.tenpay.util.XMLUtil;
+import com.quickshear.common.wechat.pay.client.TenpayHttpClient;
+import com.quickshear.common.wechat.pay.util.MD5Util;
+import com.quickshear.common.wechat.pay.util.TenpayUtil;
+import com.quickshear.common.wechat.pay.util.XMLUtil;
 
 
 /**

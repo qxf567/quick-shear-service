@@ -1,4 +1,4 @@
-package com.quickshear.common.pay.tenpay;
+package com.quickshear.common.wechat.pay;
 
 import java.io.File;
 

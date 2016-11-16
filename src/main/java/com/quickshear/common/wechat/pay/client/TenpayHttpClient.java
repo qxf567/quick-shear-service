@@ -1,4 +1,4 @@
-package com.quickshear.common.pay.tenpay.client;
+package com.quickshear.common.wechat.pay.client;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -18,7 +18,7 @@ import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSocketFactory;
 
-import com.quickshear.common.pay.tenpay.util.HttpClientUtil;
+import com.quickshear.common.wechat.pay.util.HttpClientUtil;
 
 
 /**

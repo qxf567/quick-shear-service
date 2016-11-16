@@ -1,4 +1,4 @@
-package com.quickshear.common.pay.tenpay.util;
+package com.quickshear.common.wechat.pay.util;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

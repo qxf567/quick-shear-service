@@ -1,9 +1,9 @@
-package com.quickshear.common.pay.tenpay;
+package com.quickshear.common.wechat.pay;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.quickshear.common.pay.tenpay.util.MD5Util;
+import com.quickshear.common.wechat.pay.util.MD5Util;
 
 
 public class DownloadBillRequestHandler extends RequestHandler {

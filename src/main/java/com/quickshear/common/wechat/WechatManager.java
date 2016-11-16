@@ -33,11 +33,11 @@ import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
-import com.quickshear.common.pay.tenpay.util.Sha1Util;
 import com.quickshear.common.wechat.domain.AccessToken;
 import com.quickshear.common.wechat.domain.Article;
 import com.quickshear.common.wechat.domain.Message;
 import com.quickshear.common.wechat.domain.Reply;
+import com.quickshear.common.wechat.pay.util.Sha1Util;
 import com.quickshear.common.wechat.utils.MyX509TrustManager;
 import com.quickshear.common.wechat.utils.WechatUtil;
 import com.thoughtworks.xstream.XStream;

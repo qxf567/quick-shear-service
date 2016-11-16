@@ -1,4 +1,4 @@
-package com.quickshear.common.pay.tenpay;
+package com.quickshear.common.wechat.pay;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -20,8 +20,8 @@ import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 
-import com.quickshear.common.pay.tenpay.util.MD5Util;
-import com.quickshear.common.pay.tenpay.util.TenpayUtil;
+import com.quickshear.common.wechat.pay.util.MD5Util;
+import com.quickshear.common.wechat.pay.util.TenpayUtil;
 
 
 /**

@@ -1,4 +1,4 @@
-package com.quickshear.common.pay.tenpay.client;
+package com.quickshear.common.wechat.pay.client;
 
 import java.io.IOException;
 import java.util.Iterator;
@@ -9,8 +9,8 @@ import java.util.TreeMap;
 
 import org.jdom.JDOMException;
 
-import com.quickshear.common.pay.tenpay.util.MD5Util;
-import com.quickshear.common.pay.tenpay.util.XMLUtil;
+import com.quickshear.common.wechat.pay.util.MD5Util;
+import com.quickshear.common.wechat.pay.util.XMLUtil;
 /**
  * 后台应答类<br/>
  * ========================================================================<br/>

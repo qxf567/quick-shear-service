@@ -1,4 +1,4 @@
-package com.quickshear.common.pay.tenpay.util;
+package com.quickshear.common.wechat.pay.util;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -23,7 +23,7 @@ import org.dom4j.io.XMLWriter;
 import org.jdom.JDOMException;
 import org.jdom.input.SAXBuilder;
 
-import com.quickshear.common.pay.tenpay.TenpayConfig;
+import com.quickshear.common.wechat.pay.TenpayConfig;
 
 /**
  * xml工具类

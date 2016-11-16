@@ -1,4 +1,4 @@
-package com.quickshear.common.pay.tenpay;
+package com.quickshear.common.wechat.pay;
 
 /**
  * tenpay 订单查询接口返回的订单信息

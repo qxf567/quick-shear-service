@@ -1,4 +1,4 @@
-package com.quickshear.common.pay.tenpay;
+package com.quickshear.common.wechat.pay;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -11,9 +11,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
-import com.quickshear.common.pay.tenpay.client.TenpayHttpClient;
 import com.quickshear.common.util.JsonUtil;
 import com.quickshear.common.wechat.WechatConstat;
+import com.quickshear.common.wechat.pay.client.TenpayHttpClient;
 
 @Component
 /**
