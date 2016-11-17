@@ -525,143 +525,213 @@ public class HairdresserExample {
             return (Criteria) this;
         }
 
-        public Criteria andIdentityCardFacePhotoIsNull() {
-            addCriterion("identity_card_face_photo is null");
+        public Criteria andPhotoIsNull() {
+            addCriterion("photo is null");
             return (Criteria) this;
         }
 
-        public Criteria andIdentityCardFacePhotoIsNotNull() {
-            addCriterion("identity_card_face_photo is not null");
+        public Criteria andPhotoIsNotNull() {
+            addCriterion("photo is not null");
             return (Criteria) this;
         }
 
-        public Criteria andIdentityCardFacePhotoEqualTo(String value) {
-            addCriterion("identity_card_face_photo =", value, "identityCardFacePhoto");
+        public Criteria andPhotoEqualTo(String value) {
+            addCriterion("photo =", value, "photo");
             return (Criteria) this;
         }
 
-        public Criteria andIdentityCardFacePhotoNotEqualTo(String value) {
-            addCriterion("identity_card_face_photo <>", value, "identityCardFacePhoto");
+        public Criteria andPhotoNotEqualTo(String value) {
+            addCriterion("photo <>", value, "photo");
             return (Criteria) this;
         }
 
-        public Criteria andIdentityCardFacePhotoGreaterThan(String value) {
-            addCriterion("identity_card_face_photo >", value, "identityCardFacePhoto");
+        public Criteria andPhotoGreaterThan(String value) {
+            addCriterion("photo >", value, "photo");
             return (Criteria) this;
         }
 
-        public Criteria andIdentityCardFacePhotoGreaterThanOrEqualTo(String value) {
-            addCriterion("identity_card_face_photo >=", value, "identityCardFacePhoto");
+        public Criteria andPhotoGreaterThanOrEqualTo(String value) {
+            addCriterion("photo >=", value, "photo");
             return (Criteria) this;
         }
 
-        public Criteria andIdentityCardFacePhotoLessThan(String value) {
-            addCriterion("identity_card_face_photo <", value, "identityCardFacePhoto");
+        public Criteria andPhotoLessThan(String value) {
+            addCriterion("photo <", value, "photo");
             return (Criteria) this;
         }
 
-        public Criteria andIdentityCardFacePhotoLessThanOrEqualTo(String value) {
-            addCriterion("identity_card_face_photo <=", value, "identityCardFacePhoto");
+        public Criteria andPhotoLessThanOrEqualTo(String value) {
+            addCriterion("photo <=", value, "photo");
             return (Criteria) this;
         }
 
-        public Criteria andIdentityCardFacePhotoLike(String value) {
-            addCriterion("identity_card_face_photo like", value, "identityCardFacePhoto");
+        public Criteria andPhotoLike(String value) {
+            addCriterion("photo like", value, "photo");
             return (Criteria) this;
         }
 
-        public Criteria andIdentityCardFacePhotoNotLike(String value) {
-            addCriterion("identity_card_face_photo not like", value, "identityCardFacePhoto");
+        public Criteria andPhotoNotLike(String value) {
+            addCriterion("photo not like", value, "photo");
             return (Criteria) this;
         }
 
-        public Criteria andIdentityCardFacePhotoIn(List<String> values) {
-            addCriterion("identity_card_face_photo in", values, "identityCardFacePhoto");
+        public Criteria andPhotoIn(List<String> values) {
+            addCriterion("photo in", values, "photo");
             return (Criteria) this;
         }
 
-        public Criteria andIdentityCardFacePhotoNotIn(List<String> values) {
-            addCriterion("identity_card_face_photo not in", values, "identityCardFacePhoto");
+        public Criteria andPhotoNotIn(List<String> values) {
+            addCriterion("photo not in", values, "photo");
             return (Criteria) this;
         }
 
-        public Criteria andIdentityCardFacePhotoBetween(String value1, String value2) {
-            addCriterion("identity_card_face_photo between", value1, value2, "identityCardFacePhoto");
+        public Criteria andPhotoBetween(String value1, String value2) {
+            addCriterion("photo between", value1, value2, "photo");
             return (Criteria) this;
         }
 
-        public Criteria andIdentityCardFacePhotoNotBetween(String value1, String value2) {
-            addCriterion("identity_card_face_photo not between", value1, value2, "identityCardFacePhoto");
+        public Criteria andPhotoNotBetween(String value1, String value2) {
+            addCriterion("photo not between", value1, value2, "photo");
             return (Criteria) this;
         }
 
-        public Criteria andIdentityCardBackPhotoIsNull() {
-            addCriterion("identity_card_back_photo is null");
+        public Criteria andCardFacePhotoIsNull() {
+            addCriterion("card_face_photo is null");
             return (Criteria) this;
         }
 
-        public Criteria andIdentityCardBackPhotoIsNotNull() {
-            addCriterion("identity_card_back_photo is not null");
+        public Criteria andCardFacePhotoIsNotNull() {
+            addCriterion("card_face_photo is not null");
             return (Criteria) this;
         }
 
-        public Criteria andIdentityCardBackPhotoEqualTo(String value) {
-            addCriterion("identity_card_back_photo =", value, "identityCardBackPhoto");
+        public Criteria andCardFacePhotoEqualTo(String value) {
+            addCriterion("card_face_photo =", value, "cardFacePhoto");
             return (Criteria) this;
         }
 
-        public Criteria andIdentityCardBackPhotoNotEqualTo(String value) {
-            addCriterion("identity_card_back_photo <>", value, "identityCardBackPhoto");
+        public Criteria andCardFacePhotoNotEqualTo(String value) {
+            addCriterion("card_face_photo <>", value, "cardFacePhoto");
             return (Criteria) this;
         }
 
-        public Criteria andIdentityCardBackPhotoGreaterThan(String value) {
-            addCriterion("identity_card_back_photo >", value, "identityCardBackPhoto");
+        public Criteria andCardFacePhotoGreaterThan(String value) {
+            addCriterion("card_face_photo >", value, "cardFacePhoto");
             return (Criteria) this;
         }
 
-        public Criteria andIdentityCardBackPhotoGreaterThanOrEqualTo(String value) {
-            addCriterion("identity_card_back_photo >=", value, "identityCardBackPhoto");
+        public Criteria andCardFacePhotoGreaterThanOrEqualTo(String value) {
+            addCriterion("card_face_photo >=", value, "cardFacePhoto");
             return (Criteria) this;
         }
 
-        public Criteria andIdentityCardBackPhotoLessThan(String value) {
-            addCriterion("identity_card_back_photo <", value, "identityCardBackPhoto");
+        public Criteria andCardFacePhotoLessThan(String value) {
+            addCriterion("card_face_photo <", value, "cardFacePhoto");
             return (Criteria) this;
         }
 
-        public Criteria andIdentityCardBackPhotoLessThanOrEqualTo(String value) {
-            addCriterion("identity_card_back_photo <=", value, "identityCardBackPhoto");
+        public Criteria andCardFacePhotoLessThanOrEqualTo(String value) {
+            addCriterion("card_face_photo <=", value, "cardFacePhoto");
             return (Criteria) this;
         }
 
-        public Criteria andIdentityCardBackPhotoLike(String value) {
-            addCriterion("identity_card_back_photo like", value, "identityCardBackPhoto");
+        public Criteria andCardFacePhotoLike(String value) {
+            addCriterion("card_face_photo like", value, "cardFacePhoto");
             return (Criteria) this;
         }
 
-        public Criteria andIdentityCardBackPhotoNotLike(String value) {
-            addCriterion("identity_card_back_photo not like", value, "identityCardBackPhoto");
+        public Criteria andCardFacePhotoNotLike(String value) {
+            addCriterion("card_face_photo not like", value, "cardFacePhoto");
             return (Criteria) this;
         }
 
-        public Criteria andIdentityCardBackPhotoIn(List<String> values) {
-            addCriterion("identity_card_back_photo in", values, "identityCardBackPhoto");
+        public Criteria andCardFacePhotoIn(List<String> values) {
+            addCriterion("card_face_photo in", values, "cardFacePhoto");
             return (Criteria) this;
         }
 
-        public Criteria andIdentityCardBackPhotoNotIn(List<String> values) {
-            addCriterion("identity_card_back_photo not in", values, "identityCardBackPhoto");
+        public Criteria andCardFacePhotoNotIn(List<String> values) {
+            addCriterion("card_face_photo not in", values, "cardFacePhoto");
             return (Criteria) this;
         }
 
-        public Criteria andIdentityCardBackPhotoBetween(String value1, String value2) {
-            addCriterion("identity_card_back_photo between", value1, value2, "identityCardBackPhoto");
+        public Criteria andCardFacePhotoBetween(String value1, String value2) {
+            addCriterion("card_face_photo between", value1, value2, "cardFacePhoto");
             return (Criteria) this;
         }
 
-        public Criteria andIdentityCardBackPhotoNotBetween(String value1, String value2) {
-            addCriterion("identity_card_back_photo not between", value1, value2, "identityCardBackPhoto");
+        public Criteria andCardFacePhotoNotBetween(String value1, String value2) {
+            addCriterion("card_face_photo not between", value1, value2, "cardFacePhoto");
+            return (Criteria) this;
+        }
+
+        public Criteria andCardBackPhotoIsNull() {
+            addCriterion("card_back_photo is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCardBackPhotoIsNotNull() {
+            addCriterion("card_back_photo is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCardBackPhotoEqualTo(String value) {
+            addCriterion("card_back_photo =", value, "cardBackPhoto");
+            return (Criteria) this;
+        }
+
+        public Criteria andCardBackPhotoNotEqualTo(String value) {
+            addCriterion("card_back_photo <>", value, "cardBackPhoto");
+            return (Criteria) this;
+        }
+
+        public Criteria andCardBackPhotoGreaterThan(String value) {
+            addCriterion("card_back_photo >", value, "cardBackPhoto");
+            return (Criteria) this;
+        }
+
+        public Criteria andCardBackPhotoGreaterThanOrEqualTo(String value) {
+            addCriterion("card_back_photo >=", value, "cardBackPhoto");
+            return (Criteria) this;
+        }
+
+        public Criteria andCardBackPhotoLessThan(String value) {
+            addCriterion("card_back_photo <", value, "cardBackPhoto");
+            return (Criteria) this;
+        }
+
+        public Criteria andCardBackPhotoLessThanOrEqualTo(String value) {
+            addCriterion("card_back_photo <=", value, "cardBackPhoto");
+            return (Criteria) this;
+        }
+
+        public Criteria andCardBackPhotoLike(String value) {
+            addCriterion("card_back_photo like", value, "cardBackPhoto");
+            return (Criteria) this;
+        }
+
+        public Criteria andCardBackPhotoNotLike(String value) {
+            addCriterion("card_back_photo not like", value, "cardBackPhoto");
+            return (Criteria) this;
+        }
+
+        public Criteria andCardBackPhotoIn(List<String> values) {
+            addCriterion("card_back_photo in", values, "cardBackPhoto");
+            return (Criteria) this;
+        }
+
+        public Criteria andCardBackPhotoNotIn(List<String> values) {
+            addCriterion("card_back_photo not in", values, "cardBackPhoto");
+            return (Criteria) this;
+        }
+
+        public Criteria andCardBackPhotoBetween(String value1, String value2) {
+            addCriterion("card_back_photo between", value1, value2, "cardBackPhoto");
+            return (Criteria) this;
+        }
+
+        public Criteria andCardBackPhotoNotBetween(String value1, String value2) {
+            addCriterion("card_back_photo not between", value1, value2, "cardBackPhoto");
             return (Criteria) this;
         }
 

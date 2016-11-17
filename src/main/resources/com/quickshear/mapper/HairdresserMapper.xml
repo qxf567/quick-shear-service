@@ -8,8 +8,9 @@
     <result column="shop_id" property="shopId" jdbcType="BIGINT" />
     <result column="shop_name" property="shopName" jdbcType="VARCHAR" />
     <result column="wechat_id" property="wechatId" jdbcType="VARCHAR" />
-    <result column="identity_card_face_photo" property="identityCardFacePhoto" jdbcType="VARCHAR" />
-    <result column="identity_card_back_photo" property="identityCardBackPhoto" jdbcType="VARCHAR" />
+    <result column="photo" property="photo" jdbcType="VARCHAR" />
+    <result column="card_face_photo" property="cardFacePhoto" jdbcType="VARCHAR" />
+    <result column="card_back_photo" property="cardBackPhoto" jdbcType="VARCHAR" />
     <result column="restday" property="restday" jdbcType="VARCHAR" />
     <result column="status" property="status" jdbcType="INTEGER" />
     <result column="c_time" property="cTime" jdbcType="TIMESTAMP" />
@@ -74,8 +75,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, name, phone_number, shop_id, shop_name, wechat_id, identity_card_face_photo, 
-    identity_card_back_photo, restday, status, c_time, m_time
+    id, name, phone_number, shop_id, shop_name, wechat_id, photo, card_face_photo, card_back_photo, 
+    restday, status, c_time, m_time
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.quickshear.domain.HairdresserExample" >
     select
@@ -115,13 +116,15 @@
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into hairdresser (name, phone_number, shop_id, 
-      shop_name, wechat_id, identity_card_face_photo, 
-      identity_card_back_photo, restday, status, 
-      c_time, m_time)
+      shop_name, wechat_id, photo, 
+      card_face_photo, card_back_photo, restday, 
+      status, c_time, m_time
+      )
     values (#{name,jdbcType=VARCHAR}, #{phoneNumber,jdbcType=VARCHAR}, #{shopId,jdbcType=BIGINT}, 
-      #{shopName,jdbcType=VARCHAR}, #{wechatId,jdbcType=VARCHAR}, #{identityCardFacePhoto,jdbcType=VARCHAR}, 
-      #{identityCardBackPhoto,jdbcType=VARCHAR}, #{restday,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, 
-      #{cTime,jdbcType=TIMESTAMP}, #{mTime,jdbcType=TIMESTAMP})
+      #{shopName,jdbcType=VARCHAR}, #{wechatId,jdbcType=VARCHAR}, #{photo,jdbcType=VARCHAR}, 
+      #{cardFacePhoto,jdbcType=VARCHAR}, #{cardBackPhoto,jdbcType=VARCHAR}, #{restday,jdbcType=VARCHAR}, 
+      #{status,jdbcType=INTEGER}, #{cTime,jdbcType=TIMESTAMP}, #{mTime,jdbcType=TIMESTAMP}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.quickshear.domain.Hairdresser" >
     <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
@@ -144,11 +147,14 @@
       <if test="wechatId != null" >
         wechat_id,
       </if>
-      <if test="identityCardFacePhoto != null" >
-        identity_card_face_photo,
+      <if test="photo != null" >
+        photo,
       </if>
-      <if test="identityCardBackPhoto != null" >
-        identity_card_back_photo,
+      <if test="cardFacePhoto != null" >
+        card_face_photo,
+      </if>
+      <if test="cardBackPhoto != null" >
+        card_back_photo,
       </if>
       <if test="restday != null" >
         restday,
@@ -179,11 +185,14 @@
       <if test="wechatId != null" >
         #{wechatId,jdbcType=VARCHAR},
       </if>
-      <if test="identityCardFacePhoto != null" >
-        #{identityCardFacePhoto,jdbcType=VARCHAR},
+      <if test="photo != null" >
+        #{photo,jdbcType=VARCHAR},
       </if>
-      <if test="identityCardBackPhoto != null" >
-        #{identityCardBackPhoto,jdbcType=VARCHAR},
+      <if test="cardFacePhoto != null" >
+        #{cardFacePhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="cardBackPhoto != null" >
+        #{cardBackPhoto,jdbcType=VARCHAR},
       </if>
       <if test="restday != null" >
         #{restday,jdbcType=VARCHAR},
@@ -226,11 +235,14 @@
       <if test="record.wechatId != null" >
         wechat_id = #{record.wechatId,jdbcType=VARCHAR},
       </if>
-      <if test="record.identityCardFacePhoto != null" >
-        identity_card_face_photo = #{record.identityCardFacePhoto,jdbcType=VARCHAR},
+      <if test="record.photo != null" >
+        photo = #{record.photo,jdbcType=VARCHAR},
       </if>
-      <if test="record.identityCardBackPhoto != null" >
-        identity_card_back_photo = #{record.identityCardBackPhoto,jdbcType=VARCHAR},
+      <if test="record.cardFacePhoto != null" >
+        card_face_photo = #{record.cardFacePhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cardBackPhoto != null" >
+        card_back_photo = #{record.cardBackPhoto,jdbcType=VARCHAR},
       </if>
       <if test="record.restday != null" >
         restday = #{record.restday,jdbcType=VARCHAR},
@@ -257,8 +269,9 @@
       shop_id = #{record.shopId,jdbcType=BIGINT},
       shop_name = #{record.shopName,jdbcType=VARCHAR},
       wechat_id = #{record.wechatId,jdbcType=VARCHAR},
-      identity_card_face_photo = #{record.identityCardFacePhoto,jdbcType=VARCHAR},
-      identity_card_back_photo = #{record.identityCardBackPhoto,jdbcType=VARCHAR},
+      photo = #{record.photo,jdbcType=VARCHAR},
+      card_face_photo = #{record.cardFacePhoto,jdbcType=VARCHAR},
+      card_back_photo = #{record.cardBackPhoto,jdbcType=VARCHAR},
       restday = #{record.restday,jdbcType=VARCHAR},
       status = #{record.status,jdbcType=INTEGER},
       c_time = #{record.cTime,jdbcType=TIMESTAMP},
@@ -285,11 +298,14 @@
       <if test="wechatId != null" >
         wechat_id = #{wechatId,jdbcType=VARCHAR},
       </if>
-      <if test="identityCardFacePhoto != null" >
-        identity_card_face_photo = #{identityCardFacePhoto,jdbcType=VARCHAR},
+      <if test="photo != null" >
+        photo = #{photo,jdbcType=VARCHAR},
       </if>
-      <if test="identityCardBackPhoto != null" >
-        identity_card_back_photo = #{identityCardBackPhoto,jdbcType=VARCHAR},
+      <if test="cardFacePhoto != null" >
+        card_face_photo = #{cardFacePhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="cardBackPhoto != null" >
+        card_back_photo = #{cardBackPhoto,jdbcType=VARCHAR},
       </if>
       <if test="restday != null" >
         restday = #{restday,jdbcType=VARCHAR},
@@ -313,8 +329,9 @@
       shop_id = #{shopId,jdbcType=BIGINT},
       shop_name = #{shopName,jdbcType=VARCHAR},
       wechat_id = #{wechatId,jdbcType=VARCHAR},
-      identity_card_face_photo = #{identityCardFacePhoto,jdbcType=VARCHAR},
-      identity_card_back_photo = #{identityCardBackPhoto,jdbcType=VARCHAR},
+      photo = #{photo,jdbcType=VARCHAR},
+      card_face_photo = #{cardFacePhoto,jdbcType=VARCHAR},
+      card_back_photo = #{cardBackPhoto,jdbcType=VARCHAR},
       restday = #{restday,jdbcType=VARCHAR},
       status = #{status,jdbcType=INTEGER},
       c_time = #{cTime,jdbcType=TIMESTAMP},

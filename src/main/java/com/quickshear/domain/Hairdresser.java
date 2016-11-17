@@ -29,11 +29,14 @@ public class Hairdresser implements Serializable {
     /** 微信id */
     private String wechatId;
 
+    /** 照片 */
+    private String photo;
+
     /** 身份证正面照 */
-    private String identityCardFacePhoto;
+    private String cardFacePhoto;
 
     /** 身份证背面照 */
-    private String identityCardBackPhoto;
+    private String cardBackPhoto;
 
     /** 休息日 */
     private String restday;
@@ -97,20 +100,28 @@ public class Hairdresser implements Serializable {
         this.wechatId = wechatId;
     }
 
-    public String getIdentityCardFacePhoto() {
-        return identityCardFacePhoto;
+    public String getPhoto() {
+        return photo;
     }
 
-    public void setIdentityCardFacePhoto(String identityCardFacePhoto) {
-        this.identityCardFacePhoto = identityCardFacePhoto;
+    public void setPhoto(String photo) {
+        this.photo = photo;
     }
 
-    public String getIdentityCardBackPhoto() {
-        return identityCardBackPhoto;
+    public String getCardFacePhoto() {
+        return cardFacePhoto;
     }
 
-    public void setIdentityCardBackPhoto(String identityCardBackPhoto) {
-        this.identityCardBackPhoto = identityCardBackPhoto;
+    public void setCardFacePhoto(String cardFacePhoto) {
+        this.cardFacePhoto = cardFacePhoto;
+    }
+
+    public String getCardBackPhoto() {
+        return cardBackPhoto;
+    }
+
+    public void setCardBackPhoto(String cardBackPhoto) {
+        this.cardBackPhoto = cardBackPhoto;
     }
 
     public String getRestday() {
