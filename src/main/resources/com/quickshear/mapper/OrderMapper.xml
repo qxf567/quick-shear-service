@@ -122,6 +122,9 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.quickshear.domain.Order" >
+  	<selectKey resultType="java.lang.Long" keyProperty="orderId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
     insert into orders (order_id, customer_id, customer_name, 
       customer_number, shop_id, hairdresser_id, 
       hairstyle_id, appointment_time, pay_type, 
@@ -140,6 +143,9 @@
       )
   </insert>
   <insert id="insertSelective" parameterType="com.quickshear.domain.Order" >
+  	<selectKey resultType="java.lang.Long" keyProperty="orderId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
     insert into orders
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="orderId != null" >
