@@ -1,6 +1,7 @@
 package com.quickshear.domain.query;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import com.quickshear.common.vo.BaseQuery;
 
@@ -9,12 +10,12 @@ import com.quickshear.common.vo.BaseQuery;
  */
 public class OrderQuery extends BaseQuery implements Serializable {
 
-	/**
+    /**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	/** 订单号 */
+    /** 订单号 */
     private Long orderId;
 
     /** 顾客id */
@@ -41,76 +42,87 @@ public class OrderQuery extends BaseQuery implements Serializable {
     /** 是否已评价(0否1是) */
     private Integer isEvaluate;
 
-	public Long getOrderId() {
-		return orderId;
-	}
+    /** 预约时间 */
+    private Date appointmentTime;
 
-	public void setOrderId(Long orderId) {
-		this.orderId = orderId;
-	}
+    public Long getOrderId() {
+	return orderId;
+    }
 
-	public Long getCustomerId() {
-		return customerId;
-	}
+    public void setOrderId(Long orderId) {
+	this.orderId = orderId;
+    }
 
-	public void setCustomerId(Long customerId) {
-		this.customerId = customerId;
-	}
+    public Long getCustomerId() {
+	return customerId;
+    }
 
-	public String getCustomerNumber() {
-		return customerNumber;
-	}
+    public void setCustomerId(Long customerId) {
+	this.customerId = customerId;
+    }
 
-	public void setCustomerNumber(String customerNumber) {
-		this.customerNumber = customerNumber;
-	}
+    public String getCustomerNumber() {
+	return customerNumber;
+    }
 
-	public String getShopId() {
-		return shopId;
-	}
+    public void setCustomerNumber(String customerNumber) {
+	this.customerNumber = customerNumber;
+    }
 
-	public void setShopId(String shopId) {
-		this.shopId = shopId;
-	}
+    public String getShopId() {
+	return shopId;
+    }
 
-	public Long getHairdresserId() {
-		return hairdresserId;
-	}
+    public void setShopId(String shopId) {
+	this.shopId = shopId;
+    }
 
-	public void setHairdresserId(Long hairdresserId) {
-		this.hairdresserId = hairdresserId;
-	}
+    public Long getHairdresserId() {
+	return hairdresserId;
+    }
 
-	public Long getHairstyleId() {
-		return hairstyleId;
-	}
+    public void setHairdresserId(Long hairdresserId) {
+	this.hairdresserId = hairdresserId;
+    }
 
-	public void setHairstyleId(Long hairstyleId) {
-		this.hairstyleId = hairstyleId;
-	}
+    public Long getHairstyleId() {
+	return hairstyleId;
+    }
 
-	public Integer getPayType() {
-		return payType;
-	}
+    public void setHairstyleId(Long hairstyleId) {
+	this.hairstyleId = hairstyleId;
+    }
 
-	public void setPayType(Integer payType) {
-		this.payType = payType;
-	}
+    public Integer getPayType() {
+	return payType;
+    }
 
-	public Integer getOrderStatus() {
-		return orderStatus;
-	}
+    public void setPayType(Integer payType) {
+	this.payType = payType;
+    }
 
-	public void setOrderStatus(Integer orderStatus) {
-		this.orderStatus = orderStatus;
-	}
+    public Integer getOrderStatus() {
+	return orderStatus;
+    }
 
-	public Integer getIsEvaluate() {
-		return isEvaluate;
-	}
+    public void setOrderStatus(Integer orderStatus) {
+	this.orderStatus = orderStatus;
+    }
 
-	public void setIsEvaluate(Integer isEvaluate) {
-		this.isEvaluate = isEvaluate;
-	}
+    public Integer getIsEvaluate() {
+	return isEvaluate;
+    }
+
+    public void setIsEvaluate(Integer isEvaluate) {
+	this.isEvaluate = isEvaluate;
+    }
+
+    public Date getAppointmentTime() {
+	return appointmentTime;
+    }
+
+    public void setAppointmentTime(Date appointmentTime) {
+	this.appointmentTime = appointmentTime;
+    }
 
 }

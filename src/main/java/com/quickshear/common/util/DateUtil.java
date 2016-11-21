@@ -131,6 +131,17 @@ public final class DateUtil {
 	
 	
 	/**
+	 * get minute 之后的 date
+	 * @return
+	 */
+	public static Date getMinuteAfterDay(int minute){
+		Calendar calendar = Calendar.getInstance();
+		calendar.add(Calendar.MINUTE, minute);
+		return calendar.getTime();
+	}
+	
+	
+	/**
 	 * get days between given two dates.
 	 * 
 	 * @param start

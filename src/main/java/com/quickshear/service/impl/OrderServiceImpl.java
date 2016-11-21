@@ -1,6 +1,7 @@
 package com.quickshear.service.impl;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
@@ -8,6 +9,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.quickshear.common.util.DateUtil;
 import com.quickshear.common.vo.BaseQuery;
 import com.quickshear.common.vo.PageVo;
 import com.quickshear.domain.Order;
@@ -80,6 +82,11 @@ public class OrderServiceImpl implements OrderService {
 		}
 		if(queryObj.getOrderStatus() != null){
 			criteria.andOrderStatusEqualTo(queryObj.getOrderStatus());
+		}
+		if(queryObj.getAppointmentTime() != null){
+		    Date start = queryObj.getAppointmentTime();
+		    Date end = DateUtil.getMinuteAfterDay(30);
+		    criteria.andAppointmentTimeBetween(start, end);
 		}
 		return orderMapper.selectByExample(example);
 	}
