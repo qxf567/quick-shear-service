@@ -1,4 +1,11 @@
-/target/
 .classpath
-.settings/
 .project
+.settings/
+target/
+.checkstyle
+/bin
+/target
+overlays/
+.idea/
+*.iml
+/target
