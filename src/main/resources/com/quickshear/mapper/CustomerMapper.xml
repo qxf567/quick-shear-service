@@ -3,7 +3,7 @@
 <mapper namespace="com.quickshear.mapper.CustomerMapper" >
   <resultMap id="BaseResultMap" type="com.quickshear.domain.Customer" >
     <id column="id" property="id" jdbcType="BIGINT" />
-    <result column="wechat_id" property="wechatId" jdbcType="VARCHAR" />
+    <result column="wechat_open_id" property="wechatOpenId" jdbcType="VARCHAR" />
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="phone_number" property="phoneNumber" jdbcType="VARCHAR" />
     <result column="c_time" property="cTime" jdbcType="TIMESTAMP" />
@@ -68,7 +68,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, wechat_id, name, phone_number, c_time, m_time
+    id, wechat_open_id, name, phone_number, c_time, m_time
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.quickshear.domain.CustomerExample" >
     select
@@ -107,9 +107,9 @@
     <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into customer (wechat_id, name, phone_number, 
+    insert into customer (wechat_open_id, name, phone_number, 
       c_time, m_time)
-    values (#{wechatId,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{phoneNumber,jdbcType=VARCHAR}, 
+    values (#{wechatOpenId,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{phoneNumber,jdbcType=VARCHAR}, 
       #{cTime,jdbcType=TIMESTAMP}, #{mTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.quickshear.domain.Customer" >
@@ -118,8 +118,8 @@
     </selectKey>
     insert into customer
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="wechatId != null" >
-        wechat_id,
+      <if test="wechatOpenId != null" >
+        wechat_open_id,
       </if>
       <if test="name != null" >
         name,
@@ -135,8 +135,8 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="wechatId != null" >
-        #{wechatId,jdbcType=VARCHAR},
+      <if test="wechatOpenId != null" >
+        #{wechatOpenId,jdbcType=VARCHAR},
       </if>
       <if test="name != null" >
         #{name,jdbcType=VARCHAR},
@@ -164,8 +164,8 @@
       <if test="record.id != null" >
         id = #{record.id,jdbcType=BIGINT},
       </if>
-      <if test="record.wechatId != null" >
-        wechat_id = #{record.wechatId,jdbcType=VARCHAR},
+      <if test="record.wechatOpenId != null" >
+        wechat_open_id = #{record.wechatOpenId,jdbcType=VARCHAR},
       </if>
       <if test="record.name != null" >
         name = #{record.name,jdbcType=VARCHAR},
@@ -187,7 +187,7 @@
   <update id="updateByExample" parameterType="map" >
     update customer
     set id = #{record.id,jdbcType=BIGINT},
-      wechat_id = #{record.wechatId,jdbcType=VARCHAR},
+      wechat_open_id = #{record.wechatOpenId,jdbcType=VARCHAR},
       name = #{record.name,jdbcType=VARCHAR},
       phone_number = #{record.phoneNumber,jdbcType=VARCHAR},
       c_time = #{record.cTime,jdbcType=TIMESTAMP},
@@ -199,8 +199,8 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.quickshear.domain.Customer" >
     update customer
     <set >
-      <if test="wechatId != null" >
-        wechat_id = #{wechatId,jdbcType=VARCHAR},
+      <if test="wechatOpenId != null" >
+        wechat_open_id = #{wechatOpenId,jdbcType=VARCHAR},
       </if>
       <if test="name != null" >
         name = #{name,jdbcType=VARCHAR},
@@ -219,7 +219,7 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.quickshear.domain.Customer" >
     update customer
-    set wechat_id = #{wechatId,jdbcType=VARCHAR},
+    set wechat_open_id = #{wechatOpenId,jdbcType=VARCHAR},
       name = #{name,jdbcType=VARCHAR},
       phone_number = #{phoneNumber,jdbcType=VARCHAR},
       c_time = #{cTime,jdbcType=TIMESTAMP},

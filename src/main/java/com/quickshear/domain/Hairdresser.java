@@ -7,7 +7,7 @@ import java.util.Date;
  * 
  *
  * @author Administrator
- * @date 2016-11-17
+ * @date 2016-12-1
  *
  */
 public class Hairdresser implements Serializable {
@@ -25,9 +25,6 @@ public class Hairdresser implements Serializable {
 
     /** 门店名称 */
     private String shopName;
-
-    /** 微信id */
-    private String wechatId;
 
     /** 照片 */
     private String photo;
@@ -90,14 +87,6 @@ public class Hairdresser implements Serializable {
 
     public void setShopName(String shopName) {
         this.shopName = shopName;
-    }
-
-    public String getWechatId() {
-        return wechatId;
-    }
-
-    public void setWechatId(String wechatId) {
-        this.wechatId = wechatId;
     }
 
     public String getPhoto() {

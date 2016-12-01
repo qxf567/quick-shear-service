@@ -69,6 +69,9 @@ public class CustomerServiceImpl implements CustomerService {
 		if(queryObj.getPhoneNumber() != null){
 			criteria.andPhoneNumberEqualTo(queryObj.getPhoneNumber());
 		}
+		if(queryObj.getWechatOpenId() != null){
+			criteria.andWechatOpenIdEqualTo(queryObj.getWechatOpenId());
+		}
 		return customerMapper.selectByExample(example);
 	}
 
@@ -112,7 +115,9 @@ public class CustomerServiceImpl implements CustomerService {
 		if(queryObj.getPhoneNumber() != null){
 			criteria.andPhoneNumberEqualTo(queryObj.getPhoneNumber());
 		}
-
+		if(queryObj.getWechatOpenId() != null){
+			criteria.andWechatOpenIdEqualTo(queryObj.getWechatOpenId());
+		}
 		// 排序
 		if (StringUtils.isNotBlank(queryObj.getSort())) {
 			String orderByClause = queryObj.getSort();

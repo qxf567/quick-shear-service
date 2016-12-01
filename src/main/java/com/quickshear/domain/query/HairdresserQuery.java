@@ -26,9 +26,6 @@ public class HairdresserQuery extends BaseQuery implements Serializable {
     /** 所属门店 */
     private Long shopId;
 
-    /** 微信id */
-    private String wechatId;
-
     /** 状态(0待审核1有效2无效) */
     private Integer status;
 
@@ -62,14 +59,6 @@ public class HairdresserQuery extends BaseQuery implements Serializable {
 
 	public void setShopId(Long shopId) {
 		this.shopId = shopId;
-	}
-
-	public String getWechatId() {
-		return wechatId;
-	}
-
-	public void setWechatId(String wechatId) {
-		this.wechatId = wechatId;
 	}
 
 	public Integer getStatus() {

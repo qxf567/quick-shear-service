@@ -8,7 +8,7 @@ import java.util.Date;
  * 
  *
  * @author Administrator
- * @date 2016-11-3
+ * @date 2016-12-1
  *
  */
 public class Order implements Serializable {
@@ -36,10 +36,10 @@ public class Order implements Serializable {
     /** 预约时间 */
     private Date appointmentTime;
 
-    /** 订单支付方式(0线下1微信) */
+    /** 订单支付方式(0线下1微信2支付宝) */
     private Integer payType;
 
-    /** 订单状态(0待支付1支付完成100服务完成300取消) */
+    /** 订单状态(0待支付1支付完成50已接单100服务完成300取消) */
     private Integer orderStatus;
 
     /** 合计价格 */

@@ -33,10 +33,10 @@ public class OrderQuery extends BaseQuery implements Serializable {
     /** 发型id */
     private Long hairstyleId;
 
-    /** 订单支付方式(0线下1微信) */
+    /** 订单支付方式(0线下1微信2支付宝) */
     private Integer payType;
 
-    /** 订单状态(0待支付1支付完成100服务完成300取消) */
+    /** 订单状态(0待支付1支付完成50已接单100服务完成300取消) */
     private Integer orderStatus;
 
     /** 是否已评价(0否1是) */

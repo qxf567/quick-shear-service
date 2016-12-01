@@ -16,6 +16,9 @@ public class UserQuery extends BaseQuery implements Serializable {
 
 	/** id(自增) */
     private Long id;
+    
+    /** 微信openid */
+    private String wechatOpenId;
 
     /** 电话 */
     private String phoneNumber;
@@ -34,6 +37,14 @@ public class UserQuery extends BaseQuery implements Serializable {
 
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
+	}
+
+	public String getWechatOpenId() {
+		return wechatOpenId;
+	}
+
+	public void setWechatOpenId(String wechatOpenId) {
+		this.wechatOpenId = wechatOpenId;
 	}
 
 

@@ -7,7 +7,6 @@
     <result column="phone_number" property="phoneNumber" jdbcType="VARCHAR" />
     <result column="shop_id" property="shopId" jdbcType="BIGINT" />
     <result column="shop_name" property="shopName" jdbcType="VARCHAR" />
-    <result column="wechat_id" property="wechatId" jdbcType="VARCHAR" />
     <result column="photo" property="photo" jdbcType="VARCHAR" />
     <result column="card_face_photo" property="cardFacePhoto" jdbcType="VARCHAR" />
     <result column="card_back_photo" property="cardBackPhoto" jdbcType="VARCHAR" />
@@ -75,7 +74,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, name, phone_number, shop_id, shop_name, wechat_id, photo, card_face_photo, card_back_photo, 
+    id, name, phone_number, shop_id, shop_name, photo, card_face_photo, card_back_photo, 
     restday, status, c_time, m_time
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.quickshear.domain.HairdresserExample" >
@@ -116,15 +115,13 @@
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into hairdresser (name, phone_number, shop_id, 
-      shop_name, wechat_id, photo, 
-      card_face_photo, card_back_photo, restday, 
-      status, c_time, m_time
-      )
+      shop_name, photo, card_face_photo, 
+      card_back_photo, restday, status, 
+      c_time, m_time)
     values (#{name,jdbcType=VARCHAR}, #{phoneNumber,jdbcType=VARCHAR}, #{shopId,jdbcType=BIGINT}, 
-      #{shopName,jdbcType=VARCHAR}, #{wechatId,jdbcType=VARCHAR}, #{photo,jdbcType=VARCHAR}, 
-      #{cardFacePhoto,jdbcType=VARCHAR}, #{cardBackPhoto,jdbcType=VARCHAR}, #{restday,jdbcType=VARCHAR}, 
-      #{status,jdbcType=INTEGER}, #{cTime,jdbcType=TIMESTAMP}, #{mTime,jdbcType=TIMESTAMP}
-      )
+      #{shopName,jdbcType=VARCHAR}, #{photo,jdbcType=VARCHAR}, #{cardFacePhoto,jdbcType=VARCHAR}, 
+      #{cardBackPhoto,jdbcType=VARCHAR}, #{restday,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, 
+      #{cTime,jdbcType=TIMESTAMP}, #{mTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.quickshear.domain.Hairdresser" >
     <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
@@ -143,9 +140,6 @@
       </if>
       <if test="shopName != null" >
         shop_name,
-      </if>
-      <if test="wechatId != null" >
-        wechat_id,
       </if>
       <if test="photo != null" >
         photo,
@@ -181,9 +175,6 @@
       </if>
       <if test="shopName != null" >
         #{shopName,jdbcType=VARCHAR},
-      </if>
-      <if test="wechatId != null" >
-        #{wechatId,jdbcType=VARCHAR},
       </if>
       <if test="photo != null" >
         #{photo,jdbcType=VARCHAR},
@@ -232,9 +223,6 @@
       <if test="record.shopName != null" >
         shop_name = #{record.shopName,jdbcType=VARCHAR},
       </if>
-      <if test="record.wechatId != null" >
-        wechat_id = #{record.wechatId,jdbcType=VARCHAR},
-      </if>
       <if test="record.photo != null" >
         photo = #{record.photo,jdbcType=VARCHAR},
       </if>
@@ -268,7 +256,6 @@
       phone_number = #{record.phoneNumber,jdbcType=VARCHAR},
       shop_id = #{record.shopId,jdbcType=BIGINT},
       shop_name = #{record.shopName,jdbcType=VARCHAR},
-      wechat_id = #{record.wechatId,jdbcType=VARCHAR},
       photo = #{record.photo,jdbcType=VARCHAR},
       card_face_photo = #{record.cardFacePhoto,jdbcType=VARCHAR},
       card_back_photo = #{record.cardBackPhoto,jdbcType=VARCHAR},
@@ -294,9 +281,6 @@
       </if>
       <if test="shopName != null" >
         shop_name = #{shopName,jdbcType=VARCHAR},
-      </if>
-      <if test="wechatId != null" >
-        wechat_id = #{wechatId,jdbcType=VARCHAR},
       </if>
       <if test="photo != null" >
         photo = #{photo,jdbcType=VARCHAR},
@@ -328,7 +312,6 @@
       phone_number = #{phoneNumber,jdbcType=VARCHAR},
       shop_id = #{shopId,jdbcType=BIGINT},
       shop_name = #{shopName,jdbcType=VARCHAR},
-      wechat_id = #{wechatId,jdbcType=VARCHAR},
       photo = #{photo,jdbcType=VARCHAR},
       card_face_photo = #{cardFacePhoto,jdbcType=VARCHAR},
       card_back_photo = #{cardBackPhoto,jdbcType=VARCHAR},

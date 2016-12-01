@@ -17,8 +17,8 @@ public class CustomerQuery extends BaseQuery implements Serializable {
 	/** id(自增) */
     private Long id;
 
-    /** 微信id */
-    private String wechatId;
+    /** 微信openid */
+    private String wechatOpenId;
 
     /** 姓名 */
     private String name;
@@ -32,14 +32,6 @@ public class CustomerQuery extends BaseQuery implements Serializable {
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public String getWechatId() {
-		return wechatId;
-	}
-
-	public void setWechatId(String wechatId) {
-		this.wechatId = wechatId;
 	}
 
 	public String getName() {
@@ -56,5 +48,13 @@ public class CustomerQuery extends BaseQuery implements Serializable {
 
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
+	}
+
+	public String getWechatOpenId() {
+		return wechatOpenId;
+	}
+
+	public void setWechatOpenId(String wechatOpenId) {
+		this.wechatOpenId = wechatOpenId;
 	}
 }

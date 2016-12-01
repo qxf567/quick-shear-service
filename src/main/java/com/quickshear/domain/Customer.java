@@ -7,15 +7,15 @@ import java.util.Date;
  * 
  *
  * @author Administrator
- * @date 2016-11-3
+ * @date 2016-12-1
  *
  */
 public class Customer implements Serializable {
     /** id(自增) */
     private Long id;
 
-    /** 微信id */
-    private String wechatId;
+    /** 微信openid */
+    private String wechatOpenId;
 
     /** 姓名 */
     private String name;
@@ -39,12 +39,12 @@ public class Customer implements Serializable {
         this.id = id;
     }
 
-    public String getWechatId() {
-        return wechatId;
+    public String getWechatOpenId() {
+        return wechatOpenId;
     }
 
-    public void setWechatId(String wechatId) {
-        this.wechatId = wechatId;
+    public void setWechatOpenId(String wechatOpenId) {
+        this.wechatOpenId = wechatOpenId;
     }
 
     public String getName() {
