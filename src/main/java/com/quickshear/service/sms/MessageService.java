@@ -28,14 +28,14 @@ public class MessageService {
 	String code = null;
 	try {
 	    IClientProfile profile = DefaultProfile.getProfile("cn-hangzhou", "LTAI2ySw5qXKk9C1",
-		    "BUu7ifM10cQeth6mhMJ8PdVXpllDsb ");
+		    "BUu7ifM10cQeth6mhMJ8PdVXpllDsb");
 	    DefaultProfile.addEndpoint("cn-hangzhou", "cn-hangzhou", "Sms", "sms.aliyuncs.com");
 	    IAcsClient client = new DefaultAcsClient(profile);
 	    SingleSendSmsRequest request = new SingleSendSmsRequest();
 	    request.setSignName("仟丝顺");
 	    request.setTemplateCode("SMS_32505240");
 	    code = getRandomCode(4);
-	    request.setParamString("{code:" + code + "}");
+	    request.setParamString("{\"code\":\"" + code + "\"}");
 	    request.setRecNum(phone);
 	    SingleSendSmsResponse httpResponse = client.getAcsResponse(request);
 	    System.out.println(httpResponse);
