@@ -1,4 +1,4 @@
-package com.quickshear.common.sms;
+package com.quickshear.service.sms;
 
 import java.util.Random;
 
