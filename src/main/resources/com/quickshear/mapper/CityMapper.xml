@@ -4,6 +4,7 @@
   <resultMap id="BaseResultMap" type="com.quickshear.domain.City" >
     <id column="id" property="id" jdbcType="BIGINT" />
     <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="en_name" property="enName" jdbcType="VARCHAR" />
     <result column="full_name" property="fullName" jdbcType="VARCHAR" />
     <result column="pid" property="pid" jdbcType="BIGINT" />
     <result column="full_path_id" property="fullPathId" jdbcType="VARCHAR" />
@@ -71,7 +72,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, name, full_name, pid, full_path_id, full_path_name, status, c_time, m_time
+    id, name, en_name, full_name, pid, full_path_id, full_path_name, status, c_time, 
+    m_time
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.quickshear.domain.CityExample" >
     select
@@ -110,12 +112,14 @@
     <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into city (name, full_name, pid, 
-      full_path_id, full_path_name, status, 
-      c_time, m_time)
-    values (#{name,jdbcType=VARCHAR}, #{fullName,jdbcType=VARCHAR}, #{pid,jdbcType=BIGINT}, 
-      #{fullPathId,jdbcType=VARCHAR}, #{fullPathName,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, 
-      #{cTime,jdbcType=TIMESTAMP}, #{mTime,jdbcType=TIMESTAMP})
+    insert into city (name, en_name, full_name, 
+      pid, full_path_id, full_path_name, 
+      status, c_time, m_time
+      )
+    values (#{name,jdbcType=VARCHAR}, #{enName,jdbcType=VARCHAR}, #{fullName,jdbcType=VARCHAR}, 
+      #{pid,jdbcType=BIGINT}, #{fullPathId,jdbcType=VARCHAR}, #{fullPathName,jdbcType=VARCHAR}, 
+      #{status,jdbcType=INTEGER}, #{cTime,jdbcType=TIMESTAMP}, #{mTime,jdbcType=TIMESTAMP}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.quickshear.domain.City" >
     <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
@@ -125,6 +129,9 @@
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="name != null" >
         name,
+      </if>
+      <if test="enName != null" >
+        en_name,
       </if>
       <if test="fullName != null" >
         full_name,
@@ -151,6 +158,9 @@
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="name != null" >
         #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="enName != null" >
+        #{enName,jdbcType=VARCHAR},
       </if>
       <if test="fullName != null" >
         #{fullName,jdbcType=VARCHAR},
@@ -190,6 +200,9 @@
       <if test="record.name != null" >
         name = #{record.name,jdbcType=VARCHAR},
       </if>
+      <if test="record.enName != null" >
+        en_name = #{record.enName,jdbcType=VARCHAR},
+      </if>
       <if test="record.fullName != null" >
         full_name = #{record.fullName,jdbcType=VARCHAR},
       </if>
@@ -220,6 +233,7 @@
     update city
     set id = #{record.id,jdbcType=BIGINT},
       name = #{record.name,jdbcType=VARCHAR},
+      en_name = #{record.enName,jdbcType=VARCHAR},
       full_name = #{record.fullName,jdbcType=VARCHAR},
       pid = #{record.pid,jdbcType=BIGINT},
       full_path_id = #{record.fullPathId,jdbcType=VARCHAR},
@@ -236,6 +250,9 @@
     <set >
       <if test="name != null" >
         name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="enName != null" >
+        en_name = #{enName,jdbcType=VARCHAR},
       </if>
       <if test="fullName != null" >
         full_name = #{fullName,jdbcType=VARCHAR},
@@ -264,6 +281,7 @@
   <update id="updateByPrimaryKey" parameterType="com.quickshear.domain.City" >
     update city
     set name = #{name,jdbcType=VARCHAR},
+      en_name = #{enName,jdbcType=VARCHAR},
       full_name = #{fullName,jdbcType=VARCHAR},
       pid = #{pid,jdbcType=BIGINT},
       full_path_id = #{fullPathId,jdbcType=VARCHAR},

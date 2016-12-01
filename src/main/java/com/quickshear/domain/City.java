@@ -7,7 +7,7 @@ import java.util.Date;
  * 
  *
  * @author Administrator
- * @date 2016-11-3
+ * @date 2016-12-1
  *
  */
 public class City implements Serializable {
@@ -16,6 +16,9 @@ public class City implements Serializable {
 
     /** 城市名称(简称) */
     private String name;
+
+    /** 城市英文名 */
+    private String enName;
 
     /** 城市名称(全称) */
     private String fullName;
@@ -54,6 +57,14 @@ public class City implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getEnName() {
+        return enName;
+    }
+
+    public void setEnName(String enName) {
+        this.enName = enName;
     }
 
     public String getFullName() {
