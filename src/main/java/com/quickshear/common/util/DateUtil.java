@@ -134,8 +134,9 @@ public final class DateUtil {
 	 * get minute 之后的 date
 	 * @return
 	 */
-	public static Date getMinuteAfterDay(int minute){
+	public static Date getMinuteAfterDay(Date date,int minute){
 		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(date);
 		calendar.add(Calendar.MINUTE, minute);
 		return calendar.getTime();
 	}

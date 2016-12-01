@@ -140,7 +140,16 @@
 			<artifactId>dom4j</artifactId>
 			<version>1.6.1</version>
 		</dependency>
-
+            <dependency>
+                <groupId>com.aliyun</groupId>
+                <artifactId>aliyun-java-sdk-core</artifactId>
+                <version>2.4.2</version>
+            </dependency>
+            <dependency>
+                <groupId>com.aliyun</groupId>
+                <artifactId>aliyun-java-sdk-sms</artifactId>
+                <version>3.0.0-rc1</version>
+            </dependency>
 
 		<!-- ====================== dependencies for testing ====================== -->
 		<!-- <dependency> <groupId>junit</groupId> <artifactId>junit</artifactId> 
