@@ -33,4 +33,7 @@ public class LRUCache {
     public void set(String key, String value) {
         cache.put(key, value);
     }
+    public void remove(String key){
+	cache.remove(key);
+    }
 }
