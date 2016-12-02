@@ -22,7 +22,7 @@
 		<property name="defaultEncoding" value="${upload.defaultEncoding?UTF-8}"/>
 	</bean>
 	
-	
+	<!-- 
 	<bean id="fastdfsTrackerGroup-repair" class="org.csource.fastdfs.TrackerGroup">
 		<constructor-arg>
 			<set>
@@ -46,6 +46,6 @@
 		<property name="g_anti_steal_token" value="${fastdfs.anti_steal_token?false}" />
 		<property name="g_secret_key" value="${fastdfs.secret_key?FastDFS1234567890}" />
 	</bean>
-	
+	 -->
 	
 </beans>
