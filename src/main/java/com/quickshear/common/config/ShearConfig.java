@@ -15,8 +15,10 @@ public class ShearConfig {
     
     @Value("${wechat.appsecret}")
     private String appSecret;
+    //文件存储路径
+    @Value("${fastdfs.server.host}")
+    private String fastdfsServerHost;
     
-
     public String getEnv() {
 	return env;
     }
@@ -40,4 +42,12 @@ public class ShearConfig {
     public void setAppSecret(String appSecret) {
         this.appSecret = appSecret;
     }
+
+	public String getFastdfsServerHost() {
+		return fastdfsServerHost;
+	}
+
+	public void setFastdfsServerHost(String fastdfsServerHost) {
+		this.fastdfsServerHost = fastdfsServerHost;
+	}
 }

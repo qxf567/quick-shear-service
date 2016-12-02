@@ -1,9 +1,15 @@
 package com.quickshear.common.fileupload;
 
+import java.io.File;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.quickshear.common.config.ShearConfig;
+
 /**
  * @since shear
  */
@@ -12,15 +18,11 @@ public class FileService {
 
 	private Logger logger = LoggerFactory.getLogger(FileService.class);
 
-	/** 单次上传图片不能超过50张 */
-	public static final int MAX_COUNT = 50;
-	/** 允许上传的文件类型 */
-	private static final String CMS_ACCETP_TYPES = "jpg,jpeg";
-	private static final String CRM_ACCETP_TYPES = "png,gif,jpg,jpeg,rar,zip,7z,doc,docx";
-	private static final String CRM_ACCETP_TYPES_1 = "png,gif,jpg,jpeg,doc,docx";
-	private static final String CRM_ACCETP_TYPES_NOTICE = "png,gif,jpg,jpeg,rar,zip,7z,doc,docx,xls,xlsx";
 	/** 图片加水印后的质量设置 */
 	private static final float COMPRESSED_QUALITY = 0.85F;
+
+	@Autowired
+	protected ShearConfig config;
 
 	/**
 	 * 上传单张图片
@@ -32,28 +34,22 @@ public class FileService {
 	 * @return
 	 */
 	public String uploadSinglePic(MultipartFile mf, boolean watermark) {
-		String msg = "{\"url\": \"%s\", \"fileType\":\"%s\", \"state\":\"%s\",\"original\":\"%s\"}";
-		String filename = mf.getOriginalFilename().replace(",", "_").replace("&", "_");
-		try
-		{
-//			if (!validateFileExtName(mf, CMS_ACCETP_TYPES, true, fileExtName))
-//			{
-//				return String.format(msg, null, null, "文件格式错误，只支持" + CMS_ACCETP_TYPES, null);
-//			}
-//			String file = uploadSinglePicToCms(mf, watermark, false, trackerGroup, fileExtName);
-//			if (StringUtils.isNotBlank(file))
-//			{
-//				return String.format(msg, file, fileExtName, "SUCCESS", filename);
-//			}
-//			else
-//			{
-				return String.format(msg, null, null, "文件上传失败，请重试或与管理员联系", null);
-//			}
-		}
-		catch (Exception e)
-		{
-			logger.error("Fail to upload file, filename is " + filename,e);
-			return String.format(msg, null, null, "文件上传失败，请重试或与管理员联系", null);
+		String msg = "{\"success\":%b, \"filePath\":\"%s\", \"message\":\"%s\"}";
+		String fileName = mf.getOriginalFilename().replace(",", "_")
+				.replace("&", "_");
+		try {
+			// 自定义的文件名称
+			String trueFileName = String.valueOf(System.currentTimeMillis())
+					+ fileName;
+			// 设置存放图片文件的路径
+			String path = config.getFastdfsServerHost()+trueFileName;
+			System.out.println("存放图片文件的路径:" + path);
+			// 转存文件到指定的路径
+			mf.transferTo(new File(path));
+			return String.format(msg, true, trueFileName, "上传成功");
+		} catch (Exception e) {
+			logger.error("Fail to upload file, filename is " + fileName, e);
+			return String.format(msg, null, null, "上传失败，请重试或与管理员联系");
 		}
 	}
 

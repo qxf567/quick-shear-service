@@ -15,6 +15,7 @@
 		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.2.xsd
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.2.xsd">
 
+    <context:component-scan base-package="com.quickshear.common.fileupload" />
 	<!-- file upload -->
 	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 		<property name="maxUploadSize" value="${upload.maxUploadSize?22020096}"/>
