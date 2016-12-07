@@ -9,7 +9,7 @@ package com.quickshear.common.enumeration;
 public enum ShopStatusEnum{
 	
 	INVALID(0, "无效"),
-	OPEN(1, "营业中"),
+	OPEN(1, "正常营业"),
 	REST(2,"暂停营业");
 	
 	private Integer code;

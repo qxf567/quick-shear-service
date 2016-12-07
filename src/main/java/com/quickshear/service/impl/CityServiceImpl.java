@@ -69,6 +69,9 @@ public class CityServiceImpl implements CityService {
 		if(queryObj.getStatus() != null){
 			criteria.andStatusEqualTo(queryObj.getStatus());
 		}
+		if(queryObj.getPid() != null){
+			criteria.andPidEqualTo(queryObj.getPid());
+		}
 		return cityMapper.selectByExample(example);
 	}
 
@@ -112,7 +115,9 @@ public class CityServiceImpl implements CityService {
 		if(queryObj.getStatus() != null){
 			criteria.andStatusEqualTo(queryObj.getStatus());
 		}
-
+		if(queryObj.getPid() != null){
+			criteria.andPidEqualTo(queryObj.getPid());
+		}
 		// 排序
 		if (StringUtils.isNotBlank(queryObj.getSort())) {
 			String orderByClause = queryObj.getSort();
