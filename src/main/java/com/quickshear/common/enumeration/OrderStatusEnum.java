@@ -2,15 +2,17 @@ package com.quickshear.common.enumeration;
 
 
 /**
- * 发型师状态
+ * 订单状态
  * @author QIAN
  *
  */
-public enum HairdresserStatusEnum{
+public enum OrderStatusEnum{
 	
-        PENDING(0, "待审核"),
-        VALID(1, "有效"),
-	INVALID(2,"无效");
+        PAY_WAIT(0, "待支付"),
+	PAY_COMPLETE(1, "支付完成"),
+	ORDER_RECEIVE(50,"已接单"),
+	SERVICE_COMPLETE(100,"服务完成"),
+	CANCEL(300,"取消");
 	
 	private Integer code;
 	/**
@@ -22,7 +24,7 @@ public enum HairdresserStatusEnum{
 	 * @param code
 	 * @param name
 	 */
-	private HairdresserStatusEnum(final Integer code, final String name) {
+	private OrderStatusEnum(final Integer code, final String name) {
 		this.code = code;
 		this.name = name;
 	}
@@ -48,11 +50,11 @@ public enum HairdresserStatusEnum{
 	 * @param code
 	 * @return
 	 */
-	public static HairdresserStatusEnum valueOfCode(Integer code) {
+	public static OrderStatusEnum valueOfCode(Integer code) {
 		if(null == code) {
 			return null;
 		}
-		for(HairdresserStatusEnum pp : values()) {
+		for(OrderStatusEnum pp : values()) {
 			if(pp.getCode().equals(code)) {
 				return pp;
 			}
