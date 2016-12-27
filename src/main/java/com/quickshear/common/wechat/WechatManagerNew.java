@@ -347,4 +347,53 @@ public class WechatManagerNew {
     return result;
   }
   
+  
+  /**
+   * 创建客服
+   * 
+   * @param menu 菜单实例
+   * @return 0表示成功，其他值表示失败
+   */
+  public int createKeFu(String kefuJsonStr) {
+    int result = -1;
+    if (StringUtils.isBlank(kefuJsonStr)) {
+      return result;
+    }
+
+    // 拼装创建菜单的url
+    ObjectMapper objectMapper = new ObjectMapper();
+    Map<String, Object> objMap = null;
+    try {
+      String url = WechatConstat.KEFU_CREATE_URL.replace("ACCESS_TOKEN", wechatUtil.getAccessToken().getToken());
+      String httpResult = httpRequest(url, "POST", kefuJsonStr);
+      log.error("----->httpResult="+httpResult);
+      // 如果请求成功
+      if ("" != httpResult) {
+        objMap = objectMapper.readValue(httpResult, Map.class);
+        result = Integer.valueOf(objMap.get("errcode").toString());
+        log.error("----->result="+result);
+        if (0 != result) {
+          log.error("创建客服失败 errcode:{" + objMap.get("errcode") + "} errmsg:{" + objMap.get("errmsg")
+              + "}");
+        }
+      }
+    } catch (JsonParseException e) {
+      e.printStackTrace();
+      log.error("createKeFu()", e);
+    } catch (JsonMappingException e) {
+      e.printStackTrace();
+      log.error("createKeFu()", e);
+    } catch (IOException e) {
+      e.printStackTrace();
+      log.error("createKeFu()", e);
+    } catch (Exception e) {
+      e.printStackTrace();
+      // 获取token失败
+      log.error(
+          "获取token失败 errcode:{" + objMap.get("errcode") + "} errmsg:{" + objMap.get("errmsg") + "}",
+          e);
+    }
+    return result;
+  }
+  
 }

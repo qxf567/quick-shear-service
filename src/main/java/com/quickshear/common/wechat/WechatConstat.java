@@ -32,6 +32,12 @@ public class WechatConstat {
      */
     public static String MENU_CREATE_URL = "https://api.weixin.qq.com/cgi-bin/menu/create?access_token=ACCESS_TOKEN";
 
+    
+    /**
+     * 菜单客服
+     */
+    public static String KEFU_CREATE_URL = "https://api.weixin.qq.com/customservice/kfaccount/add?access_token=ACCESS_TOKEN";
+    
     /** Token获取网关地址地址 */
     public static String token_url = "https://api.weixin.qq.com/cgi-bin/token";
     /** 订单查询url */

@@ -22,13 +22,13 @@ import org.springframework.stereotype.Component;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.quickshear.common.config.ShearConfig;
+import com.quickshear.common.lru.LRUCache;
+import com.quickshear.common.util.JsonUtil;
 import com.quickshear.common.wechat.WechatConstat;
 import com.quickshear.common.wechat.domain.AccessToken;
 
 
 /**
- * @author liuyh
- * @date 2015-9-11
  *
  */
 @Component
@@ -36,6 +36,8 @@ public class WechatUtil {
   private static Logger log = Logger.getLogger(WechatUtil.class);
   @Autowired
   private ShearConfig config;
+  
+  private LRUCache cache;
 
   /**
    * 获取access_token 首先从session中获取，如果没有，则从微信获取，并放入session中
@@ -44,28 +46,16 @@ public class WechatUtil {
    */
   public AccessToken getAccessToken() {
     AccessToken result = new AccessToken();
-//    // 从缓存中获取
-//    String token = (String) redisTemplate.opsForValue().get(wechatConfig.getWechatTokenCacheKey());
-//    log.debug("token=" + token);
-//
-//    if (StringUtils.isBlank(token)) {
-//      // 从微信中获取accessToken
-//      result = this.getAccessTokenFromWexin();
-//      if (result != null) {
-//        log.debug(redisTemplate.opsForValue().get("result.getToken()=" + result.getToken()));
-//        // 存入session
-//        redisTemplate.opsForValue().set(wechatConfig.getWechatTokenCacheKey(), result.getToken(),
-//            result.getExpiresIn() - 1800, TimeUnit.SECONDS);
-//
-//        log.debug(redisTemplate.opsForValue()
-//            .get("wechatConfig.getWechatTokenCacheKey()=" + wechatConfig.getWechatTokenCacheKey()));
-//      }
-//    } else {
-//      result.setToken(token);
-//    }
-    // 从微信中获取accessToken
-    result = this.getAccessTokenFromWexin();
-    // log.info("获取accessToken:" + JSON.toJSONString(accessToken));
+    if(cache == null){
+	cache = new LRUCache(100);
+	result = this.getAccessTokenFromWexin();
+	cache.set("token", result.getToken());
+    }else{
+	String token = cache.get("accessToken");
+	result.setToken(token);
+    }
+   
+    log.info("获取accessToken:" + JsonUtil.toJson(result));
     return result;
   }
 
