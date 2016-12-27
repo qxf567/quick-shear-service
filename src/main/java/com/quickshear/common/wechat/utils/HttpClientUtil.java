@@ -15,17 +15,17 @@ import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.httpclient.methods.PostMethod;
 import org.apache.commons.httpclient.params.HttpMethodParams;
 import org.apache.commons.lang.StringUtils;
+import org.springframework.stereotype.Component;
 
 
 /**
  * httpClient工具类
  * 
- * @author liuyh
- * 
  */
+@Component
 public class HttpClientUtil {
 
-  private HttpClient httpclient;
+  private HttpClient httpclient = new HttpClient();
 
   public void setHttpclient(HttpClient httpclient) {
     this.httpclient = httpclient;
