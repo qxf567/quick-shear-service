@@ -13,8 +13,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 /**
  * 微信模板消息
  * 
- * @author liuyh
- *
  */
 public class WechatTemplateMsg implements Serializable {
 

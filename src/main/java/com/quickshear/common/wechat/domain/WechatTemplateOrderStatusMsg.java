@@ -11,8 +11,6 @@ import com.quickshear.common.wechat.domain.WechatTemplateMsg.TemplateData;
 /**
  * 订单变化微信消息模板消息类
  * 
- * @author liuyh
- *
  */
 public class WechatTemplateOrderStatusMsg implements Serializable{
 
@@ -31,7 +29,6 @@ public class WechatTemplateOrderStatusMsg implements Serializable{
   private TemplateData keyword2Template;
   private TemplateData keyword3Template;
   private TemplateData keyword4Template;
-  private TemplateData keyword5Template;
   private TemplateData remarkTemplate;
 
   public WechatTemplateOrderStatusMsg(String templateId){
@@ -48,7 +45,7 @@ public class WechatTemplateOrderStatusMsg implements Serializable{
    */
   private void initial() {
     msg = new WechatTemplateMsg();
-    msg.setTemplate_id("8mkf9fF2sS-c81xHpTDLS-iqQlcUdCPaHbfBhLuy6qc");
+    msg.setTemplate_id("C96smq2eb2iHCoxeaLBy_3EOMiTy1Pg5zLm0P3kIkbY");
     msg.setTopcolor(this.defaultTopColor);
 
     firstTemplate = new TemplateData("", this.defaultItemColor);
@@ -56,7 +53,6 @@ public class WechatTemplateOrderStatusMsg implements Serializable{
     keyword2Template = new TemplateData("", this.defaultItemColor);
     keyword3Template = new TemplateData("", this.defaultItemColor);
     keyword4Template = new TemplateData("", this.defaultItemColor);
-    keyword5Template = new TemplateData("", this.defaultItemColor);
     remarkTemplate = new TemplateData("", this.defaultItemColor);
 
     data = new HashMap<String, TemplateData>();
@@ -65,7 +61,6 @@ public class WechatTemplateOrderStatusMsg implements Serializable{
     data.put("keyword2", keyword2Template);
     data.put("keyword3", keyword3Template);
     data.put("keyword4", keyword4Template);
-    data.put("keyword5", keyword5Template);
     data.put("remark", remarkTemplate);
     msg.setData(data);
   }
@@ -119,10 +114,6 @@ public class WechatTemplateOrderStatusMsg implements Serializable{
 
   public void setKeyword4Value(String value) {
     keyword4Template.setValue(value);
-  }
-
-  public void setKeyword5Value(String value) {
-    keyword5Template.setValue(value);
   }
 
   public void setRemarkValue(String value) {
