@@ -7,8 +7,8 @@ import java.util.Date;
 /**
  * 
  *
- * @author Administrator
- * @date 2016-12-1
+ * @author qianxiaofei
+ * @date 2017-01-10
  *
  */
 public class Order implements Serializable {
@@ -35,6 +35,9 @@ public class Order implements Serializable {
 
     /** 预约时间 */
     private Date appointmentTime;
+
+    /**  */
+    private String serviceCode;
 
     /** 订单支付方式(0线下1微信2支付宝) */
     private Integer payType;
@@ -139,6 +142,14 @@ public class Order implements Serializable {
 
     public void setAppointmentTime(Date appointmentTime) {
         this.appointmentTime = appointmentTime;
+    }
+
+    public String getServiceCode() {
+        return serviceCode;
+    }
+
+    public void setServiceCode(String serviceCode) {
+        this.serviceCode = serviceCode;
     }
 
     public Integer getPayType() {

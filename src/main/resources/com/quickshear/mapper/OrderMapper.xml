@@ -10,6 +10,7 @@
     <result column="hairdresser_id" property="hairdresserId" jdbcType="BIGINT" />
     <result column="hairstyle_id" property="hairstyleId" jdbcType="BIGINT" />
     <result column="appointment_time" property="appointmentTime" jdbcType="TIMESTAMP" />
+    <result column="service_code" property="serviceCode" jdbcType="VARCHAR" />
     <result column="pay_type" property="payType" jdbcType="INTEGER" />
     <result column="order_status" property="orderStatus" jdbcType="INTEGER" />
     <result column="total_price" property="totalPrice" jdbcType="DECIMAL" />
@@ -84,9 +85,9 @@
   </sql>
   <sql id="Base_Column_List" >
     order_id, customer_id, customer_name, customer_number, shop_id, hairdresser_id, hairstyle_id, 
-    appointment_time, pay_type, order_status, total_price, actual_price, order_time, 
-    service_completion_time, cancel_type, cancel_reason, cancel_time, is_evaluate, c_time, 
-    m_time, t_stamp
+    appointment_time, service_code, pay_type, order_status, total_price, actual_price, 
+    order_time, service_completion_time, cancel_type, cancel_reason, cancel_time, is_evaluate, 
+    c_time, m_time, t_stamp
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.quickshear.domain.OrderExample" >
     select
@@ -124,20 +125,20 @@
   <insert id="insert" parameterType="com.quickshear.domain.Order" >
     insert into orders (order_id, customer_id, customer_name, 
       customer_number, shop_id, hairdresser_id, 
-      hairstyle_id, appointment_time, pay_type, 
-      order_status, total_price, actual_price, 
-      order_time, service_completion_time, cancel_type, 
-      cancel_reason, cancel_time, is_evaluate, 
-      c_time, m_time, t_stamp
-      )
+      hairstyle_id, appointment_time, service_code, 
+      pay_type, order_status, total_price, 
+      actual_price, order_time, service_completion_time, 
+      cancel_type, cancel_reason, cancel_time, 
+      is_evaluate, c_time, m_time, 
+      t_stamp)
     values (#{orderId,jdbcType=BIGINT}, #{customerId,jdbcType=BIGINT}, #{customerName,jdbcType=VARCHAR}, 
       #{customerNumber,jdbcType=VARCHAR}, #{shopId,jdbcType=VARCHAR}, #{hairdresserId,jdbcType=BIGINT}, 
-      #{hairstyleId,jdbcType=BIGINT}, #{appointmentTime,jdbcType=TIMESTAMP}, #{payType,jdbcType=INTEGER}, 
-      #{orderStatus,jdbcType=INTEGER}, #{totalPrice,jdbcType=DECIMAL}, #{actualPrice,jdbcType=DECIMAL}, 
-      #{orderTime,jdbcType=TIMESTAMP}, #{serviceCompletionTime,jdbcType=TIMESTAMP}, #{cancelType,jdbcType=INTEGER}, 
-      #{cancelReason,jdbcType=VARCHAR}, #{cancelTime,jdbcType=TIMESTAMP}, #{isEvaluate,jdbcType=INTEGER}, 
-      #{cTime,jdbcType=TIMESTAMP}, #{mTime,jdbcType=TIMESTAMP}, #{tStamp,jdbcType=BIGINT}
-      )
+      #{hairstyleId,jdbcType=BIGINT}, #{appointmentTime,jdbcType=TIMESTAMP}, #{serviceCode,jdbcType=VARCHAR}, 
+      #{payType,jdbcType=INTEGER}, #{orderStatus,jdbcType=INTEGER}, #{totalPrice,jdbcType=DECIMAL}, 
+      #{actualPrice,jdbcType=DECIMAL}, #{orderTime,jdbcType=TIMESTAMP}, #{serviceCompletionTime,jdbcType=TIMESTAMP}, 
+      #{cancelType,jdbcType=INTEGER}, #{cancelReason,jdbcType=VARCHAR}, #{cancelTime,jdbcType=TIMESTAMP}, 
+      #{isEvaluate,jdbcType=INTEGER}, #{cTime,jdbcType=TIMESTAMP}, #{mTime,jdbcType=TIMESTAMP}, 
+      #{tStamp,jdbcType=BIGINT})
   </insert>
   <insert id="insertSelective" parameterType="com.quickshear.domain.Order" >
     insert into orders
@@ -165,6 +166,9 @@
       </if>
       <if test="appointmentTime != null" >
         appointment_time,
+      </if>
+      <if test="serviceCode != null" >
+        service_code,
       </if>
       <if test="payType != null" >
         pay_type,
@@ -230,6 +234,9 @@
       </if>
       <if test="appointmentTime != null" >
         #{appointmentTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="serviceCode != null" >
+        #{serviceCode,jdbcType=VARCHAR},
       </if>
       <if test="payType != null" >
         #{payType,jdbcType=INTEGER},
@@ -305,6 +312,9 @@
       <if test="record.appointmentTime != null" >
         appointment_time = #{record.appointmentTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="record.serviceCode != null" >
+        service_code = #{record.serviceCode,jdbcType=VARCHAR},
+      </if>
       <if test="record.payType != null" >
         pay_type = #{record.payType,jdbcType=INTEGER},
       </if>
@@ -359,6 +369,7 @@
       hairdresser_id = #{record.hairdresserId,jdbcType=BIGINT},
       hairstyle_id = #{record.hairstyleId,jdbcType=BIGINT},
       appointment_time = #{record.appointmentTime,jdbcType=TIMESTAMP},
+      service_code = #{record.serviceCode,jdbcType=VARCHAR},
       pay_type = #{record.payType,jdbcType=INTEGER},
       order_status = #{record.orderStatus,jdbcType=INTEGER},
       total_price = #{record.totalPrice,jdbcType=DECIMAL},
@@ -399,6 +410,9 @@
       </if>
       <if test="appointmentTime != null" >
         appointment_time = #{appointmentTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="serviceCode != null" >
+        service_code = #{serviceCode,jdbcType=VARCHAR},
       </if>
       <if test="payType != null" >
         pay_type = #{payType,jdbcType=INTEGER},
@@ -451,6 +465,7 @@
       hairdresser_id = #{hairdresserId,jdbcType=BIGINT},
       hairstyle_id = #{hairstyleId,jdbcType=BIGINT},
       appointment_time = #{appointmentTime,jdbcType=TIMESTAMP},
+      service_code = #{serviceCode,jdbcType=VARCHAR},
       pay_type = #{payType,jdbcType=INTEGER},
       order_status = #{orderStatus,jdbcType=INTEGER},
       total_price = #{totalPrice,jdbcType=DECIMAL},

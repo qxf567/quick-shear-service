@@ -636,6 +636,76 @@ public class OrderExample {
             return (Criteria) this;
         }
 
+        public Criteria andServiceCodeIsNull() {
+            addCriterion("service_code is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andServiceCodeIsNotNull() {
+            addCriterion("service_code is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andServiceCodeEqualTo(String value) {
+            addCriterion("service_code =", value, "serviceCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andServiceCodeNotEqualTo(String value) {
+            addCriterion("service_code <>", value, "serviceCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andServiceCodeGreaterThan(String value) {
+            addCriterion("service_code >", value, "serviceCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andServiceCodeGreaterThanOrEqualTo(String value) {
+            addCriterion("service_code >=", value, "serviceCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andServiceCodeLessThan(String value) {
+            addCriterion("service_code <", value, "serviceCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andServiceCodeLessThanOrEqualTo(String value) {
+            addCriterion("service_code <=", value, "serviceCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andServiceCodeLike(String value) {
+            addCriterion("service_code like", value, "serviceCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andServiceCodeNotLike(String value) {
+            addCriterion("service_code not like", value, "serviceCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andServiceCodeIn(List<String> values) {
+            addCriterion("service_code in", values, "serviceCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andServiceCodeNotIn(List<String> values) {
+            addCriterion("service_code not in", values, "serviceCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andServiceCodeBetween(String value1, String value2) {
+            addCriterion("service_code between", value1, value2, "serviceCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andServiceCodeNotBetween(String value1, String value2) {
+            addCriterion("service_code not between", value1, value2, "serviceCode");
+            return (Criteria) this;
+        }
+
         public Criteria andPayTypeIsNull() {
             addCriterion("pay_type is null");
             return (Criteria) this;
