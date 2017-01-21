@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
@@ -16,14 +17,14 @@ import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
 import org.dom4j.io.OutputFormat;
 import org.dom4j.io.XMLWriter;
-//import org.jdom.Document;
-//import org.jdom.Element;
-//import org.jdom.JDOMException;
-//import org.jdom.input.SAXBuilder;
 import org.jdom.JDOMException;
 import org.jdom.input.SAXBuilder;
 
 import com.quickshear.common.wechat.pay.TenpayConfig;
+//import org.jdom.Document;
+//import org.jdom.Element;
+//import org.jdom.JDOMException;
+//import org.jdom.input.SAXBuilder;
 
 /**
  * xml工具类
@@ -40,6 +41,7 @@ public class XMLUtil {
 		SortedMap<String, String> packageParams = new TreeMap<String, String>();
 		packageParams.put("appid", TenpayConfig.app_id);
 		packageParams.put("mch_id", TenpayConfig.mch_id);//商户号
+		packageParams.put("body", "1");
 		String noncestr = Sha1Util.getNonceStr();
 		packageParams.put("nonce_str", noncestr);
 //		packageParams.put("fee_type", TenpayConfig.fee_type); //币种 
@@ -49,17 +51,46 @@ public class XMLUtil {
 //		packageParams.put("bank_type", TenpayConfig.bank_type); //银行通道类型 
 //		packageParams.put("body", product_name); //商品描述   
 //		packageParams.put("input_charset", TenpayConfig.input_charset); //字符编码
+//		System.out.println(map2Xml(packageParams));
 		System.out.println(map2Xml(packageParams));
 		
 	}
+	
+	  public static String getRequestXml(Map<String,String> parameters){
+	        StringBuffer sb = new StringBuffer();
+	        sb.append("<xml>");
+	        sb.append("\r\n");
+	        Set es = parameters.entrySet();
+	        Iterator it = es.iterator();
+	        while(it.hasNext()) {
+	            Map.Entry entry = (Map.Entry)it.next();
+	            String k = (String)entry.getKey();
+	            String v = (String)entry.getValue();
+	            if ("attach".equalsIgnoreCase(k)||"body".equalsIgnoreCase(k)||"sign".equalsIgnoreCase(k)) {
+	                sb.append("<"+k+">"+"<![CDATA["+v+"]]></"+k+">");
+	            }else {
+	                sb.append("<"+k+">"+v+"</"+k+">");
+	            }
+	            sb.append("\r\n");
+	        }
+	        sb.append("</xml>");
+	        return sb.toString();
+	    }
+	
 	public static String map2Xml(Map<String, String> map) {  
         Document document = DocumentHelper.createDocument();  
         Element nodeElement = document.addElement("xml");  
         for (Object obj : map.keySet()) {  
-            Element keyElement = nodeElement.addElement(String.valueOf(obj));  
-            keyElement.setText(String.valueOf(map.get(obj)));  
+        	String key = String.valueOf(obj);
+            Element keyElement = nodeElement.addElement(key);  
+//            if ("attach".equalsIgnoreCase(key)||"body".equalsIgnoreCase(key)||"sign".equalsIgnoreCase(key)) {
+//                keyElement.setText("<![CDATA["+String.valueOf(map.get(obj))+"]]>");  
+//            }else {
+            	 keyElement.setText(String.valueOf(map.get(obj)));  
+//            }
+           
         }  
-        return doc2String(document);  
+        return doc2String(document).replace("<?xml version=\"1.0\" encoding=\"UTF-8\"?>", "").replace("&lt;", "<").replace("&gt;", ">").trim();  
     }  
 	
 	public static String doc2String(Document document) {  
