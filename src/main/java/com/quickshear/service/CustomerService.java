@@ -22,6 +22,13 @@ public interface CustomerService  {
 	 * @return 实体对象
 	 */
 	Customer findbyid(Long id) throws Exception;
+	
+	/**
+	 * 根据openid查询
+	 * @param openid 
+	 * @return 实体对象
+	 */
+	Customer findbyOpenId(String openId) throws Exception;
 
 	/**
 	 * 添加

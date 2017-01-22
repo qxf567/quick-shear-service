@@ -88,6 +88,7 @@ public class OrderServiceImpl implements OrderService {
 		    Date end = DateUtil.getMinuteAfterDay(30);
 		    criteria.andAppointmentTimeBetween(start, end);
 		}
+		example.setOrderByClause("m_time desc");
 		return orderMapper.selectByExample(example);
 	}
 

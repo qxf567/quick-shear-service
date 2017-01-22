@@ -134,4 +134,18 @@ public class CustomerServiceImpl implements CustomerService {
 		return example;
 	}
 
+    public Customer findbyOpenId(String openId) throws Exception {
+	if (openId == null) {
+	    return null;
+	}
+	CustomerExample example = new CustomerExample();
+	Criteria criteria = example.createCriteria();
+	criteria.andWechatOpenIdEqualTo(openId);
+	List<Customer> list = customerMapper.selectByExample(example);
+	if (list.size() > 0) {
+	    return list.get(0);
+	}
+	return null;
+	}
+
 }
