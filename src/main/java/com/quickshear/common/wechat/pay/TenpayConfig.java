@@ -16,7 +16,7 @@ public class TenpayConfig {
         //商户号
 	public static String mch_id="1428573602";
 	/** 密钥 */
-	public static String partner_key;
+	public static String partner_key="qiansishun2016QIANSISHUN2017qssS";
 	/** appid */
 	public static String app_id;
 	public static String app_secret;
@@ -38,11 +38,6 @@ public class TenpayConfig {
 	
 	public static String pkcs12_path;
 	
-	@Value("${pay.tenpay.partner.key}")
-	private void setPartnerKey(String partnerKey) {
-		TenpayConfig.partner_key = partnerKey;
-	}
-
 	@Value("${wechat.appid}")
 	private void setAppId(String appId) {
 		TenpayConfig.app_id = appId;
