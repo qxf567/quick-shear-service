@@ -52,6 +52,36 @@ public class WechatManagerNew {
   @Autowired
   private WechatUtil wechatUtil;
 
+  public String getWechatOpenIdByPageAccess(String code) {
+      String openId = "";
+      // 1、微信授权回调地址
+      String finalUrl = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=" + TenpayConfig.app_id
+          + "&secret=" + TenpayConfig.app_secret + "&code=" + code + "&grant_type=authorization_code";
+      String resultFromOAuth2 = "";
+      log.debug("-----------------WechatUserInfoManager.getWechatOpenIdByPageAccess------------");
+      log.debug("finalUrl=" + finalUrl);
+      resultFromOAuth2 = httpRequest(finalUrl,"GET",null);
+      log.debug("resultFromOAuth2=" + resultFromOAuth2);
+
+      ObjectMapper objectMapper = new ObjectMapper();
+      Map<String, String> objMap;
+      try {
+        objMap = objectMapper.readValue(resultFromOAuth2, Map.class);
+        openId = objMap.get("openid");
+        log.debug("-------------------openId=" + openId);
+      } catch (JsonParseException e) {
+        e.printStackTrace();
+        log.error("getWechatOpenIdByPageAccess(", e);
+      } catch (JsonMappingException e) {
+        e.printStackTrace();
+        log.error("getWechatOpenIdByPageAccess(", e);
+      } catch (IOException e) {
+        e.printStackTrace();
+        log.error("getWechatOpenIdByPageAccess(", e);
+      }
+      return openId;
+    }
+  
   /**
    * 公众号可以通过微信网页授权机制，来获取用户基本信息
    * 

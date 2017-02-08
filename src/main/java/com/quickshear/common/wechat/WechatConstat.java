@@ -9,7 +9,7 @@ public class WechatConstat {
     /**
      * 第一步：用户同意授权，获取code
      */
-    public static String codeUrl = "https://open.weixin.qq.com/connect/oauth2/authorize?appid={appid}&redirect_uri={redirect}&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect";
+    public static String codeUrl = "https://open.weixin.qq.com/connect/oauth2/authorize?appid={appid}&redirect_uri={redirect}&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect";
 
     /**
      * 第二步：通过code换取网页授权access_token
