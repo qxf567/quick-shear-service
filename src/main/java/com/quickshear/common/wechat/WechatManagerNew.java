@@ -317,14 +317,14 @@ public class WechatManagerNew {
     try {
       String url = WechatConstat.MENU_CREATE_URL.replace("ACCESS_TOKEN", wechatUtil.getAccessToken().getToken());
       String httpResult = httpRequest(url, "POST", menuJsonStr);
-      log.error("----->httpResult="+httpResult);
+      log.debug("----->httpResult="+httpResult);
       // 如果请求成功
       if ("" != httpResult) {
         objMap = objectMapper.readValue(httpResult, Map.class);
         result = Integer.valueOf(objMap.get("errcode").toString());
-        log.error("----->result="+result);
+        log.debug("----->result="+result);
         if (0 != result) {
-          log.error("创建菜单失败 errcode:{" + objMap.get("errcode") + "} errmsg:{" + objMap.get("errmsg")
+          log.warn("创建菜单失败 errcode:{" + objMap.get("errcode") + "} errmsg:{" + objMap.get("errmsg")
               + "}");
         }
       }
