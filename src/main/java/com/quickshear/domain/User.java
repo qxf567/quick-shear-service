@@ -23,7 +23,7 @@ public class User implements Serializable {
     /** 登陆密码 */
     private String password;
 
-    /** 用户角色(1管理员2发型师) */
+    /** 用户角色(1管理员2发型师300未审核用户) */
     private String roles;
 
     /** 创建时间 */
