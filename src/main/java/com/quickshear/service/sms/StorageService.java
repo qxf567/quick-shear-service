@@ -14,6 +14,7 @@ public class StorageService {
 	Cookie cookie = new Cookie(key, value);
 	cookie.setMaxAge(60 * 60 * 24 * 30); // 设置生存期为1小时
 //	cookie.setDomain("m.qiansishun.com"); // 子域，在这个子域下才可以访问该Cookie
+	cookie.setPath("/");
 	response.addCookie(cookie);
     }
 
