@@ -7,6 +7,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.ConnectException;
 import java.net.URL;
+import java.util.Date;
 import java.util.Map;
 
 import javax.net.ssl.HttpsURLConnection;
@@ -46,18 +47,25 @@ public class WechatUtil {
      */
     public AccessToken getAccessToken() {
 	AccessToken result = null;
+	Date dateNow = new Date();
+	Long stampNow = dateNow.getTime();
 	if (cache == null) {
 	    cache = new LRUCache(100);
 	    result = this.getAccessTokenFromWexin();
-	    cache.set("token", result.getToken());
+	    cache.set("wechat_token", result.getToken());
+	    cache.set("wechat_token_stamp", String.valueOf(stampNow));
 	} else {
-	    String token = cache.get("token");
-	    if (StringUtils.isBlank(token)) {
-		result = this.getAccessTokenFromWexin();
-		cache.set("token", result.getToken());
-	    } else {
+	    String token = cache.get("wechat_token");
+	    String stampOld = cache.get("wechat_token_stamp");
+	    if (StringUtils.isNotBlank(token)
+		    && StringUtils.isNotBlank(stampOld)
+		    && (stampNow - Long.valueOf(stampOld)) < 3600000) {//过期时间3600秒
 		result = new AccessToken();
 		result.setToken(token);
+	    } else {
+		 result = this.getAccessTokenFromWexin();
+		 cache.set("wechat_token", result.getToken());
+		 cache.set("wechat_token_stamp", String.valueOf(stampNow));
 	    }
 	}
 	log.info("获取accessToken:" + JsonUtil.toJson(result));

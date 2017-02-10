@@ -36,7 +36,7 @@ public class MessageService {
 	request.setParamString("{\"code\":\"" + code + "\"}");
 	request.setRecNum(phone);
 	//@TODO测试期间不发短信
-	//client.getAcsResponse(request);
+	client.getAcsResponse(request);
 	return code;
     }
 
