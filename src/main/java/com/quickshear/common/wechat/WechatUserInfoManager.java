@@ -1,7 +1,6 @@
 package com.quickshear.common.wechat;
 
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -96,11 +95,13 @@ public class WechatUserInfoManager {
 	String resultFromOAuth2 = "";
 
 	resultFromOAuth2 = httpClientUtil.sendRequest(finalUrl);
-	log.info("getWechatUserInfoByPageAccess()" + resultFromOAuth2);
+	
 	ObjectMapper objectMapper = new ObjectMapper();
 	Map<String, Object> objMap = null;
 	try {
-	    objMap = objectMapper.readValue(resultFromOAuth2, Map.class);
+	    String  result= new String(resultFromOAuth2.getBytes("ISO-8859-1"), "UTF-8");
+	    log.info("getWechatUserInfoByPageAccess()" + result);
+	    objMap = objectMapper.readValue(result, Map.class);
 	} catch (IOException e) {
 	    e.printStackTrace();
 	    log.error("getWechatOpenIdByPageAccess(", e);
