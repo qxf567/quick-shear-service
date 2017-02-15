@@ -72,6 +72,9 @@ public class HairdresserServiceImpl implements HairdresserService {
 		if(queryObj.getPhoneNumber() != null){
 			criteria.andPhoneNumberEqualTo(queryObj.getPhoneNumber());
 		}
+		if(queryObj.getShopId() !=null){
+			criteria.andShopIdEqualTo(queryObj.getShopId());
+		}
 		return hairdresserMapper.selectByExample(example);
 	}
 
