@@ -9,8 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.quickshear.common.util.GeoUtil;
-import com.quickshear.common.util.Geohash;
 import com.quickshear.common.util.GeoUtil.GaussSphere;
+import com.quickshear.common.util.Geohash;
 import com.quickshear.common.vo.BaseQuery;
 import com.quickshear.common.vo.PageVo;
 import com.quickshear.domain.Shop;
@@ -69,6 +69,9 @@ public class ShopServiceImpl implements ShopService {
 		}
 		ShopExample example = new ShopExample();
 		Criteria criteria = example.createCriteria();
+		if(queryObj.getId() != null){
+			criteria.andIdEqualTo(queryObj.getId());
+		}
 		if(queryObj.getCityId() != null){
 			criteria.andCityIdEqualTo(queryObj.getCityId());
 		}
