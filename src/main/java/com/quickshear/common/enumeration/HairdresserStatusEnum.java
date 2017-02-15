@@ -8,9 +8,9 @@ package com.quickshear.common.enumeration;
  */
 public enum HairdresserStatusEnum{
 	
-        PENDING(0, "待审核"),
+        PENDING(0, "无效"),
         VALID(1, "有效"),
-	INVALID(2,"无效");
+	INVALID(300,"待审核");
 	
 	private Integer code;
 	/**

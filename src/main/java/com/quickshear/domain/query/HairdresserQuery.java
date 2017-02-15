@@ -26,7 +26,7 @@ public class HairdresserQuery extends BaseQuery implements Serializable {
     /** 所属门店 */
     private Long shopId;
 
-    /** 状态(0待审核1有效2无效) */
+    /** 状态(0无效1有效300待审核) */
     private Integer status;
 
 	public Long getId() {

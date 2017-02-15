@@ -38,7 +38,7 @@ public class Hairdresser implements Serializable {
     /** 休息日 */
     private String restday;
 
-    /** 状态(0待审核1有效2无效) */
+    /** 状态(0无效1有效300待审核) */
     private Integer status;
 
     /** 创建时间 */
