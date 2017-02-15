@@ -8,6 +8,7 @@
     <result column="main_image_url" property="mainImageUrl" jdbcType="VARCHAR" />
     <result column="multi_image_urls" property="multiImageUrls" jdbcType="VARCHAR" />
     <result column="price" property="price" jdbcType="DECIMAL" />
+    <result column="sex" property="sex" jdbcType="INTEGER" />
     <result column="status" property="status" jdbcType="INTEGER" />
     <result column="c_time" property="cTime" jdbcType="TIMESTAMP" />
     <result column="m_time" property="mTime" jdbcType="TIMESTAMP" />
@@ -71,7 +72,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, name, detail, main_image_url, multi_image_urls, price, status, c_time, m_time
+    id, name, detail, main_image_url, multi_image_urls, price, sex, status, c_time, m_time
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.quickshear.domain.HairstyleExample" >
     select
@@ -111,11 +112,13 @@
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into hairstyle (name, detail, main_image_url, 
-      multi_image_urls, price, status, 
-      c_time, m_time)
+      multi_image_urls, price, sex, 
+      status, c_time, m_time
+      )
     values (#{name,jdbcType=VARCHAR}, #{detail,jdbcType=VARCHAR}, #{mainImageUrl,jdbcType=VARCHAR}, 
-      #{multiImageUrls,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL}, #{status,jdbcType=INTEGER}, 
-      #{cTime,jdbcType=TIMESTAMP}, #{mTime,jdbcType=TIMESTAMP})
+      #{multiImageUrls,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL}, #{sex,jdbcType=INTEGER}, 
+      #{status,jdbcType=INTEGER}, #{cTime,jdbcType=TIMESTAMP}, #{mTime,jdbcType=TIMESTAMP}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.quickshear.domain.Hairstyle" >
     <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
@@ -137,6 +140,9 @@
       </if>
       <if test="price != null" >
         price,
+      </if>
+      <if test="sex != null" >
+        sex,
       </if>
       <if test="status != null" >
         status,
@@ -163,6 +169,9 @@
       </if>
       <if test="price != null" >
         #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=INTEGER},
       </if>
       <if test="status != null" >
         #{status,jdbcType=INTEGER},
@@ -202,6 +211,9 @@
       <if test="record.price != null" >
         price = #{record.price,jdbcType=DECIMAL},
       </if>
+      <if test="record.sex != null" >
+        sex = #{record.sex,jdbcType=INTEGER},
+      </if>
       <if test="record.status != null" >
         status = #{record.status,jdbcType=INTEGER},
       </if>
@@ -224,6 +236,7 @@
       main_image_url = #{record.mainImageUrl,jdbcType=VARCHAR},
       multi_image_urls = #{record.multiImageUrls,jdbcType=VARCHAR},
       price = #{record.price,jdbcType=DECIMAL},
+      sex = #{record.sex,jdbcType=INTEGER},
       status = #{record.status,jdbcType=INTEGER},
       c_time = #{record.cTime,jdbcType=TIMESTAMP},
       m_time = #{record.mTime,jdbcType=TIMESTAMP}
@@ -249,6 +262,9 @@
       <if test="price != null" >
         price = #{price,jdbcType=DECIMAL},
       </if>
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=INTEGER},
+      </if>
       <if test="status != null" >
         status = #{status,jdbcType=INTEGER},
       </if>
@@ -268,6 +284,7 @@
       main_image_url = #{mainImageUrl,jdbcType=VARCHAR},
       multi_image_urls = #{multiImageUrls,jdbcType=VARCHAR},
       price = #{price,jdbcType=DECIMAL},
+      sex = #{sex,jdbcType=INTEGER},
       status = #{status,jdbcType=INTEGER},
       c_time = #{cTime,jdbcType=TIMESTAMP},
       m_time = #{mTime,jdbcType=TIMESTAMP}

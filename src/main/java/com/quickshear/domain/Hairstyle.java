@@ -8,11 +8,10 @@ import java.util.Date;
  * 
  *
  * @author Administrator
- * @date 2016-11-3
+ * @date 2017-2-15
  *
  */
 public class Hairstyle implements Serializable {
-	
     /** id(自增) */
     private Long id;
 
@@ -30,6 +29,9 @@ public class Hairstyle implements Serializable {
 
     /** 收费价格 */
     private BigDecimal price;
+
+    /** 男（0）女(1) */
+    private Integer sex;
 
     /** 状态(0无效1有效) */
     private Integer status;
@@ -88,6 +90,14 @@ public class Hairstyle implements Serializable {
 
     public void setPrice(BigDecimal price) {
         this.price = price;
+    }
+
+    public Integer getSex() {
+        return sex;
+    }
+
+    public void setSex(Integer sex) {
+        this.sex = sex;
     }
 
     public Integer getStatus() {

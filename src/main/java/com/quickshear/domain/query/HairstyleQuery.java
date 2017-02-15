@@ -19,6 +19,9 @@ public class HairstyleQuery extends BaseQuery implements Serializable {
 
     /** 发型名称 */
     private String name;
+    
+    /** 男（0）女(1) */
+    private Integer sex;
 
     /** 状态(0无效1有效) */
     private Integer status;
@@ -45,5 +48,13 @@ public class HairstyleQuery extends BaseQuery implements Serializable {
 
 	public void setStatus(Integer status) {
 		this.status = status;
+	}
+
+	public Integer getSex() {
+		return sex;
+	}
+
+	public void setSex(Integer sex) {
+		this.sex = sex;
 	}
 }

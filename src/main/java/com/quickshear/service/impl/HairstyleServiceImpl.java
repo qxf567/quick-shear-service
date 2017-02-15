@@ -69,6 +69,9 @@ public class HairstyleServiceImpl implements HairstyleService {
 		if(queryObj.getStatus() != null){
 			criteria.andStatusEqualTo(queryObj.getStatus());
 		}
+		if(queryObj.getSex() != null){
+			criteria.andSexEqualTo(queryObj.getSex());
+		}
 		return hairstyleMapper.selectByExample(example);
 	}
 
@@ -112,7 +115,9 @@ public class HairstyleServiceImpl implements HairstyleService {
 		if(queryObj.getStatus() != null){
 			criteria.andStatusEqualTo(queryObj.getStatus());
 		}
-
+		if(queryObj.getSex() != null){
+			criteria.andSexEqualTo(queryObj.getSex());
+		}
 		// 排序
 		if (StringUtils.isNotBlank(queryObj.getSort())) {
 			String orderByClause = queryObj.getSort();

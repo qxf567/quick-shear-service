@@ -36,7 +36,7 @@ public class Order implements Serializable {
     /** 预约时间 */
     private Date appointmentTime;
 
-    /**  */
+    /** 服务号 */
     private String serviceCode;
 
     /** 订单支付方式(0线下1微信2支付宝) */
