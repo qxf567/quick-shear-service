@@ -136,4 +136,24 @@ public class HairdresserServiceImpl implements HairdresserService {
 		example.setLimitEnd(queryObj.getPageSize());
 		return example;
 	}
+	
+	public int update(Hairdresser t, HairdresserQuery queryObj)
+			throws Exception {
+		if (t == null) {
+			return -1;
+		}
+		try {
+			HairdresserExample example = new HairdresserExample();
+			Criteria criteria = example.createCriteria();
+			if(queryObj.getPhoneNumber() != null){
+				criteria.andPhoneNumberEqualTo(queryObj.getPhoneNumber());
+			}
+			t.setmTime(Calendar.getInstance().getTime());
+			return hairdresserMapper.updateByExampleSelective(t, example);
+		} catch (Exception e) {
+			e.printStackTrace();
+			logger.error("update 失败", e);
+		}
+		return 0;
+	}
 }

@@ -35,6 +35,13 @@ public interface HairdresserService {
 	int update(Hairdresser t) throws Exception;
 	
 	/**
+	 * 更新，更新实体对象
+	 * @param t 实体对象
+	 * @return 0:失败，1：成功
+	 */
+	int update(Hairdresser t,HairdresserQuery queryObj) throws Exception;
+	
+	/**
 	 * 根据条件查询
 	 * 
 	 * @param queryObj

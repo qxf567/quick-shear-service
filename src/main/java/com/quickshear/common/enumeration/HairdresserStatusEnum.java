@@ -7,10 +7,12 @@ package com.quickshear.common.enumeration;
  *
  */
 public enum HairdresserStatusEnum{
-	
-        PENDING(0, "无效"),
-        VALID(1, "有效"),
-	INVALID(300,"待审核");
+	/** 无效  */
+	INVALID(0, "无效"),
+	/** 有效  */
+    VALID(1, "有效"),
+    /** 待审核  */
+	PENDING(300,"待审核");
 	
 	private Integer code;
 	/**

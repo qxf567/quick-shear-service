@@ -133,4 +133,26 @@ public class UserServiceImpl implements UserService {
 		example.setLimitEnd(queryObj.getPageSize());
 		return example;
 	}
+
+	public int update(User t, UserQuery queryObj) throws Exception {
+		if (t == null || queryObj == null) {
+			return -1;
+		}
+		try {
+			UserExample example = new UserExample();
+			Criteria criteria = example.createCriteria();
+			if(queryObj.getWechatOpenId() != null){
+				criteria.andWechatOpenIdEqualTo(queryObj.getWechatOpenId());
+			}
+			if(queryObj.getPhoneNumber() != null){
+				criteria.andPhoneNumberEqualTo(queryObj.getPhoneNumber());
+			}
+			t.setmTime(Calendar.getInstance().getTime());
+			return userMapper.updateByExampleSelective(t, example);
+		} catch (Exception e) {
+			e.printStackTrace();
+			logger.error("update 失败", e);
+		}
+		return 0;
+	}
 }

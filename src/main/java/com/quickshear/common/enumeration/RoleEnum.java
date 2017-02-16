@@ -2,45 +2,65 @@ package com.quickshear.common.enumeration;
 
 
 /**
- * 角色定义 三个API共用一个体系的角色 
+ * 系统角色 
  * 
  */
 public enum RoleEnum {
-	
-    CUSTOMER(1, "web用户"),
-    ENGINEER(2, "工程师"),
-    CUSTOMER_SERVICE(3,"客服"),
-    FINANCE(4, "财务"),
-    SUPER_ADMIN(999,"超级管理员");
+	/** 管理员  */
+	ADMIN("1", "管理员"),
+	/** 发型师  */
+	STYLIST("2", "发型师"),
+	/** 顾客  */
+    CUSTOMER("3","顾客"),
+    /** 待审核用户  */
+    PENDING("300","待审核用户");
     
 
-    private Integer id;
+	private String code;
+	/**
+	 * 名称
+	 */
+	private String name;
+	
+	/**
+	 * @param code
+	 * @param name
+	 */
+	private RoleEnum(final String code, final String name) {
+		this.code = code;
+		this.name = name;
+	}
 
-    private String desc;
+	public String getCode() {
+		return code;
+	}
 
+	public void setCode(String code) {
+		this.code = code;
+	}
 
-    private RoleEnum(Integer id, String desc){
-        this.id = id;
-        this.desc = desc;
-    }
-    public static RoleEnum getRoleEnum(Integer id) {
-        if(id == null){
-            return null;
-        }
-        RoleEnum[] enumArray = RoleEnum.values();
-        for(RoleEnum c :  enumArray){
-            if(c.id.equals(id)){
-                return c;
-            }
-        }
-        return null;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public Integer getId() {
-        return id;
-    }
-
-    public String getDesc() {
-        return desc;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	/**
+	 * 找不到则返回null
+	 * @param code
+	 * @return
+	 */
+	public static RoleEnum valueOfCode(String code) {
+		if(null == code) {
+			return null;
+		}
+		for(RoleEnum pp : values()) {
+			if(pp.getCode().equals(code)) {
+				return pp;
+			}
+		}
+		return null;
+	}
 }
