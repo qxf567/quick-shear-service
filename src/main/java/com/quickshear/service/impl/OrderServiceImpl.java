@@ -40,6 +40,7 @@ public class OrderServiceImpl implements OrderService {
 		try {
 			t.setcTime(Calendar.getInstance().getTime());
 			t.setmTime(Calendar.getInstance().getTime());
+			t.settStamp(Calendar.getInstance().getTime().getTime());
 			return orderMapper.insertSelective(t);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -54,6 +55,7 @@ public class OrderServiceImpl implements OrderService {
 		}
 		try {
 			t.setmTime(Calendar.getInstance().getTime());
+			t.settStamp(Calendar.getInstance().getTime().getTime());
 			return orderMapper.updateByPrimaryKeySelective(t);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -164,5 +166,29 @@ public class OrderServiceImpl implements OrderService {
 		example.setLimitStart((queryObj.getPageNo() - 1) * queryObj.getPageSize());
 		example.setLimitEnd(queryObj.getPageSize());
 		return example;
+	}
+
+	public int updateByParam(Order t, OrderQuery queryObj) throws Exception {
+		if (t == null || queryObj == null || queryObj.getOrderId() == null) {
+			return -1;
+		}
+		try {
+			OrderExample example = new OrderExample();
+			Criteria criteria = example.createCriteria();
+			criteria.andOrderIdEqualTo(queryObj.getOrderId());
+			if(queryObj.getOrderStatus() != null){
+				criteria.andOrderStatusEqualTo(queryObj.getOrderStatus());
+			}
+			if(queryObj.getHairdresserId() != null){
+				criteria.andHairdresserIdEqualTo(queryObj.getHairdresserId());
+			}
+			t.setmTime(Calendar.getInstance().getTime());
+			t.settStamp(Calendar.getInstance().getTime().getTime());
+			return orderMapper.updateByExampleSelective(t, example);
+		} catch (Exception e) {
+			e.printStackTrace();
+			logger.error("update 失败", e);
+		}
+		return 0;
 	}
 }

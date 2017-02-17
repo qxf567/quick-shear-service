@@ -13,7 +13,7 @@ public class StorageService {
     public void set(String key,String value,HttpServletResponse response) {
 	Cookie cookie = new Cookie(key, value);
 	cookie.setMaxAge(60 * 60 * 24); // 设置生存期为24小时
-	cookie.setDomain(".qiansishun.com"); // 子域，在这个子域下才可以访问该Cookie
+	//cookie.setDomain(".qiansishun.com"); // 子域，在这个子域下才可以访问该Cookie
 	cookie.setPath("/");
 	response.addCookie(cookie);
     }

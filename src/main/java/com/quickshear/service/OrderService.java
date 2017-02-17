@@ -4,8 +4,6 @@ import java.util.List;
 
 import com.quickshear.common.vo.PageVo;
 import com.quickshear.domain.Order;
-import com.quickshear.domain.OrderEvaluate;
-import com.quickshear.domain.query.OrderEvaluateQuery;
 import com.quickshear.domain.query.OrderQuery;
 
 
@@ -35,6 +33,13 @@ public interface OrderService {
 	 * @return 0:失败，1：成功
 	 */
 	int update(Order t) throws Exception;
+	
+	/**
+	 * 更新，更新实体对象
+	 * @param t 实体对象
+	 * @return 0:失败，1：成功
+	 */
+	int updateByParam(Order t,OrderQuery queryObj) throws Exception;
 	
 	/**
 	 * 根据条件查询
