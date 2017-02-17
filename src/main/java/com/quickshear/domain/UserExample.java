@@ -584,6 +584,66 @@ public class UserExample {
             addCriterion("m_time not between", value1, value2, "mTime");
             return (Criteria) this;
         }
+
+        public Criteria andHairdresserIdIsNull() {
+            addCriterion("hairdresser_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andHairdresserIdIsNotNull() {
+            addCriterion("hairdresser_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andHairdresserIdEqualTo(Long value) {
+            addCriterion("hairdresser_id =", value, "hairdresserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andHairdresserIdNotEqualTo(Long value) {
+            addCriterion("hairdresser_id <>", value, "hairdresserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andHairdresserIdGreaterThan(Long value) {
+            addCriterion("hairdresser_id >", value, "hairdresserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andHairdresserIdGreaterThanOrEqualTo(Long value) {
+            addCriterion("hairdresser_id >=", value, "hairdresserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andHairdresserIdLessThan(Long value) {
+            addCriterion("hairdresser_id <", value, "hairdresserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andHairdresserIdLessThanOrEqualTo(Long value) {
+            addCriterion("hairdresser_id <=", value, "hairdresserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andHairdresserIdIn(List<Long> values) {
+            addCriterion("hairdresser_id in", values, "hairdresserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andHairdresserIdNotIn(List<Long> values) {
+            addCriterion("hairdresser_id not in", values, "hairdresserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andHairdresserIdBetween(Long value1, Long value2) {
+            addCriterion("hairdresser_id between", value1, value2, "hairdresserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andHairdresserIdNotBetween(Long value1, Long value2) {
+            addCriterion("hairdresser_id not between", value1, value2, "hairdresserId");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

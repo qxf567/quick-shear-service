@@ -6,7 +6,7 @@
     <result column="customer_id" property="customerId" jdbcType="BIGINT" />
     <result column="customer_name" property="customerName" jdbcType="VARCHAR" />
     <result column="customer_number" property="customerNumber" jdbcType="VARCHAR" />
-    <result column="shop_id" property="shopId" jdbcType="VARCHAR" />
+    <result column="shop_id" property="shopId" jdbcType="BIGINT" />
     <result column="hairdresser_id" property="hairdresserId" jdbcType="BIGINT" />
     <result column="hairstyle_id" property="hairstyleId" jdbcType="BIGINT" />
     <result column="appointment_time" property="appointmentTime" jdbcType="TIMESTAMP" />
@@ -132,7 +132,7 @@
       is_evaluate, c_time, m_time, 
       t_stamp)
     values (#{orderId,jdbcType=BIGINT}, #{customerId,jdbcType=BIGINT}, #{customerName,jdbcType=VARCHAR}, 
-      #{customerNumber,jdbcType=VARCHAR}, #{shopId,jdbcType=VARCHAR}, #{hairdresserId,jdbcType=BIGINT}, 
+      #{customerNumber,jdbcType=VARCHAR}, #{shopId,jdbcType=BIGINT}, #{hairdresserId,jdbcType=BIGINT}, 
       #{hairstyleId,jdbcType=BIGINT}, #{appointmentTime,jdbcType=TIMESTAMP}, #{serviceCode,jdbcType=VARCHAR}, 
       #{payType,jdbcType=INTEGER}, #{orderStatus,jdbcType=INTEGER}, #{totalPrice,jdbcType=DECIMAL}, 
       #{actualPrice,jdbcType=DECIMAL}, #{orderTime,jdbcType=TIMESTAMP}, #{serviceCompletionTime,jdbcType=TIMESTAMP}, 
@@ -224,7 +224,7 @@
         #{customerNumber,jdbcType=VARCHAR},
       </if>
       <if test="shopId != null" >
-        #{shopId,jdbcType=VARCHAR},
+        #{shopId,jdbcType=BIGINT},
       </if>
       <if test="hairdresserId != null" >
         #{hairdresserId,jdbcType=BIGINT},
@@ -301,7 +301,7 @@
         customer_number = #{record.customerNumber,jdbcType=VARCHAR},
       </if>
       <if test="record.shopId != null" >
-        shop_id = #{record.shopId,jdbcType=VARCHAR},
+        shop_id = #{record.shopId,jdbcType=BIGINT},
       </if>
       <if test="record.hairdresserId != null" >
         hairdresser_id = #{record.hairdresserId,jdbcType=BIGINT},
@@ -365,7 +365,7 @@
       customer_id = #{record.customerId,jdbcType=BIGINT},
       customer_name = #{record.customerName,jdbcType=VARCHAR},
       customer_number = #{record.customerNumber,jdbcType=VARCHAR},
-      shop_id = #{record.shopId,jdbcType=VARCHAR},
+      shop_id = #{record.shopId,jdbcType=BIGINT},
       hairdresser_id = #{record.hairdresserId,jdbcType=BIGINT},
       hairstyle_id = #{record.hairstyleId,jdbcType=BIGINT},
       appointment_time = #{record.appointmentTime,jdbcType=TIMESTAMP},
@@ -400,7 +400,7 @@
         customer_number = #{customerNumber,jdbcType=VARCHAR},
       </if>
       <if test="shopId != null" >
-        shop_id = #{shopId,jdbcType=VARCHAR},
+        shop_id = #{shopId,jdbcType=BIGINT},
       </if>
       <if test="hairdresserId != null" >
         hairdresser_id = #{hairdresserId,jdbcType=BIGINT},
@@ -461,7 +461,7 @@
     set customer_id = #{customerId,jdbcType=BIGINT},
       customer_name = #{customerName,jdbcType=VARCHAR},
       customer_number = #{customerNumber,jdbcType=VARCHAR},
-      shop_id = #{shopId,jdbcType=VARCHAR},
+      shop_id = #{shopId,jdbcType=BIGINT},
       hairdresser_id = #{hairdresserId,jdbcType=BIGINT},
       hairstyle_id = #{hairstyleId,jdbcType=BIGINT},
       appointment_time = #{appointmentTime,jdbcType=TIMESTAMP},

@@ -7,7 +7,7 @@ import java.util.Date;
  * 
  *
  * @author Administrator
- * @date 2016-12-1
+ * @date 2017-2-17
  *
  */
 public class User implements Serializable {
@@ -31,6 +31,9 @@ public class User implements Serializable {
 
     /** 最后修改时间 */
     private Date mTime;
+
+    /** 发型师id */
+    private Long hairdresserId;
 
     private static final long serialVersionUID = 1L;
 
@@ -88,5 +91,13 @@ public class User implements Serializable {
 
     public void setmTime(Date mTime) {
         this.mTime = mTime;
+    }
+
+    public Long getHairdresserId() {
+        return hairdresserId;
+    }
+
+    public void setHairdresserId(Long hairdresserId) {
+        this.hairdresserId = hairdresserId;
     }
 }

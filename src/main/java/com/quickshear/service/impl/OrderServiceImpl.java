@@ -83,6 +83,9 @@ public class OrderServiceImpl implements OrderService {
 		if(queryObj.getOrderStatus() != null){
 			criteria.andOrderStatusEqualTo(queryObj.getOrderStatus());
 		}
+		if(queryObj.getOrderStatusList() != null){
+			criteria.andOrderStatusIn(queryObj.getOrderStatusList());
+		}
 		if(queryObj.getAppointmentTime() != null){
 		    Date start = queryObj.getAppointmentTime();
 		    Date end = DateUtil.getMinuteAfterDay(30);
@@ -144,7 +147,9 @@ public class OrderServiceImpl implements OrderService {
 		if(queryObj.getOrderStatus() != null){
 			criteria.andOrderStatusEqualTo(queryObj.getOrderStatus());
 		}
-
+		if(queryObj.getOrderStatusList() != null){
+			criteria.andOrderStatusIn(queryObj.getOrderStatusList());
+		}
 		// 排序
 		if (StringUtils.isNotBlank(queryObj.getSort())) {
 			String orderByClause = queryObj.getSort();

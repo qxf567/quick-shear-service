@@ -2,6 +2,7 @@ package com.quickshear.domain.query;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import com.quickshear.common.vo.BaseQuery;
 
@@ -25,7 +26,7 @@ public class OrderQuery extends BaseQuery implements Serializable {
     private String customerNumber;
 
     /** 门店 */
-    private String shopId;
+    private Long shopId;
 
     /** 发型师id */
     private Long hairdresserId;
@@ -38,6 +39,9 @@ public class OrderQuery extends BaseQuery implements Serializable {
 
     /** 订单状态(0待支付1支付完成50已接单100服务完成300取消) */
     private Integer orderStatus;
+    
+    /** 订单状态(0待支付1支付完成50已接单100服务完成300取消) */
+    private List<Integer> orderStatusList;
 
     /** 是否已评价(0否1是) */
     private Integer isEvaluate;
@@ -69,11 +73,11 @@ public class OrderQuery extends BaseQuery implements Serializable {
 	this.customerNumber = customerNumber;
     }
 
-    public String getShopId() {
+    public Long getShopId() {
 	return shopId;
     }
 
-    public void setShopId(String shopId) {
+    public void setShopId(Long shopId) {
 	this.shopId = shopId;
     }
 
@@ -124,5 +128,13 @@ public class OrderQuery extends BaseQuery implements Serializable {
     public void setAppointmentTime(Date appointmentTime) {
 	this.appointmentTime = appointmentTime;
     }
+
+	public List<Integer> getOrderStatusList() {
+		return orderStatusList;
+	}
+
+	public void setOrderStatusList(List<Integer> orderStatusList) {
+		this.orderStatusList = orderStatusList;
+	}
 
 }

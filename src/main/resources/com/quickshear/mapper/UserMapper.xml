@@ -9,6 +9,7 @@
     <result column="roles" property="roles" jdbcType="VARCHAR" />
     <result column="c_time" property="cTime" jdbcType="TIMESTAMP" />
     <result column="m_time" property="mTime" jdbcType="TIMESTAMP" />
+    <result column="hairdresser_id" property="hairdresserId" jdbcType="BIGINT" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -69,7 +70,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, wechat_open_id, phone_number, password, roles, c_time, m_time
+    id, wechat_open_id, phone_number, password, roles, c_time, m_time, hairdresser_id
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.quickshear.domain.UserExample" >
     select
@@ -109,11 +110,11 @@
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into users (wechat_open_id, phone_number, password, 
-      roles, c_time, m_time
-      )
+      roles, c_time, m_time, 
+      hairdresser_id)
     values (#{wechatOpenId,jdbcType=VARCHAR}, #{phoneNumber,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{roles,jdbcType=VARCHAR}, #{cTime,jdbcType=TIMESTAMP}, #{mTime,jdbcType=TIMESTAMP}
-      )
+      #{roles,jdbcType=VARCHAR}, #{cTime,jdbcType=TIMESTAMP}, #{mTime,jdbcType=TIMESTAMP}, 
+      #{hairdresserId,jdbcType=BIGINT})
   </insert>
   <insert id="insertSelective" parameterType="com.quickshear.domain.User" >
     <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
@@ -139,6 +140,9 @@
       <if test="mTime != null" >
         m_time,
       </if>
+      <if test="hairdresserId != null" >
+        hairdresser_id,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="wechatOpenId != null" >
@@ -158,6 +162,9 @@
       </if>
       <if test="mTime != null" >
         #{mTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="hairdresserId != null" >
+        #{hairdresserId,jdbcType=BIGINT},
       </if>
     </trim>
   </insert>
@@ -191,6 +198,9 @@
       <if test="record.mTime != null" >
         m_time = #{record.mTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="record.hairdresserId != null" >
+        hairdresser_id = #{record.hairdresserId,jdbcType=BIGINT},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -204,7 +214,8 @@
       password = #{record.password,jdbcType=VARCHAR},
       roles = #{record.roles,jdbcType=VARCHAR},
       c_time = #{record.cTime,jdbcType=TIMESTAMP},
-      m_time = #{record.mTime,jdbcType=TIMESTAMP}
+      m_time = #{record.mTime,jdbcType=TIMESTAMP},
+      hairdresser_id = #{record.hairdresserId,jdbcType=BIGINT}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -230,6 +241,9 @@
       <if test="mTime != null" >
         m_time = #{mTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="hairdresserId != null" >
+        hairdresser_id = #{hairdresserId,jdbcType=BIGINT},
+      </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
@@ -240,7 +254,8 @@
       password = #{password,jdbcType=VARCHAR},
       roles = #{roles,jdbcType=VARCHAR},
       c_time = #{cTime,jdbcType=TIMESTAMP},
-      m_time = #{mTime,jdbcType=TIMESTAMP}
+      m_time = #{mTime,jdbcType=TIMESTAMP},
+      hairdresser_id = #{hairdresserId,jdbcType=BIGINT}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

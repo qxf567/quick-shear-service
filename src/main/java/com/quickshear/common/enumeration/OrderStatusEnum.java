@@ -8,7 +8,7 @@ package com.quickshear.common.enumeration;
  */
 public enum OrderStatusEnum{
 	
-        PAY_WAIT(0, "待支付"),
+    PAY_WAIT(0, "待支付"),
 	PAY_COMPLETE(1, "支付完成"),
 	ORDER_RECEIVE(50,"已接单"),
 	SERVICE_COMPLETE(100,"服务完成"),
