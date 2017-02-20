@@ -59,7 +59,7 @@ public class WechatUtil {
 	    String stampOld = cache.get("wechat_token_stamp");
 	    if (StringUtils.isNotBlank(token)
 		    && StringUtils.isNotBlank(stampOld)
-		    && (stampNow - Long.valueOf(stampOld)) < 600000) {//过期时间600秒
+		    && (stampNow - Long.valueOf(stampOld)) < 60000) {//过期时间60秒
 		result = new AccessToken();
 		result.setToken(token);
 	    } else {
