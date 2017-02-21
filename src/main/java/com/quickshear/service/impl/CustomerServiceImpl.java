@@ -69,9 +69,7 @@ public class CustomerServiceImpl implements CustomerService {
 		if(queryObj.getPhoneNumber() != null){
 			criteria.andPhoneNumberEqualTo(queryObj.getPhoneNumber());
 		}
-		if(queryObj.getWechatOpenId() != null){
-			criteria.andWechatOpenIdEqualTo(queryObj.getWechatOpenId());
-		}
+		criteria.andWechatOpenIdEqualTo(queryObj.getWechatOpenId());
 		return customerMapper.selectByExample(example);
 	}
 
