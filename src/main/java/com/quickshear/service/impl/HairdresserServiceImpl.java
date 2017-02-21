@@ -75,6 +75,16 @@ public class HairdresserServiceImpl implements HairdresserService {
 		if(queryObj.getShopId() !=null){
 			criteria.andShopIdEqualTo(queryObj.getShopId());
 		}
+		// 排序
+		if (StringUtils.isNotBlank(queryObj.getSort())) {
+			String orderByClause = queryObj.getSort();
+			if (BaseQuery.DESC.equalsIgnoreCase(queryObj.getSortType())) {
+				orderByClause += " desc";
+			} else {
+				orderByClause += " asc";
+			}
+			example.setOrderByClause(orderByClause);
+		}
 		return hairdresserMapper.selectByExample(example);
 	}
 

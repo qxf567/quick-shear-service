@@ -93,7 +93,16 @@ public class OrderServiceImpl implements OrderService {
 		    Date end = DateUtil.getMinuteAfterDay(30);
 		    criteria.andAppointmentTimeBetween(start, end);
 		}
-		example.setOrderByClause("m_time desc");
+		// 排序
+		if (StringUtils.isNotBlank(queryObj.getSort())) {
+			String orderByClause = queryObj.getSort();
+			if (BaseQuery.DESC.equalsIgnoreCase(queryObj.getSortType())) {
+				orderByClause += " desc";
+			} else {
+				orderByClause += " asc";
+			}
+			example.setOrderByClause(orderByClause);
+		}
 		return orderMapper.selectByExample(example);
 	}
 

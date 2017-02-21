@@ -78,6 +78,16 @@ public class ShopServiceImpl implements ShopService {
 		if(queryObj.getStatus() != null){
 			criteria.andStatusEqualTo(queryObj.getStatus());
 		}
+		// 排序
+		if (StringUtils.isNotBlank(queryObj.getSort())) {
+			String orderByClause = queryObj.getSort();
+			if (BaseQuery.DESC.equalsIgnoreCase(queryObj.getSortType())) {
+				orderByClause += " desc";
+			} else {
+				orderByClause += " asc";
+			}
+			example.setOrderByClause(orderByClause);
+		}
 		return shopMapper.selectByExample(example);
 	}
 
