@@ -1,16 +1,11 @@
 package com.quickshear.common.aop.datasource.dynamic;
 
-import org.apache.commons.lang.StringUtils;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
-
-import com.quickshear.common.util.Page;
 
 /**
  * 数据源切换拦截器
@@ -18,7 +13,6 @@ import com.quickshear.common.util.Page;
 @Component
 @Aspect
 public class QuickShearDynamicDsAOP {
-	private Logger logger = LoggerFactory.getLogger(QuickShearDynamicDsAOP.class);
 
 	@Pointcut("execution(* com.lashou.x.mysql.repair.mapper..*.*(..))")
 	public void inMapper() {
